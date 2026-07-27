@@ -7,6 +7,7 @@ package endpoint_agents
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/deploymenttheory/go-sdk-thousandeyes/thousandeyes/client"
@@ -44,7 +45,6 @@ func (s *EndpointAgents) GetEndpointAgents(ctx context.Context, opts ...client.R
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -52,10 +52,24 @@ func (s *EndpointAgents) GetEndpointAgents(ctx context.Context, opts ...client.R
 		opt(req)
 	}
 
-	resp, err := req.Get(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []EndpointAgent
+	merge := func(page []byte) error {
+		var batch []EndpointAgent
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding agents page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.GetPaginated(endpoint, "agents", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Agents = items
 
 	return &result, resp, nil
 }
@@ -100,7 +114,6 @@ func (s *EndpointAgents) FilterEndpointAgents(ctx context.Context, opts ...clien
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -108,10 +121,24 @@ func (s *EndpointAgents) FilterEndpointAgents(ctx context.Context, opts ...clien
 		opt(req)
 	}
 
-	resp, err := req.Post(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []EndpointAgent
+	merge := func(page []byte) error {
+		var batch []EndpointAgent
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding agents page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.PostPaginated(endpoint, "agents", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Agents = items
 
 	return &result, resp, nil
 }

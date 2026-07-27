@@ -66,8 +66,8 @@ type AccountGroupToken string
 
 // ResourceAccountGroups is generated from the OpenAPI specification.
 type ResourceAccountGroups struct {
-	Links                 SelfLinks          `json:"_links,omitempty"`
-	ResourceAccountGroups []AccountGroupInfo `json:"accountGroups,omitempty"`
+	Links         SelfLinks          `json:"_links,omitempty"`
+	AccountGroups []AccountGroupInfo `json:"accountGroups,omitempty"`
 }
 
 // ClusterMember is generated from the OpenAPI specification.
@@ -134,7 +134,7 @@ type Enabled bool
 // EnterpriseAgent is generated from the OpenAPI specification.
 type EnterpriseAgent struct {
 	// List of account groups.
-	ResourceAccountGroups []AccountGroup `json:"accountGroups,omitempty"`
+	AccountGroups []AccountGroup `json:"accountGroups,omitempty"`
 	// Unique ID of the agent.
 	AgentID *string `json:"agentId,omitempty"`
 	// Name of the agent.

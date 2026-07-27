@@ -112,11 +112,11 @@ func TestUnit_Codegen_ResolveNameCollisions_NoCollision(t *testing.T) {
 	assert.Equal(t, "BgpTest", operations[0].ResultType)
 }
 
-func TestUnit_Codegen_ReplaceIdentifier_WholeWordsOnly(t *testing.T) {
+func TestUnit_Codegen_ReplaceTypeRef_WholeWordsOnly(t *testing.T) {
 	// A substring match would corrupt neighbouring type names.
-	assert.Equal(t, "[]Foo", replaceIdentifier("[]Bar", "Bar", "Foo"))
-	assert.Equal(t, "BarBaz", replaceIdentifier("BarBaz", "Bar", "Foo"))
-	assert.Equal(t, "*Foo", replaceIdentifier("*Bar", "Bar", "Foo"))
+	assert.Equal(t, "[]Foo", replaceTypeRef("[]Bar", "Bar", "Foo"))
+	assert.Equal(t, "BarBaz", replaceTypeRef("BarBaz", "Bar", "Foo"))
+	assert.Equal(t, "*Foo", replaceTypeRef("*Bar", "Bar", "Foo"))
 }
 
 func TestUnit_Codegen_FirstSentence_Truncates(t *testing.T) {

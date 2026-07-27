@@ -134,6 +134,6 @@ type UserRequest struct {
 
 // ResourceUsers is generated from the OpenAPI specification.
 type ResourceUsers struct {
-	Links         SelfLinks      `json:"_links,omitempty"`
-	ResourceUsers []ExtendedUser `json:"users,omitempty"`
+	Links SelfLinks      `json:"_links,omitempty"`
+	Users []ExtendedUser `json:"users,omitempty"`
 }

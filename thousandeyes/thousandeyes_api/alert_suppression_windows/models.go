@@ -67,8 +67,8 @@ type AlertSuppressionWindowRequest struct {
 
 // ResourceAlertSuppressionWindows Alert suppression windows.
 type ResourceAlertSuppressionWindows struct {
-	Links                           SelfLinks                `json:"_links,omitempty"`
-	ResourceAlertSuppressionWindows []AlertSuppressionWindow `json:"alertSuppressionWindows,omitempty"`
+	Links                   SelfLinks                `json:"_links,omitempty"`
+	AlertSuppressionWindows []AlertSuppressionWindow `json:"alertSuppressionWindows,omitempty"`
 }
 
 // Enabled Test is enabled.

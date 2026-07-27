@@ -79,8 +79,8 @@ type Quota struct {
 
 // ResourceQuotas is generated from the OpenAPI specification.
 type ResourceQuotas struct {
-	Links          SelfLinks `json:"_links,omitempty"`
-	ResourceQuotas []Quota   `json:"quotas,omitempty"`
+	Links  SelfLinks `json:"_links,omitempty"`
+	Quotas []Quota   `json:"quotas,omitempty"`
 }
 
 // QuotasAssignRequest is generated from the OpenAPI specification.

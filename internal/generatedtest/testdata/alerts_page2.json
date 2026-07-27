@@ -1,0 +1,15 @@
+{
+  "alerts": [
+    {
+      "id": "alert-2",
+      "alertType": "http-server",
+      "severity": "info",
+      "state": "active"
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://api.thousandeyes.com/v7/alerts"
+    }
+  }
+}

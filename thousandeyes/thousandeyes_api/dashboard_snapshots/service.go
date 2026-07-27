@@ -7,6 +7,7 @@ package dashboard_snapshots
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/deploymenttheory/go-sdk-thousandeyes/thousandeyes/client"
@@ -44,7 +45,6 @@ func (s *DashboardSnapshots) GetDashboardSnapshots(ctx context.Context, opts ...
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -52,10 +52,24 @@ func (s *DashboardSnapshots) GetDashboardSnapshots(ctx context.Context, opts ...
 		opt(req)
 	}
 
-	resp, err := req.Get(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []ApiDashboardSnapshot
+	merge := func(page []byte) error {
+		var batch []ApiDashboardSnapshot
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding dashboardSnapshots page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.GetPaginated(endpoint, "dashboardSnapshots", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.DashboardSnapshots = items
 
 	return &result, resp, nil
 }

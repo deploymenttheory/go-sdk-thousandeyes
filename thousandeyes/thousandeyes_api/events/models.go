@@ -406,11 +406,11 @@ type EventTestLinks struct {
 
 // ResourceEvents is generated from the OpenAPI specification.
 type ResourceEvents struct {
-	Links          PaginationNextAndSelfLinks `json:"_links,omitempty"`
-	AID            AccountGroupId             `json:"aid,omitempty"`
-	EndDate        EndDate                    `json:"endDate,omitempty"`
-	ResourceEvents []Event                    `json:"events,omitempty"`
-	StartDate      StartDate                  `json:"startDate,omitempty"`
+	Links     PaginationNextAndSelfLinks `json:"_links,omitempty"`
+	AID       AccountGroupId             `json:"aid,omitempty"`
+	EndDate   EndDate                    `json:"endDate,omitempty"`
+	Events    []Event                    `json:"events,omitempty"`
+	StartDate StartDate                  `json:"startDate,omitempty"`
 }
 
 // GatewayEventDetail is generated from the OpenAPI specification.

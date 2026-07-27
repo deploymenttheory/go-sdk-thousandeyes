@@ -1,75 +1,178 @@
-# Template
+# Go SDK for the ThousandEyes API
 
-This repository serves as a **Default Template Repository** according official [GitHub Contributing Guidelines][ProjectSetup] for healthy contributions. It brings you clean default Templates for several areas:
+A Go client for the [ThousandEyes API v7](https://developer.cisco.com/docs/thousandeyes/), generated
+from Cisco's published OpenAPI specification.
 
-- [Azure DevOps Pull Requests](.azuredevops/PULL_REQUEST_TEMPLATE.md) ([`.azuredevops\PULL_REQUEST_TEMPLATE.md`](`.azuredevops\PULL_REQUEST_TEMPLATE.md`))
-- [Azure Pipelines](.pipelines/pipeline.yml) ([`.pipelines/pipeline.yml`](`.pipelines/pipeline.yml`))
-- [GitHub Workflows](.github/workflows/)
-  - [Super Linter](.github/workflows/linter.yml) ([`.github/workflows/linter.yml`](`.github/workflows/linter.yml`))
-  - [Sample Workflows](.github/workflows/workflow.yml) ([`.github/workflows/workflow.yml`](`.github/workflows/workflow.yml`))
-- [GitHub Pull Requests](.github/PULL_REQUEST_TEMPLATE.md) ([`.github/PULL_REQUEST_TEMPLATE.md`](`.github/PULL_REQUEST_TEMPLATE.md`))
-- [GitHub Issues](.github/ISSUE_TEMPLATE/)
-  - [Feature Requests](.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md) ([`.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md`](`.github/ISSUE_TEMPLATE/FEATURE_REQUEST.md`))
-  - [Bug Reports](.github/ISSUE_TEMPLATE/BUG_REPORT.md) ([`.github/ISSUE_TEMPLATE/BUG_REPORT.md`](`.github/ISSUE_TEMPLATE/BUG_REPORT.md`))
-- [Codeowners](.github/CODEOWNERS) ([`.github/CODEOWNERS`](`.github/CODEOWNERS`)) _adjust usernames once cloned_
-- [Wiki and Documentation](docs/) ([`docs/`](`docs/`))
-- [gitignore](.gitignore) ([`.gitignore`](.gitignore))
-- [gitattributes](.gitattributes) ([`.gitattributes`](.gitattributes))
-- [Changelog](CHANGELOG.md) ([`CHANGELOG.md`](`CHANGELOG.md`))
-- [Code of Conduct](CODE_OF_CONDUCT.md) ([`CODE_OF_CONDUCT.md`](`CODE_OF_CONDUCT.md`))
-- [Contribution](CONTRIBUTING.md) ([`CONTRIBUTING.md`](`CONTRIBUTING.md`))
-- [License](LICENSE) ([`LICENSE`](`LICENSE`)) _adjust projectname once cloned_
-- [Readme](README.md) ([`README.md`](`README.md`))
-- [Security](SECURITY.md) ([`SECURITY.md`](`SECURITY.md`))
+**97 service packages · 315 operations · 641 enumerations · 18 discriminated unions**
 
+## Quick start
 
-## Status
+```go
+package main
 
-[![Super Linter](<https://github.com/segraef/Template/actions/workflows/linter.yml/badge.svg>)](<https://github.com/segraef/Template/actions/workflows/linter.yml>)
+import (
+	"context"
+	"fmt"
+	"log"
 
-[![Sample Workflow](<https://github.com/segraef/Template/actions/workflows/workflow.yml/badge.svg>)](<https://github.com/segraef/Template/actions/workflows/workflow.yml>)
+	te "github.com/deploymenttheory/go-sdk-thousandeyes/thousandeyes"
+)
 
-## Creating a repository from a template
+func main() {
+	// Reads TE_TOKEN, TE_AID and TE_API_ENDPOINT.
+	client, err := te.NewClientFromEnv()
+	if err != nil {
+		log.Fatal(err)
+	}
 
-You can [generate](https://github.com/segraef/Template/generate) a new repository with the same directory structure and files as an existing repository. More details can be found [here][CreateFromTemplate].
+	agents, _, err := client.API.CloudAndEnterpriseAgents.GetAgents(context.Background())
+	if err != nil {
+		log.Fatal(err)
+	}
 
-## Reporting Issues and Feedback
+	fmt.Printf("%d agents\n", len(agents.Agents))
+}
+```
 
-### Issues and Bugs
+## Authentication
 
-If you find any bugs, please file an issue in the [GitHub Issues][GitHubIssues] page. Please fill out the provided template with the appropriate information.
+ThousandEyes has **no service-account or client-credentials identity type**. The v7 API accepts
+exactly one credential: an OAuth2 bearer token belonging to a *user*, created by hand from
+**Account Settings → Users and Roles → Profile → User API Tokens**. There is no token exchange,
+refresh or revocation flow, and no API for minting a token on another user's behalf.
 
-If you are taking the time to mention a problem, even a seemingly minor one, it is greatly appreciated, and a totally valid contribution to this project. **Thank you!**
+For automation, the closest equivalent is a dedicated user account on a mailbox the team controls,
+holding a role scoped to what the automation needs.
 
-## Feedback
+```go
+client, err := te.NewClient(&config.AuthConfig{
+	BearerToken:    os.Getenv("TE_TOKEN"),
+	AccountGroupID: "281474976742769", // optional; sent as aid on every request
+})
+```
 
-If there is a feature you would like to see in here, please file an issue or feature request in the [GitHub Issues][GitHubIssues] page to provide direct feedback.
+| Variable | Purpose |
+| --- | --- |
+| `TE_TOKEN` | Bearer token. Required. |
+| `TE_AID` | Account group. Optional; the token's default is used when unset. |
+| `TE_API_ENDPOINT` | Base URL. Defaults to `https://api.thousandeyes.com/v7`. |
 
-## Contribution
+These are the same variables the ThousandEyes Terraform provider reads, so one exported environment
+serves both.
 
-If you would like to become an active contributor to this repository or project, please follow the instructions provided in [`CONTRIBUTING.md`][Contributing].
+## Client options
 
-## Learn More
+```go
+client, err := te.NewClientFromEnv(
+	te.WithTimeout(30*time.Second),
+	te.WithRetryCount(3),
+	te.WithLogger(logger),
+)
+```
 
-* [GitHub Documentation][GitHubDocs]
-* [Azure DevOps Documentation][AzureDevOpsDocs]
-* [Microsoft Azure Documentation][MicrosoftAzureDocs]
+Transport behaviour worth knowing:
 
-<!-- References -->
+- **Rate limiting is header-driven.** The API reports the organization quota on every response
+  (`x-organization-rate-limit-{limit,remaining,reset}`), and the client paces itself against that
+  budget rather than inferring pressure from latency. `client.Transport.RateLimit()` returns the last
+  snapshot.
+- **Retries** cover idempotent requests with exponential backoff.
+- **Concurrency** is limited when `WithMaxConcurrentRequests` is set.
 
-<!-- Local -->
-[ProjectSetup]: <https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions>
-[CreateFromTemplate]: <https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/creating-a-repository-from-a-template>
-[GitHubDocs]: <https://docs.github.com/>
-[AzureDevOpsDocs]: <https://docs.microsoft.com/en-us/azure/devops/?view=azure-devops>
-[GitHubIssues]: <https://github.com/segraef/Template/issues>
-[Contributing]: CONTRIBUTING.md
+## Pagination
 
-<!-- External -->
-[Az]: <https://img.shields.io/powershellgallery/v/Az.svg?style=flat-square&label=Az>
-[AzGallery]: <https://www.powershellgallery.com/packages/Az/>
-[PowerShellCore]: <https://github.com/PowerShell/PowerShell/releases/latest>
+Read operations that accept a cursor **fetch every page** and return the whole collection. 37 of the
+315 operations work this way; the rest return a single response.
 
-<!-- Docs -->
-[MicrosoftAzureDocs]: <https://docs.microsoft.com/en-us/azure/>
-[PowerShellDocs]: <https://docs.microsoft.com/en-us/powershell/>
+```go
+alerts, _, err := client.API.Alerts.GetAlerts(ctx) // all pages, merged
+```
+
+This is deliberate. Returning only the first page is the kind of bug that never announces itself —
+the call succeeds, the data looks right, and it is quietly incomplete.
+
+To bound the walk:
+
+```go
+client.API.Alerts.GetAlerts(ctx, tclient.WithMaxPages(1)) // one page
+client.API.Alerts.GetAlerts(ctx, tclient.WithMax(50))     // 50 items per page
+```
+
+`WithMax` sets the page *size*; `WithMaxPages` limits how many pages are fetched. Note that some
+collection endpoints — `/agents` among them — ignore paging parameters entirely and return
+everything in one response.
+
+## Enumerations are open
+
+Every enumeration in the specification becomes a named type with typed constants:
+
+```go
+if test.Type == tests.TestTypeHTTPServer { ... }
+```
+
+They are **open**: a value the specification does not list still decodes and compares as its
+underlying string. The API adds values without a major version change, and a closed type would turn a
+routine upstream addition into a decode failure.
+
+```go
+value.IsKnown()          // is this one of the documented values?
+value.String()           // the value as the API spells it
+tests.TestTypeValues()   // every documented value
+```
+
+## Discriminated unions
+
+Where the API returns one of several shapes, the generated type carries the discriminator plus one
+pointer per variant. Build one with a constructor so the tag and the variant cannot disagree:
+
+```go
+selector := endpoint.NewEndpointAgentSelectorConfigFromSpecificAgents(
+	endpoint.EndpointSpecificAgentsSelectorConfig{Agents: []string{"1", "2"}},
+)
+
+if cfg, ok := response.GetSpecificAgents(); ok {
+	fmt.Println(cfg.Agents)
+}
+```
+
+An unrecognised discriminator is not an error — the payload is retained on `Raw`, so a variant added
+upstream is still reachable.
+
+## Errors
+
+```go
+if client.IsNotFound(err) { ... }
+if client.IsRateLimited(err) { ... }
+```
+
+The API uses three unrelated error shapes — RFC 7807 `problem+json` on validation failures,
+`{"error","error_description"}` for an invalid token, `{"errorMessage"}` when credentials are absent
+— plus an empty body on 404. All four are normalised into `*client.APIError`.
+
+## Generated code
+
+`thousandeyes/thousandeyes_api/` and `thousandeyes/thousandeyes.go` are generated. Do not edit them;
+change the generator or its templates and regenerate:
+
+```bash
+go run ./scripts/openapi/GenerateServices
+```
+
+The specification itself is version-controlled under `openapi-specs/`, fetched weekly by
+`.github/workflows/get-openapi-specs.yml`, which opens a PR carrying both the new snapshot and the
+regenerated code. `codegen-verify.yml` fails any PR whose generated output has drifted from the
+specification it was generated from.
+
+| Path | Contents |
+| --- | --- |
+| `thousandeyes/client` | transport, auth, retry, rate limiting, pagination |
+| `thousandeyes/thousandeyes_api` | generated services, models, enums, unions |
+| `thousandeyes/shared/templating` | `TemplatedValue[T]` for the Templates API |
+| `internal/codegen`, `internal/templates` | the generator and its templates |
+| `openapi-specs` | version-controlled specification snapshots |
+| `examples` | runnable examples |
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Unit tests are required for changed packages, and generated
+code must be regenerated rather than hand-edited.

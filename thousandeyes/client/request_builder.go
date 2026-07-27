@@ -17,7 +17,7 @@ type MultipartProgressCallback func(fieldName string, fileName string, bytesWrit
 type requestExecutor interface {
 	execute(req *resty.Request, method, path string, result any) (*resty.Response, error)
 	executeGetBytes(req *resty.Request, path string) (*resty.Response, []byte, error)
-	executePaginated(req *resty.Request, path string, collectionKey string, mergePage func([]byte) error) (*resty.Response, error)
+	executePaginated(req *resty.Request, method, path string, collectionKey string, maxPages int, mergePage func([]byte) error) (*resty.Response, error)
 }
 
 // RequestBuilder constructs a single API request. Following the same pattern
@@ -38,6 +38,20 @@ type RequestBuilder struct {
 	req      *resty.Request
 	executor requestExecutor
 	result   any
+	// maxPages bounds a paginated walk. Zero means the package default.
+	maxPages int
+}
+
+// SetMaxPages bounds how many pages a paginated request will fetch.
+//
+// Generated read operations paginate to exhaustion by default, which is what
+// makes them correct. This is how a caller asks for less: SetMaxPages(1)
+// fetches a single page. Values below zero are ignored.
+func (b *RequestBuilder) SetMaxPages(pages int) *RequestBuilder {
+	if pages > 0 {
+		b.maxPages = pages
+	}
+	return b
 }
 
 // SetHeader sets a request-level header. Empty values are ignored.
@@ -157,7 +171,17 @@ func (b *RequestBuilder) GetPaginated(
 	collectionKey string,
 	mergePage func([]byte) error,
 ) (*resty.Response, error) {
-	return b.executor.executePaginated(b.req, path, collectionKey, mergePage)
+	return b.executor.executePaginated(b.req, "GET", path, collectionKey, b.maxPages, mergePage)
+}
+
+// PostPaginated is GetPaginated for collections filtered through a request body.
+// The body set on the builder is replayed on every page.
+func (b *RequestBuilder) PostPaginated(
+	path string,
+	collectionKey string,
+	mergePage func([]byte) error,
+) (*resty.Response, error) {
+	return b.executor.executePaginated(b.req, "POST", path, collectionKey, b.maxPages, mergePage)
 }
 
 // mockRequestExecutor backs a RequestBuilder in tests, routing execution
@@ -181,7 +205,7 @@ func (m *mockRequestExecutor) executeGetBytes(req *resty.Request, path string) (
 	return resp, resp.Bytes(), nil
 }
 
-func (m *mockRequestExecutor) executePaginated(req *resty.Request, path string, collectionKey string, mergePage func([]byte) error) (*resty.Response, error) {
+func (m *mockRequestExecutor) executePaginated(req *resty.Request, method, path string, collectionKey string, maxPages int, mergePage func([]byte) error) (*resty.Response, error) {
 	m.captureQueryParams(req)
 	resp, err := m.fn("GET", path, nil)
 	if err != nil {

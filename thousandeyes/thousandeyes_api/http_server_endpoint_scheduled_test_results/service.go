@@ -7,6 +7,7 @@ package http_server_endpoint_scheduled_test_results
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/deploymenttheory/go-sdk-thousandeyes/thousandeyes/client"
@@ -50,7 +51,6 @@ func (s *HTTPServerEndpointScheduledTestResults) GetMultiTestFilteredHttpServerS
 		SetHeader("Accept", constants.Accept).
 		SetHeader("Content-Type", constants.ApplicationJSON).
 		SetBody(request).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -58,10 +58,24 @@ func (s *HTTPServerEndpointScheduledTestResults) GetMultiTestFilteredHttpServerS
 		opt(req)
 	}
 
-	resp, err := req.Post(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []HttpEndpointTestResult
+	merge := func(page []byte) error {
+		var batch []HttpEndpointTestResult
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding results page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.PostPaginated(endpoint, "results", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Results = items
 
 	return &result, resp, nil
 }
@@ -83,7 +97,6 @@ func (s *HTTPServerEndpointScheduledTestResults) GetHttpServerScheduledTestResul
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -91,10 +104,24 @@ func (s *HTTPServerEndpointScheduledTestResults) GetHttpServerScheduledTestResul
 		opt(req)
 	}
 
-	resp, err := req.Get(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []HttpEndpointTestResult
+	merge := func(page []byte) error {
+		var batch []HttpEndpointTestResult
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding results page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.GetPaginated(endpoint, "results", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Results = items
 
 	return &result, resp, nil
 }
@@ -120,7 +147,6 @@ func (s *HTTPServerEndpointScheduledTestResults) GetSingleTestFilteredHttpServer
 		SetHeader("Accept", constants.Accept).
 		SetHeader("Content-Type", constants.ApplicationJSON).
 		SetBody(request).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -128,10 +154,24 @@ func (s *HTTPServerEndpointScheduledTestResults) GetSingleTestFilteredHttpServer
 		opt(req)
 	}
 
-	resp, err := req.Post(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []HttpEndpointTestResult
+	merge := func(page []byte) error {
+		var batch []HttpEndpointTestResult
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding results page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.PostPaginated(endpoint, "results", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Results = items
 
 	return &result, resp, nil
 }

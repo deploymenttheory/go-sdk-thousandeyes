@@ -80,8 +80,8 @@ type RoleRequestBody struct {
 
 // ResourceRoles is generated from the OpenAPI specification.
 type ResourceRoles struct {
-	Links         SelfLinks `json:"_links,omitempty"`
-	ResourceRoles []Role    `json:"roles,omitempty"`
+	Links SelfLinks `json:"_links,omitempty"`
+	Roles []Role    `json:"roles,omitempty"`
 }
 
 // SelfLinks A links object containing the self link.

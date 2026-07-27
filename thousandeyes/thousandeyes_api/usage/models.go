@@ -200,8 +200,8 @@ type UnitsByTests struct {
 
 // ResourceUsage is generated from the OpenAPI specification.
 type ResourceUsage struct {
-	Links         SelfLinks    `json:"_links,omitempty"`
-	ResourceUsage UsageDetails `json:"usage,omitempty"`
+	Links SelfLinks    `json:"_links,omitempty"`
+	Usage UsageDetails `json:"usage,omitempty"`
 }
 
 // UsageDetails is generated from the OpenAPI specification.

@@ -65,6 +65,32 @@ jobs:
           go run ./scripts/openapi/GetOpenAPISpecs ${{ inputs.dry_run && '-dry-run' || '' }}
           echo "::endgroup::"
 
+      # A spec update that is not accompanied by regenerated code leaves the SDK
+      # stale on merge, so the PR carries both and is self-consistent.
+      - name: Regenerate service packages
+        if: steps.collect.outputs.changed == 'true' && !inputs.dry_run
+        run: |
+          echo "::group::🔁 Regenerating against the new specification"
+          go run ./scripts/openapi/GenerateServices
+          echo "::endgroup::"
+
+          if git diff --quiet -- thousandeyes/; then
+            echo "generated_changed=false" >> "$GITHUB_OUTPUT"
+            echo "Specification changed but the generated surface did not."
+          else
+            echo "generated_changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat -- thousandeyes/
+          fi
+        id: regenerate
+
+      # Regenerated output must compile and pass its tests before a PR is opened;
+      # an upstream schema change can produce output that does not build.
+      - name: Build and test regenerated code
+        if: steps.collect.outputs.changed == 'true' && !inputs.dry_run
+        run: |
+          go build ./...
+          go test ./internal/... ./thousandeyes/...
+
       - name: Report outcome
         run: |
           if [ "${{ steps.collect.outputs.changed }}" = "true" ]; then
@@ -88,5 +114,7 @@ jobs:
           commit-message: ${{ steps.collect.outputs.title }}
           title: ${{ steps.collect.outputs.title }}
           body-path: ${{ steps.collect.outputs.body_path }}
-          add-paths: openapi-specs
+          add-paths: |
+            openapi-specs
+            thousandeyes
           labels: openapi

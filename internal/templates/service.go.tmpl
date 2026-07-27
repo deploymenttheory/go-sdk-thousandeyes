@@ -7,6 +7,9 @@ package {{ .Package }}
 
 import (
 	"context"
+{{- if .NeedsJSON }}
+	"encoding/json"
+{{- end }}
 {{- if .NeedsFmt }}
 	"fmt"
 {{- end }}
@@ -58,7 +61,7 @@ func (s *{{ $.Name }}) {{ .Name }}(ctx context.Context{{ .ParamSig }}, opts ...c
 		SetHeader("Content-Type", constants.ApplicationJSON).
 		SetBody(request).
 {{- end }}
-{{- if .ResultType }}
+{{- if and .ResultType (not .Paginated) }}
 		SetResult(&result).
 {{- end }}
 		SetQueryParam("aid", s.client.AccountGroupID())
@@ -68,10 +71,33 @@ func (s *{{ $.Name }}) {{ .Name }}(ctx context.Context{{ .ParamSig }}, opts ...c
 		opt(req)
 	}
 
+{{- if .Paginated }}
+
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []{{ .CollectionElem }}
+	merge := func(page []byte) error {
+		var batch []{{ .CollectionElem }}
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding {{ .CollectionKey }} page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.{{ .PaginatedVerb }}(endpoint, {{ printf "%q" .CollectionKey }}, merge)
+	if err != nil {
+		return {{ .NilPrefix }}resp, err
+	}
+	result.{{ .CollectionField }} = items
+{{- else }}
+
 	resp, err := req.{{ .RestyVerb }}(endpoint)
 	if err != nil {
 		return {{ .NilPrefix }}resp, err
 	}
+{{- end }}
 
 	return {{ .SuccessReturn }}resp, nil
 }

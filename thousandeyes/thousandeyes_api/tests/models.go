@@ -121,6 +121,6 @@ type TestVersionHistoryResponse struct {
 
 // ResourceTests is generated from the OpenAPI specification.
 type ResourceTests struct {
-	Links         SelfLinks    `json:"_links,omitempty"`
-	ResourceTests []SimpleTest `json:"tests,omitempty"`
+	Links SelfLinks    `json:"_links,omitempty"`
+	Tests []SimpleTest `json:"tests,omitempty"`
 }

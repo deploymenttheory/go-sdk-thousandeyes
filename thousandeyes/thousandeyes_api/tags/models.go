@@ -14,9 +14,9 @@ type Assignment struct {
 
 // BulkTagResponse is generated from the OpenAPI specification.
 type BulkTagResponse struct {
-	Links        SelfLinks            `json:"_links,omitempty"`
-	Errors       []TagBulkCreateError `json:"errors,omitempty"`
-	ResourceTags []Tag                `json:"tags,omitempty"`
+	Links  SelfLinks            `json:"_links,omitempty"`
+	Errors []TagBulkCreateError `json:"errors,omitempty"`
+	Tags   []Tag                `json:"tags,omitempty"`
 }
 
 // Link A hyperlink from the containing resource to a URI.
@@ -131,6 +131,6 @@ type TagInfo struct {
 
 // ResourceTags is generated from the OpenAPI specification.
 type ResourceTags struct {
-	Links        SelfLinks `json:"_links,omitempty"`
-	ResourceTags []Tag     `json:"tags,omitempty"`
+	Links SelfLinks `json:"_links,omitempty"`
+	Tags  []Tag     `json:"tags,omitempty"`
 }

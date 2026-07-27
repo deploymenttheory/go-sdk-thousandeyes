@@ -99,8 +99,8 @@ type AlertMetricDetail struct {
 
 // ResourceAlerts is generated from the OpenAPI specification.
 type ResourceAlerts struct {
-	Links          PaginationLinks `json:"_links,omitempty"`
-	ResourceAlerts []Alert         `json:"alerts,omitempty"`
+	Links  PaginationLinks `json:"_links,omitempty"`
+	Alerts []Alert         `json:"alerts,omitempty"`
 }
 
 // Asn Autonomous System Number (ASN) information for network outage alerts.

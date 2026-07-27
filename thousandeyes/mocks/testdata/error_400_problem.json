@@ -1,0 +1,6 @@
+{
+  "type": "about:blank",
+  "title": "There were some errors in your request, please correct them before trying again. Error in field prefix.prefix : Prefix is empty.",
+  "status": 400,
+  "instance": "/v7/tests/bgp"
+}

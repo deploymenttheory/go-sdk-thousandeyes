@@ -61,3 +61,13 @@ func WithMax(max int) RequestOption {
 func WithWindow(window string) RequestOption {
 	return func(b *RequestBuilder) { b.SetQueryParam("window", window) }
 }
+
+// WithMaxPages bounds how many pages a paginated operation fetches.
+//
+// Generated read operations follow _links.next to exhaustion, so a collection
+// comes back whole rather than silently truncated at page one. WithMaxPages(1)
+// is how a caller asks for a single page; WithMax sets the page size, which is
+// a different thing.
+func WithMaxPages(pages int) RequestOption {
+	return func(b *RequestBuilder) { b.SetMaxPages(pages) }
+}

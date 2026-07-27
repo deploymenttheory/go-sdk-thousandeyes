@@ -7,6 +7,7 @@ package events
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/deploymenttheory/go-sdk-thousandeyes/thousandeyes/client"
@@ -44,7 +45,6 @@ func (s *Events) GetEvents(ctx context.Context, opts ...client.RequestOption) (*
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -52,10 +52,24 @@ func (s *Events) GetEvents(ctx context.Context, opts ...client.RequestOption) (*
 		opt(req)
 	}
 
-	resp, err := req.Get(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []Event
+	merge := func(page []byte) error {
+		var batch []Event
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding events page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.GetPaginated(endpoint, "events", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Events = items
 
 	return &result, resp, nil
 }

@@ -35,8 +35,8 @@ type CredentialWithoutValue struct {
 
 // ResourceCredentials is generated from the OpenAPI specification.
 type ResourceCredentials struct {
-	Links               SelfLinks    `json:"_links,omitempty"`
-	ResourceCredentials []Credential `json:"credentials,omitempty"`
+	Links       SelfLinks    `json:"_links,omitempty"`
+	Credentials []Credential `json:"credentials,omitempty"`
 }
 
 // Link A hyperlink from the containing resource to a URI.

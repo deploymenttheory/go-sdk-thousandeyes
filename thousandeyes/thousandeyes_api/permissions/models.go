@@ -42,8 +42,8 @@ type Permission struct {
 
 // ResourcePermissions is generated from the OpenAPI specification.
 type ResourcePermissions struct {
-	Links               SelfLinks             `json:"_links,omitempty"`
-	ResourcePermissions PermissionsCollection `json:"permissions,omitempty"`
+	Links       SelfLinks             `json:"_links,omitempty"`
+	Permissions PermissionsCollection `json:"permissions,omitempty"`
 }
 
 // PermissionsCollection is generated from the OpenAPI specification.

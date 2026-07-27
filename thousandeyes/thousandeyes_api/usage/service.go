@@ -7,6 +7,8 @@ package usage
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 
 	"github.com/deploymenttheory/go-sdk-thousandeyes/thousandeyes/client"
 	"github.com/deploymenttheory/go-sdk-thousandeyes/thousandeyes/constants"
@@ -74,7 +76,6 @@ func (s *Usage) GetEnterpriseAgentsUnitsUsage(ctx context.Context, opts ...clien
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -82,10 +83,24 @@ func (s *Usage) GetEnterpriseAgentsUnitsUsage(ctx context.Context, opts ...clien
 		opt(req)
 	}
 
-	resp, err := req.Get(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []EnterpriseAgentUnitsByTestOwnerAccountGroup
+	merge := func(page []byte) error {
+		var batch []EnterpriseAgentUnitsByTestOwnerAccountGroup
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding breakdowns page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.GetPaginated(endpoint, "breakdowns", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Breakdowns = items
 
 	return &result, resp, nil
 }
@@ -105,7 +120,6 @@ func (s *Usage) GetTestsUnitsUsage(ctx context.Context, opts ...client.RequestOp
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -113,10 +127,24 @@ func (s *Usage) GetTestsUnitsUsage(ctx context.Context, opts ...client.RequestOp
 		opt(req)
 	}
 
-	resp, err := req.Get(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []UnitsByTests
+	merge := func(page []byte) error {
+		var batch []UnitsByTests
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding breakdowns page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.GetPaginated(endpoint, "breakdowns", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Breakdowns = items
 
 	return &result, resp, nil
 }

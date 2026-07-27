@@ -7,6 +7,7 @@ package web_page_load_test_results
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/deploymenttheory/go-sdk-thousandeyes/thousandeyes/client"
@@ -48,7 +49,6 @@ func (s *WebPageLoadTestResults) GetTestPageLoadResults(ctx context.Context, tes
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -56,10 +56,24 @@ func (s *WebPageLoadTestResults) GetTestPageLoadResults(ctx context.Context, tes
 		opt(req)
 	}
 
-	resp, err := req.Get(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []PageLoadTestResult
+	merge := func(page []byte) error {
+		var batch []PageLoadTestResult
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding results page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.GetPaginated(endpoint, "results", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Results = items
 
 	return &result, resp, nil
 }

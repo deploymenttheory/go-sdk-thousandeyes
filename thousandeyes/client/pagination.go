@@ -9,9 +9,10 @@ import (
 	"resty.dev/v3"
 )
 
-// maxPages bounds a pagination loop so a server that keeps returning a next
-// link cannot spin forever.
-const maxPages = 10_000
+// defaultMaxPages bounds a pagination loop so a server that keeps returning a
+// next link cannot spin forever. A caller can lower it per request with
+// RequestBuilder.SetMaxPages.
+const defaultMaxPages = 10_000
 
 // halPage is the envelope ThousandEyes returns from collection endpoints.
 //
@@ -44,16 +45,28 @@ type halPage struct {
 // href in _links.next, which already carries the cursor and the original
 // filters, so they must not be re-applied.
 //
+// The verb is carried across pages because a collection may be filtered through
+// a POST body rather than the query string; that body is replayed on each page.
+//
 // Endpoints that do not paginate simply return no next link, and the loop ends
 // after a single request. That is the common case: only a minority of the v7
 // collection endpoints support cursors at all, and some — /agents among them —
 // return the entire collection and ignore paging parameters entirely.
 func (t *Transport) executePaginated(
 	req *resty.Request,
+	method string,
 	path string,
 	collectionKey string,
+	maxPages int,
 	mergePage func([]byte) error,
 ) (*resty.Response, error) {
+	if method == "" {
+		method = "GET"
+	}
+	if maxPages <= 0 {
+		maxPages = defaultMaxPages
+	}
+
 	// The service has set filters and Accept on req; carry both onto each page.
 	baseParams := make(map[string]string)
 	for k, vs := range req.QueryParams {
@@ -61,6 +74,9 @@ func (t *Transport) executePaginated(
 			baseParams[k] = vs[0]
 		}
 	}
+	// A POST collection filters through its body, which every page repeats.
+	body := req.Body
+
 	templateHeaders := make(map[string]string)
 	for k, vs := range req.Header {
 		if len(vs) > 0 {
@@ -82,6 +98,9 @@ func (t *Transport) executePaginated(
 		pageReq := t.client.R().
 			SetContext(ctx).
 			SetResponseBodyUnlimitedReads(true)
+		if body != nil {
+			pageReq.SetBody(body)
+		}
 		for k, v := range templateHeaders {
 			if v != "" {
 				pageReq.SetHeader(k, v)
@@ -101,7 +120,7 @@ func (t *Transport) executePaginated(
 			target = nextURL
 		}
 
-		resp, err := t.executeRequest(pageReq, "GET", target)
+		resp, err := t.executeRequest(pageReq, method, target)
 		lastResp = resp
 		if err != nil {
 			return lastResp, err
@@ -134,6 +153,11 @@ func (t *Transport) executePaginated(
 		nextURL = envelope.Links.Next.Href
 	}
 
+	// Stopping at the caller's bound is the requested outcome, not a failure;
+	// only the runaway default indicates something is wrong.
+	if maxPages < defaultMaxPages {
+		return lastResp, nil
+	}
 	return lastResp, fmt.Errorf("pagination exceeded %d pages for %s", maxPages, path)
 }
 

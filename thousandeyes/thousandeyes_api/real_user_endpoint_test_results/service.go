@@ -7,6 +7,7 @@ package real_user_endpoint_test_results
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/deploymenttheory/go-sdk-thousandeyes/thousandeyes/client"
@@ -49,7 +50,6 @@ func (s *RealUserEndpointTestResults) FilterRealUserTestsResults(ctx context.Con
 		SetHeader("Accept", constants.Accept).
 		SetHeader("Content-Type", constants.ApplicationJSON).
 		SetBody(request).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -57,10 +57,24 @@ func (s *RealUserEndpointTestResults) FilterRealUserTestsResults(ctx context.Con
 		opt(req)
 	}
 
-	resp, err := req.Post(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []RealUserEndpointTest
+	merge := func(page []byte) error {
+		var batch []RealUserEndpointTest
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding results page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.PostPaginated(endpoint, "results", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Results = items
 
 	return &result, resp, nil
 }
@@ -83,7 +97,6 @@ func (s *RealUserEndpointTestResults) FilterRealUserTestsNetworkResults(ctx cont
 		SetHeader("Accept", constants.Accept).
 		SetHeader("Content-Type", constants.ApplicationJSON).
 		SetBody(request).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -91,10 +104,24 @@ func (s *RealUserEndpointTestResults) FilterRealUserTestsNetworkResults(ctx cont
 		opt(req)
 	}
 
-	resp, err := req.Post(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []RealUserEndpointTestNetworkResult
+	merge := func(page []byte) error {
+		var batch []RealUserEndpointTestNetworkResult
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding results page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.PostPaginated(endpoint, "results", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Results = items
 
 	return &result, resp, nil
 }
@@ -117,7 +144,6 @@ func (s *RealUserEndpointTestResults) FilterRealUserTestsVisitedPagesResults(ctx
 		SetHeader("Accept", constants.Accept).
 		SetHeader("Content-Type", constants.ApplicationJSON).
 		SetBody(request).
-		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.
@@ -125,10 +151,24 @@ func (s *RealUserEndpointTestResults) FilterRealUserTestsVisitedPagesResults(ctx
 		opt(req)
 	}
 
-	resp, err := req.Post(endpoint)
+	// The collection arrives across pages linked by _links.next. Fetching only
+	// the first would silently truncate the result, so every page is merged.
+	// Bound the walk with client.WithMaxPages when that is not wanted.
+	var items []RealUserEndpointTestPageResult
+	merge := func(page []byte) error {
+		var batch []RealUserEndpointTestPageResult
+		if err := json.Unmarshal(page, &batch); err != nil {
+			return fmt.Errorf("decoding results page: %w", err)
+		}
+		items = append(items, batch...)
+		return nil
+	}
+
+	resp, err := req.PostPaginated(endpoint, "results", merge)
 	if err != nil {
 		return nil, resp, err
 	}
+	result.Results = items
 
 	return &result, resp, nil
 }

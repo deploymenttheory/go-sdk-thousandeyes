@@ -42,6 +42,17 @@ type Operation struct {
 	ParamSig      string
 	ReturnSig     string
 	SuccessReturn string
+	// Paginated is true when the operation accepts a cursor, meaning the
+	// collection arrives across several pages that must all be fetched.
+	Paginated bool
+	// CollectionKey is the JSON name of the array within the HAL envelope.
+	CollectionKey string
+	// CollectionField is the Go field on the result struct holding it.
+	CollectionField string
+	// CollectionElem is the element type, decoded per page.
+	CollectionElem string
+	// PaginatedVerb is the builder method driving the walk.
+	PaginatedVerb string
 	// NilPrefix is the leading nil an error return needs when the operation
 	// has a result type, so error paths match the signature's arity.
 	NilPrefix  string
@@ -57,7 +68,9 @@ type Service struct {
 	SpecVersion string
 	// NeedsFmt is false when no operation validates an argument or interpolates
 	// a path, in which case importing fmt would not compile.
-	NeedsFmt   bool
+	NeedsFmt bool
+	// NeedsJSON is true when a paginated operation decodes pages itself.
+	NeedsJSON  bool
 	Operations []Operation
 	Models     []Model
 	Enums      []Enum
@@ -118,9 +131,11 @@ func (g *Generator) Build() []Service {
 		svc.UsesTemplating = resolver.UsesTemplating()
 
 		for _, op := range svc.Operations {
-			if len(op.PathParams) > 0 || op.HasBody {
+			if len(op.PathParams) > 0 || op.HasBody || op.Paginated {
 				svc.NeedsFmt = true
-				break
+			}
+			if op.Paginated {
+				svc.NeedsJSON = true
 			}
 		}
 
@@ -164,6 +179,7 @@ func (g *Generator) buildOperation(raw RawOperation, resolver *TypeResolver) Ope
 		op.NilPrefix = ""
 	}
 
+	g.applyPagination(&op, raw, resolver)
 	op.DocComment = operationDoc(op)
 	return op
 }
@@ -486,21 +502,41 @@ func resolveNameCollisions(serviceName string, models []Model, operations *[]Ope
 	for old, replacement := range renamed {
 		for i := range models {
 			model := &models[i]
-			model.Definition = replaceIdentifier(model.Definition, old, replacement)
+			model.Definition = replaceInDefinition(model.Definition, old, replacement)
 		}
 		for i := range *operations {
 			op := &(*operations)[i]
-			op.ResultType = replaceIdentifier(op.ResultType, old, replacement)
-			op.BodyType = replaceIdentifier(op.BodyType, old, replacement)
-			op.ReturnSig = replaceIdentifier(op.ReturnSig, old, replacement)
-			op.ParamSig = replaceIdentifier(op.ParamSig, old, replacement)
+			op.ResultType = replaceTypeRef(op.ResultType, old, replacement)
+			op.BodyType = replaceTypeRef(op.BodyType, old, replacement)
+			op.ReturnSig = replaceTypeRef(op.ReturnSig, old, replacement)
+			op.ParamSig = replaceTypeRef(op.ParamSig, old, replacement)
+			op.CollectionElem = replaceTypeRef(op.CollectionElem, old, replacement)
 		}
 	}
 	return models
 }
 
-// replaceIdentifier substitutes whole-word occurrences of old with replacement.
-func replaceIdentifier(in, old, replacement string) string {
+// replaceInDefinition renames a type inside a struct body, leaving field names
+// alone.
+//
+// A struct field and its type can share a name — "Alerts []Alert" inside a
+// renamed Alerts model — and rewriting both would rename the field too,
+// producing ResourceAlerts.ResourceAlerts. In gofmt'd output a field name is
+// the first token on its line and so is preceded by a tab; a type reference is
+// always preceded by a space or by one of the composite markers below.
+func replaceInDefinition(in, old, replacement string) string {
+	if in == "" || !strings.Contains(in, old) {
+		return in
+	}
+	pattern := regexp.MustCompile(`([ \[\]*(,])` + regexp.QuoteMeta(old) + `\b`)
+	return pattern.ReplaceAllString(in, "${1}"+replacement)
+}
+
+// replaceTypeRef renames a type in a standalone type expression, such as an
+// operation's result or body type. There are no field names in those, so a
+// plain whole-word match is right — and necessary, since the identifier is
+// often the whole string and has no preceding character to anchor on.
+func replaceTypeRef(in, old, replacement string) string {
 	if in == "" || !strings.Contains(in, old) {
 		return in
 	}
@@ -565,4 +601,144 @@ func (g *Generator) WriteRootClient(path string, root RootClient) error {
 		return fmt.Errorf("writing %s: %w", path, err)
 	}
 	return nil
+}
+
+// applyPagination marks an operation as paginated and resolves the collection
+// it accumulates.
+//
+// An operation paginates when it accepts a cursor. Every such operation in the
+// specification returns exactly one array property, so the collection is
+// identified without guesswork; anything else is left unpaginated rather than
+// half-resolved.
+func (g *Generator) applyPagination(op *Operation, raw RawOperation, resolver *TypeResolver) {
+	if op.ResultType == "" {
+		return
+	}
+	// Both GET and POST collections paginate; POST is used where the filter is
+	// large enough to warrant a body.
+	if op.Method != "GET" && op.Method != "POST" {
+		return
+	}
+
+	cursored := false
+	for _, p := range op.QueryParams {
+		if p.Name == "cursor" {
+			cursored = true
+			break
+		}
+	}
+	if !cursored {
+		return
+	}
+
+	key, elem := g.collectionOf(raw, resolver)
+	if key == "" || elem == "" {
+		return
+	}
+
+	op.Paginated = true
+	op.CollectionKey = key
+	op.CollectionField = goFieldName(key)
+	op.CollectionElem = elem
+	op.PaginatedVerb = "GetPaginated"
+	if op.Method == "POST" {
+		op.PaginatedVerb = "PostPaginated"
+	}
+}
+
+// collectionOf returns the JSON name and element type of the single array
+// property in an operation's success response, or empty strings when the
+// response does not have exactly one.
+func (g *Generator) collectionOf(raw RawOperation, resolver *TypeResolver) (string, string) {
+	responses, ok := raw.Op["responses"].(map[string]any)
+	if !ok {
+		return "", ""
+	}
+	response, ok := responses["200"].(map[string]any)
+	if !ok {
+		return "", ""
+	}
+	if ref, isRef := response["$ref"].(string); isRef {
+		resolved, _, found := g.spec.Resolve(ref)
+		if !found {
+			return "", ""
+		}
+		response = resolved
+	}
+
+	schema := contentSchema(response)
+	if schema == nil {
+		return "", ""
+	}
+
+	props := g.responseProperties(schema, 0)
+
+	var key string
+	var items map[string]any
+	for name, raw := range props {
+		prop := g.deref(raw)
+		if prop == nil || typeOf(prop) != "array" {
+			continue
+		}
+		if key != "" {
+			// More than one array: the collection is ambiguous.
+			return "", ""
+		}
+		key = name
+		items, _ = prop["items"].(map[string]any)
+	}
+	if key == "" {
+		return "", ""
+	}
+
+	return key, resolver.GoType(items)
+}
+
+// responseProperties collects a response schema's properties, following $ref
+// and allOf so a composed envelope resolves like any other.
+func (g *Generator) responseProperties(schema map[string]any, depth int) map[string]any {
+	out := map[string]any{}
+	if depth > maxCompositionDepth || schema == nil {
+		return out
+	}
+
+	if resolved := g.deref(schema); resolved != nil {
+		schema = resolved
+	}
+
+	if members, ok := schema["allOf"].([]any); ok {
+		for _, m := range members {
+			member, ok := m.(map[string]any)
+			if !ok {
+				continue
+			}
+			for k, v := range g.responseProperties(member, depth+1) {
+				out[k] = v
+			}
+		}
+	}
+
+	if props, ok := schema["properties"].(map[string]any); ok {
+		for k, v := range props {
+			out[k] = v
+		}
+	}
+	return out
+}
+
+// deref resolves a $ref, or returns the schema unchanged.
+func (g *Generator) deref(node any) map[string]any {
+	schema, ok := node.(map[string]any)
+	if !ok {
+		return nil
+	}
+	ref, isRef := schema["$ref"].(string)
+	if !isRef {
+		return schema
+	}
+	resolved, _, found := g.spec.Resolve(ref)
+	if !found {
+		return nil
+	}
+	return resolved
 }
