@@ -37,6 +37,8 @@ func NewVoiceSIPServerTestResults(client client.Client) *VoiceSIPServerTestResul
 // Optional query params: window, startDate, endDate, cursor
 //
 // Returns Voice SIP server test results.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *VoiceSIPServerTestResults) GetTestSipServerResults(ctx context.Context, testId string, opts ...client.RequestOption) (*SipServerTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

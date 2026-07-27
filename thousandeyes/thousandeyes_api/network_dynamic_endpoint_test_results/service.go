@@ -38,6 +38,11 @@ func NewNetworkDynamicEndpointTestResults(client client.Client) *NetworkDynamicE
 //
 // Returns network metrics (`loss`, `latency`, `jitter` and `bandwidth`) from
 // each endpoint agent, for each `roundId` in the requested window.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
+//
+// Multi-page behaviour on this endpoint is UNVERIFIED: no _links.next
+// has been observed from a /filter endpoint. See client.PostPaginated.
 func (s *NetworkDynamicEndpointTestResults) FilterDynamicTestNetworkResults(ctx context.Context, testId string, request *DynamicEndpointTestsDataRoundSearch, opts ...client.RequestOption) (*ResourceNetworkDynamicEndpointTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")
@@ -89,6 +94,8 @@ func (s *NetworkDynamicEndpointTestResults) FilterDynamicTestNetworkResults(ctx 
 //
 // Returns a summary of the path visualization data collected from each
 // endpoint agent to the destination.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *NetworkDynamicEndpointTestResults) GetDynamicTestPathVisResults(ctx context.Context, testId string, opts ...client.RequestOption) (*PathVisDynamicEndpointTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

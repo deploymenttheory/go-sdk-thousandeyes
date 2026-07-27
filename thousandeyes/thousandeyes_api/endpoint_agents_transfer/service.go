@@ -35,7 +35,10 @@ func NewEndpointAgentsTransfer(client client.Client) *EndpointAgentsTransfer {
 // URL: POST /endpoint/agents/transfer/bulk
 //
 // Initiates the transfer of multiple agents between accounts.
-func (s *EndpointAgentsTransfer) TransferEndpointAgents(ctx context.Context, opts ...client.RequestOption) (*BulkAgentTransferResponse, *resty.Response, error) {
+func (s *EndpointAgentsTransfer) TransferEndpointAgents(ctx context.Context, request *BulkAgentTransferRequest, opts ...client.RequestOption) (*BulkAgentTransferResponse, *resty.Response, error) {
+	if request == nil {
+		return nil, nil, fmt.Errorf("request is required")
+	}
 
 	endpoint := "/endpoint/agents/transfer/bulk"
 
@@ -43,6 +46,8 @@ func (s *EndpointAgentsTransfer) TransferEndpointAgents(ctx context.Context, opt
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		SetBody(request).
 		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
@@ -64,15 +69,20 @@ func (s *EndpointAgentsTransfer) TransferEndpointAgents(ctx context.Context, opt
 //
 // Initiates the transfer of an agent from its current account, which must
 // correspond to the provided aid, to the target account.
-func (s *EndpointAgentsTransfer) TransferEndpointAgent(ctx context.Context, agentId string, opts ...client.RequestOption) (*resty.Response, error) {
+func (s *EndpointAgentsTransfer) TransferEndpointAgent(ctx context.Context, agentId string, request *AgentTransferRequest, opts ...client.RequestOption) (*resty.Response, error) {
 	if agentId == "" {
 		return nil, fmt.Errorf("agentId is required")
+	}
+	if request == nil {
+		return nil, fmt.Errorf("request is required")
 	}
 
 	endpoint := fmt.Sprintf("/endpoint/agents/%s/transfer", agentId)
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		SetBody(request).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.

@@ -37,6 +37,8 @@ func NewAlerts(client client.Client) *Alerts {
 // Optional query params: window, startDate, endDate, max, cursor, state
 //
 // Returns a list of alerts.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *Alerts) GetAlerts(ctx context.Context, opts ...client.RequestOption) (*ResourceAlerts, *resty.Response, error) {
 
 	endpoint := "/alerts"

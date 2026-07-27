@@ -38,6 +38,8 @@ func NewEndpointAgentLogItems(client client.Client) *EndpointAgentLogItems {
 //
 // Returns paginated logs for an endpoint agent within the requested time
 // range.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *EndpointAgentLogItems) GetEndpointAgentLogItems(ctx context.Context, agentId string, opts ...client.RequestOption) (*EndpointAgentLogItemsResponse, *resty.Response, error) {
 	if agentId == "" {
 		return nil, nil, fmt.Errorf("agentId is required")

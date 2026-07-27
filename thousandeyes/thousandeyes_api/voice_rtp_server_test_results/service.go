@@ -37,6 +37,8 @@ func NewVoiceRTPServerTestResults(client client.Client) *VoiceRTPServerTestResul
 // Optional query params: window, startDate, endDate, cursor
 //
 // Returns Voice RTP server test results.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *VoiceRTPServerTestResults) GetTestRtpServerResults(ctx context.Context, testId string, opts ...client.RequestOption) (*RtpStreamTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

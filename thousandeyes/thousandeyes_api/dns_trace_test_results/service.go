@@ -37,6 +37,8 @@ func NewDNSTraceTestResults(client client.Client) *DNSTraceTestResults {
 // Optional query params: window, startDate, endDate, cursor
 //
 // Returns a DNS record from the requesting agent's point of view.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *DNSTraceTestResults) GetTestDnsTraceResults(ctx context.Context, testId string, opts ...client.RequestOption) (*DnsTraceTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

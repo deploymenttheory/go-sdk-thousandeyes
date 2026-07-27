@@ -38,6 +38,11 @@ func NewHTTPServerEndpointScheduledTestResults(client client.Client) *HTTPServer
 //
 // Returns component-level (DNS, Connect, Wait and Receive) timing for the load
 // of an object over HTTP.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
+//
+// Multi-page behaviour on this endpoint is UNVERIFIED: no _links.next
+// has been observed from a /filter endpoint. See client.PostPaginated.
 func (s *HTTPServerEndpointScheduledTestResults) GetMultiTestFilteredHttpServerScheduledTestResults(ctx context.Context, request *HttpEndpointTestsDataRoundsSearch, opts ...client.RequestOption) (*HttpMultiEndpointTestResults, *resty.Response, error) {
 	if request == nil {
 		return nil, nil, fmt.Errorf("request is required")
@@ -86,6 +91,8 @@ func (s *HTTPServerEndpointScheduledTestResults) GetMultiTestFilteredHttpServerS
 //
 // Returns component-level (DNS, Connect, Wait and Receive) timing for the load
 // of an object over HTTP.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *HTTPServerEndpointScheduledTestResults) GetHttpServerScheduledTestResults(ctx context.Context, testId string, opts ...client.RequestOption) (*HttpEndpointTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")
@@ -131,6 +138,11 @@ func (s *HTTPServerEndpointScheduledTestResults) GetHttpServerScheduledTestResul
 // Optional query params: window, startDate, endDate, cursor, expand
 //
 // Returns component-level timings for an object load over HTTP.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
+//
+// Multi-page behaviour on this endpoint is UNVERIFIED: no _links.next
+// has been observed from a /filter endpoint. See client.PostPaginated.
 func (s *HTTPServerEndpointScheduledTestResults) GetSingleTestFilteredHttpServerScheduledTestResults(ctx context.Context, testId string, request *HttpEndpointTestsDataRoundsSearch, opts ...client.RequestOption) (*HttpMultiEndpointTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

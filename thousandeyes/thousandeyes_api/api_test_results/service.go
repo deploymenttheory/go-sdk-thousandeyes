@@ -37,6 +37,8 @@ func NewAPITestResults(client client.Client) *APITestResults {
 // Optional query params: window, startDate, endDate, cursor
 //
 // Returns test results for API.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *APITestResults) GetTestApiResults(ctx context.Context, testId string, opts ...client.RequestOption) (*ApiTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

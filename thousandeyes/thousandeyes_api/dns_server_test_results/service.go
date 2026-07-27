@@ -38,6 +38,8 @@ func NewDNSServerTestResults(client client.Client) *DNSServerTestResults {
 //
 // Returns the mappings for a DNS record, along with the resolution time to
 // each authoritative server, measured from the agent's point of view.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *DNSServerTestResults) GetTestDnsServersResults(ctx context.Context, testId string, opts ...client.RequestOption) (*DnsServerTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")
@@ -84,6 +86,8 @@ func (s *DNSServerTestResults) GetTestDnsServersResults(ctx context.Context, tes
 //
 // Returns mappings for a DNS record and resolution time to the specified
 // server, measured from the requesting agent's point of view.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *DNSServerTestResults) GetTestDnsServerResult(ctx context.Context, testId string, serverId string, opts ...client.RequestOption) (*DnsServerTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

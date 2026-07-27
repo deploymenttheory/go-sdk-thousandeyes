@@ -37,6 +37,11 @@ func NewRealUserEndpointTestResults(client client.Client) *RealUserEndpointTestR
 // Optional query params: window, startDate, endDate, cursor
 //
 // Returns a list of all endpoint real user tests.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
+//
+// Multi-page behaviour on this endpoint is UNVERIFIED: no _links.next
+// has been observed from a /filter endpoint. See client.PostPaginated.
 func (s *RealUserEndpointTestResults) FilterRealUserTestsResults(ctx context.Context, request *RealUserEndpointTestResultsRequest, opts ...client.RequestOption) (*ResourceRealUserEndpointTestResults, *resty.Response, error) {
 	if request == nil {
 		return nil, nil, fmt.Errorf("request is required")
@@ -84,6 +89,11 @@ func (s *RealUserEndpointTestResults) FilterRealUserTestsResults(ctx context.Con
 // Optional query params: window, startDate, endDate, cursor
 //
 // Returns a list of all endpoint real user tests.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
+//
+// Multi-page behaviour on this endpoint is UNVERIFIED: no _links.next
+// has been observed from a /filter endpoint. See client.PostPaginated.
 func (s *RealUserEndpointTestResults) FilterRealUserTestsNetworkResults(ctx context.Context, request *RealUserEndpointTestResultsRequest, opts ...client.RequestOption) (*RealUserEndpointTestNetworkResults, *resty.Response, error) {
 	if request == nil {
 		return nil, nil, fmt.Errorf("request is required")
@@ -131,6 +141,11 @@ func (s *RealUserEndpointTestResults) FilterRealUserTestsNetworkResults(ctx cont
 // Optional query params: window, startDate, endDate, cursor
 //
 // Returns a list of all endpoint real user tests visited pages.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
+//
+// Multi-page behaviour on this endpoint is UNVERIFIED: no _links.next
+// has been observed from a /filter endpoint. See client.PostPaginated.
 func (s *RealUserEndpointTestResults) FilterRealUserTestsVisitedPagesResults(ctx context.Context, request *RealUserEndpointTestResultRequestFilter, opts ...client.RequestOption) (*RealUserEndpointTestPageResults, *resty.Response, error) {
 	if request == nil {
 		return nil, nil, fmt.Errorf("request is required")

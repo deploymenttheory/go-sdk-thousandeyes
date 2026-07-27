@@ -37,6 +37,8 @@ func NewNetworkTestResults(client client.Client) *NetworkTestResults {
 // Optional query params: window, startDate, endDate, cursor, direction
 //
 // Returns network test results for every agent and round.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *NetworkTestResults) GetTestNetworkResults(ctx context.Context, testId string, opts ...client.RequestOption) (*ResourceNetworkTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")
@@ -83,6 +85,8 @@ func (s *NetworkTestResults) GetTestNetworkResults(ctx context.Context, testId s
 //
 // Returns a summary of the path trace data collected during path visualization
 // for a given time range.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *NetworkTestResults) GetTestPathVisResults(ctx context.Context, testId string, opts ...client.RequestOption) (*PathVisTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

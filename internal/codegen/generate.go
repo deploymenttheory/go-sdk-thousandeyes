@@ -240,6 +240,13 @@ func (g *Generator) requestBody(raw RawOperation, resolver *TypeResolver) (strin
 	if !ok {
 		return "", false
 	}
+	// A requestBody may be a $ref into components/requestBodies. Left
+	// unresolved it has no content key, so the body was silently dropped and
+	// the operation generated without a way to send its payload — which for
+	// POST /tags/assign and its siblings is the entire request.
+	if resolved := g.deref(body); resolved != nil {
+		body = resolved
+	}
 	schema := contentSchema(body)
 	if schema == nil {
 		return "", false
@@ -354,6 +361,19 @@ func operationDoc(op Operation) string {
 
 	if op.Description != "" && op.Description != op.Summary {
 		fmt.Fprintf(&b, "\n//\n%s", commentBlock("", firstSentence(op.Description)))
+	}
+
+	if op.Paginated {
+		b.WriteString("\n//\n// Fetches every page. Bound the walk with client.WithMaxPages.")
+		if op.Method == "POST" {
+			// Surfaced at the call site because a caller cannot otherwise tell
+			// that this path is inferred from the specification rather than
+			// observed. See client.PostPaginated for the evidence.
+			b.WriteString(
+				"\n//\n// Multi-page behaviour on this endpoint is UNVERIFIED: no _links.next\n" +
+					"// has been observed from a /filter endpoint. See client.PostPaginated.",
+			)
+		}
 	}
 
 	return b.String()

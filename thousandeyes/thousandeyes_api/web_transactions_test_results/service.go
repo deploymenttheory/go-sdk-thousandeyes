@@ -37,6 +37,8 @@ func NewWebTransactionsTestResults(client client.Client) *WebTransactionsTestRes
 // Optional query params: window, startDate, endDate, cursor
 //
 // Returns test results for web transactions.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *WebTransactionsTestResults) GetTestWebTransactionResults(ctx context.Context, testId string, opts ...client.RequestOption) (*WebTransactionTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

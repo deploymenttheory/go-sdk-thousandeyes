@@ -37,6 +37,8 @@ func NewEndpointAgentLabels(client client.Client) *EndpointAgentLabels {
 // Optional query params: max, cursor, expand
 //
 // Returns a list of labels.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *EndpointAgentLabels) GetEndpointLabels(ctx context.Context, opts ...client.RequestOption) (*Labels, *resty.Response, error) {
 
 	endpoint := "/endpoint/labels"

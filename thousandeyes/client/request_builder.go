@@ -176,6 +176,32 @@ func (b *RequestBuilder) GetPaginated(
 
 // PostPaginated is GetPaginated for collections filtered through a request body.
 // The body set on the builder is replayed on every page.
+//
+// The ten /filter endpoints take their criteria as a POST body — too complex for
+// a query string — and page through a cursor query parameter, the same shape
+// used by Elasticsearch _search and similar search APIs.
+//
+// UNVERIFIED against a live tenant. What is confirmed by testing
+// POST /v7/endpoint/agents/filter:
+//
+//   - cursor is a recognised, typed parameter: ?cursor=abc returns
+//     400 "Failed to deserialize", whereas an unknown parameter such as
+//     ?bogusParam=abc is silently ignored and returns 200.
+//   - the response envelope differs from the HAL collections: content-type is
+//     application/json, and the body carries a totalAgents count alongside the
+//     collection and _links.
+//
+// What is not confirmed:
+//
+//   - no _links.next has ever been observed from a filter endpoint, because the
+//     tenants available for testing return a single empty page. _links came back
+//     as {} — without even a self link, which the HAL collections always carry.
+//     That the next href appears in the same position for these endpoints is an
+//     inference from the specification, not an observation.
+//
+// The walk itself is the same code path as GetPaginated, so a next link in the
+// expected place will be followed. Until a tenant with enough data to force a
+// second page is available, treat multi-page behaviour here as untested.
 func (b *RequestBuilder) PostPaginated(
 	path string,
 	collectionKey string,

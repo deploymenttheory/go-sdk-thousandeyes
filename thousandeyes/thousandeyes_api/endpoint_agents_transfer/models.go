@@ -16,6 +16,11 @@ type AgentTransfer struct {
 	ToAID   AccountId       `json:"toAid,omitempty"`
 }
 
+// AgentTransferRequest is generated from the OpenAPI specification.
+type AgentTransferRequest struct {
+	ToAID AccountId `json:"toAid,omitempty"`
+}
+
 // AgentTransferStatus is generated from the OpenAPI specification.
 type AgentTransferStatus struct {
 	// A human-readable explanation specific to this occurrence of the problem.
@@ -30,6 +35,11 @@ type AgentTransferStatus struct {
 	Title *string `json:"title,omitempty"`
 	// A URI reference that identifies the problem type.
 	Type *string `json:"type,omitempty"`
+}
+
+// BulkAgentTransferRequest is generated from the OpenAPI specification.
+type BulkAgentTransferRequest struct {
+	Transfers []AgentTransfer `json:"transfers,omitempty"`
 }
 
 // BulkAgentTransferResponse is generated from the OpenAPI specification.

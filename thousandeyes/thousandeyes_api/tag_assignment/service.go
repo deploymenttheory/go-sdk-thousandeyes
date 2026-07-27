@@ -35,7 +35,10 @@ func NewTagAssignment(client client.Client) *TagAssignment {
 // URL: POST /tags/assign
 //
 // Assigns the specified static tags to the specified objects.
-func (s *TagAssignment) AssignTags(ctx context.Context, opts ...client.RequestOption) (*BulkTagAssignments, *resty.Response, error) {
+func (s *TagAssignment) AssignTags(ctx context.Context, request *BulkTagAssignments, opts ...client.RequestOption) (*BulkTagAssignments, *resty.Response, error) {
+	if request == nil {
+		return nil, nil, fmt.Errorf("request is required")
+	}
 
 	endpoint := "/tags/assign"
 
@@ -43,6 +46,8 @@ func (s *TagAssignment) AssignTags(ctx context.Context, opts ...client.RequestOp
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		SetBody(request).
 		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
@@ -63,7 +68,10 @@ func (s *TagAssignment) AssignTags(ctx context.Context, opts ...client.RequestOp
 // URL: POST /tags/unassign
 //
 // Removes the specified static tags from one or more objects.
-func (s *TagAssignment) UnassignTags(ctx context.Context, opts ...client.RequestOption) (*BulkTagAssignments, *resty.Response, error) {
+func (s *TagAssignment) UnassignTags(ctx context.Context, request *BulkTagAssignments, opts ...client.RequestOption) (*BulkTagAssignments, *resty.Response, error) {
+	if request == nil {
+		return nil, nil, fmt.Errorf("request is required")
+	}
 
 	endpoint := "/tags/unassign"
 
@@ -71,6 +79,8 @@ func (s *TagAssignment) UnassignTags(ctx context.Context, opts ...client.Request
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		SetBody(request).
 		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
@@ -91,9 +101,12 @@ func (s *TagAssignment) UnassignTags(ctx context.Context, opts ...client.Request
 // URL: POST /tags/{id}/assign
 //
 // Assigns a static tag to one or more objects.
-func (s *TagAssignment) AssignTag(ctx context.Context, id string, opts ...client.RequestOption) (*BulkTagAssignment, *resty.Response, error) {
+func (s *TagAssignment) AssignTag(ctx context.Context, id string, request *ResourceTagAssignment, opts ...client.RequestOption) (*BulkTagAssignment, *resty.Response, error) {
 	if id == "" {
 		return nil, nil, fmt.Errorf("id is required")
+	}
+	if request == nil {
+		return nil, nil, fmt.Errorf("request is required")
 	}
 
 	endpoint := fmt.Sprintf("/tags/%s/assign", id)
@@ -102,6 +115,8 @@ func (s *TagAssignment) AssignTag(ctx context.Context, id string, opts ...client
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		SetBody(request).
 		SetResult(&result).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
@@ -122,15 +137,20 @@ func (s *TagAssignment) AssignTag(ctx context.Context, id string, opts ...client
 // URL: POST /tags/{id}/unassign
 //
 // Removes a static tag from one or more objects.
-func (s *TagAssignment) UnassignTag(ctx context.Context, id string, opts ...client.RequestOption) (*resty.Response, error) {
+func (s *TagAssignment) UnassignTag(ctx context.Context, id string, request *ResourceTagAssignment, opts ...client.RequestOption) (*resty.Response, error) {
 	if id == "" {
 		return nil, fmt.Errorf("id is required")
+	}
+	if request == nil {
+		return nil, fmt.Errorf("request is required")
 	}
 
 	endpoint := fmt.Sprintf("/tags/%s/unassign", id)
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		SetBody(request).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.

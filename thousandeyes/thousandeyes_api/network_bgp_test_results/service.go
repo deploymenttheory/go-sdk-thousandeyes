@@ -38,6 +38,8 @@ func NewNetworkBGPTestResults(client client.Client) *NetworkBGPTestResults {
 //
 // Returns a list of BGP monitors actively monitoring the destination's target
 // prefix.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *NetworkBGPTestResults) GetTestBgpResults(ctx context.Context, testId string, opts ...client.RequestOption) (*BgpTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

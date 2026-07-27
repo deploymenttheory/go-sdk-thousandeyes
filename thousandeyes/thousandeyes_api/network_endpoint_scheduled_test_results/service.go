@@ -38,6 +38,11 @@ func NewNetworkEndpointScheduledTestResults(client client.Client) *NetworkEndpoi
 //
 // Returns network metrics, including loss, latency, and jitter, for multiple
 // test IDs obtained from each endpoint agent.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
+//
+// Multi-page behaviour on this endpoint is UNVERIFIED: no _links.next
+// has been observed from a /filter endpoint. See client.PostPaginated.
 func (s *NetworkEndpointScheduledTestResults) FilterScheduledTestsNetworkResults(ctx context.Context, request *MultiTestIdEndpointTestsDataRoundsSearch, opts ...client.RequestOption) (*MultiTestIdNetworkEndpointTestResults, *resty.Response, error) {
 	if request == nil {
 		return nil, nil, fmt.Errorf("request is required")
@@ -87,6 +92,11 @@ func (s *NetworkEndpointScheduledTestResults) FilterScheduledTestsNetworkResults
 // Returns network metrics (loss, latency, and jitter) from each endpoint
 // agent, for each roundId within the specified time window, as determined by
 // search filters.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
+//
+// Multi-page behaviour on this endpoint is UNVERIFIED: no _links.next
+// has been observed from a /filter endpoint. See client.PostPaginated.
 func (s *NetworkEndpointScheduledTestResults) FilterScheduledTestNetworkResults(ctx context.Context, testId string, request *EndpointTestsDataRoundsSearch, opts ...client.RequestOption) (*NetworkEndpointTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")
@@ -138,6 +148,8 @@ func (s *NetworkEndpointScheduledTestResults) FilterScheduledTestNetworkResults(
 //
 // Returns a summary of the path visualization data collected from each
 // endpoint agent to the destination.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *NetworkEndpointScheduledTestResults) GetScheduledTestPathVisResults(ctx context.Context, testId string, opts ...client.RequestOption) (*PathVisEndpointTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

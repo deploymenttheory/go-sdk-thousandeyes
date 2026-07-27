@@ -121,6 +121,75 @@ func AgentLicenseTypeValues() []AgentLicenseType {
 	}
 }
 
+// AgentSearchSortKey is an enumeration from the OpenAPI specification. It is
+// open: values outside the enumeration decode and compare as their underlying
+// string.
+type AgentSearchSortKey string
+
+// AgentSearchSortKey values.
+const (
+	AgentSearchSortKeyPlatform     AgentSearchSortKey = "platform"
+	AgentSearchSortKeyOsVersion    AgentSearchSortKey = "osVersion"
+	AgentSearchSortKeyName         AgentSearchSortKey = "name"
+	AgentSearchSortKeyUserName     AgentSearchSortKey = "userName"
+	AgentSearchSortKeyCity         AgentSearchSortKey = "city"
+	AgentSearchSortKeySerialNumber AgentSearchSortKey = "serialNumber"
+)
+
+// String returns the value as the API spells it, or "AgentSearchSortKey(v)" for
+// values outside the enumeration.
+func (v AgentSearchSortKey) String() string {
+	switch v {
+	case AgentSearchSortKeyPlatform:
+		return "platform"
+	case AgentSearchSortKeyOsVersion:
+		return "osVersion"
+	case AgentSearchSortKeyName:
+		return "name"
+	case AgentSearchSortKeyUserName:
+		return "userName"
+	case AgentSearchSortKeyCity:
+		return "city"
+	case AgentSearchSortKeySerialNumber:
+		return "serialNumber"
+	}
+	return fmt.Sprintf("AgentSearchSortKey(%v)", string(v))
+}
+
+// IsKnown reports whether v is one of the values the specification declares.
+// A false result is not an error: the enumeration is open, and the API adds
+// values without a major version change.
+func (v AgentSearchSortKey) IsKnown() bool {
+	switch v {
+	case AgentSearchSortKeyPlatform:
+		return true
+	case AgentSearchSortKeyOsVersion:
+		return true
+	case AgentSearchSortKeyName:
+		return true
+	case AgentSearchSortKeyUserName:
+		return true
+	case AgentSearchSortKeyCity:
+		return true
+	case AgentSearchSortKeySerialNumber:
+		return true
+	}
+	return false
+}
+
+// AgentSearchSortKeyValues returns every value the specification declares, in
+// specification order.
+func AgentSearchSortKeyValues() []AgentSearchSortKey {
+	return []AgentSearchSortKey{
+		AgentSearchSortKeyPlatform,
+		AgentSearchSortKeyOsVersion,
+		AgentSearchSortKeyName,
+		AgentSearchSortKeyUserName,
+		AgentSearchSortKeyCity,
+		AgentSearchSortKeySerialNumber,
+	}
+}
+
 // BatteryLevel is an enumeration from the OpenAPI specification. Battery level
 // indicator. It is open: values outside the enumeration decode and compare as
 // their underlying string.
@@ -238,6 +307,51 @@ func BrowserTypeValues() []BrowserType {
 		BrowserTypeIe,
 		BrowserTypeEdge,
 		BrowserTypeUnknown,
+	}
+}
+
+// ConditionalOperator is an enumeration from the OpenAPI specification. It is
+// open: values outside the enumeration decode and compare as their underlying
+// string.
+type ConditionalOperator string
+
+// ConditionalOperator values.
+const (
+	ConditionalOperatorAnd ConditionalOperator = "and"
+	ConditionalOperatorOr  ConditionalOperator = "or"
+)
+
+// String returns the value as the API spells it, or "ConditionalOperator(v)" for
+// values outside the enumeration.
+func (v ConditionalOperator) String() string {
+	switch v {
+	case ConditionalOperatorAnd:
+		return "and"
+	case ConditionalOperatorOr:
+		return "or"
+	}
+	return fmt.Sprintf("ConditionalOperator(%v)", string(v))
+}
+
+// IsKnown reports whether v is one of the values the specification declares.
+// A false result is not an error: the enumeration is open, and the API adds
+// values without a major version change.
+func (v ConditionalOperator) IsKnown() bool {
+	switch v {
+	case ConditionalOperatorAnd:
+		return true
+	case ConditionalOperatorOr:
+		return true
+	}
+	return false
+}
+
+// ConditionalOperatorValues returns every value the specification declares, in
+// specification order.
+func ConditionalOperatorValues() []ConditionalOperator {
+	return []ConditionalOperator{
+		ConditionalOperatorAnd,
+		ConditionalOperatorOr,
 	}
 }
 
@@ -409,6 +523,52 @@ func PlatformValues() []Platform {
 	}
 }
 
+// SortOrder is an enumeration from the OpenAPI specification. Parameter
+// indicates the ascending/descending order of the sorting, using either the
+// asc or desc values. It is open: values outside the enumeration decode and
+// compare as their underlying string.
+type SortOrder string
+
+// SortOrder values.
+const (
+	SortOrderAsc  SortOrder = "asc"
+	SortOrderDesc SortOrder = "desc"
+)
+
+// String returns the value as the API spells it, or "SortOrder(v)" for
+// values outside the enumeration.
+func (v SortOrder) String() string {
+	switch v {
+	case SortOrderAsc:
+		return "asc"
+	case SortOrderDesc:
+		return "desc"
+	}
+	return fmt.Sprintf("SortOrder(%v)", string(v))
+}
+
+// IsKnown reports whether v is one of the values the specification declares.
+// A false result is not an error: the enumeration is open, and the API adds
+// values without a major version change.
+func (v SortOrder) IsKnown() bool {
+	switch v {
+	case SortOrderAsc:
+		return true
+	case SortOrderDesc:
+		return true
+	}
+	return false
+}
+
+// SortOrderValues returns every value the specification declares, in
+// specification order.
+func SortOrderValues() []SortOrder {
+	return []SortOrder{
+		SortOrderAsc,
+		SortOrderDesc,
+	}
+}
+
 // Status is an enumeration from the OpenAPI specification. Status of the
 // endpoint agent in ThousandEyes. It is open: values outside the enumeration
 // decode and compare as their underlying string.
@@ -451,6 +611,51 @@ func StatusValues() []Status {
 	return []Status{
 		StatusEnabled,
 		StatusDisabled,
+	}
+}
+
+// ThresholdFilterOperator is an enumeration from the OpenAPI specification. It
+// is open: values outside the enumeration decode and compare as their
+// underlying string.
+type ThresholdFilterOperator string
+
+// ThresholdFilterOperator values.
+const (
+	ThresholdFilterOperatorGte ThresholdFilterOperator = "gte"
+	ThresholdFilterOperatorLte ThresholdFilterOperator = "lte"
+)
+
+// String returns the value as the API spells it, or "ThresholdFilterOperator(v)" for
+// values outside the enumeration.
+func (v ThresholdFilterOperator) String() string {
+	switch v {
+	case ThresholdFilterOperatorGte:
+		return "gte"
+	case ThresholdFilterOperatorLte:
+		return "lte"
+	}
+	return fmt.Sprintf("ThresholdFilterOperator(%v)", string(v))
+}
+
+// IsKnown reports whether v is one of the values the specification declares.
+// A false result is not an error: the enumeration is open, and the API adds
+// values without a major version change.
+func (v ThresholdFilterOperator) IsKnown() bool {
+	switch v {
+	case ThresholdFilterOperatorGte:
+		return true
+	case ThresholdFilterOperatorLte:
+		return true
+	}
+	return false
+}
+
+// ThresholdFilterOperatorValues returns every value the specification declares, in
+// specification order.
+func ThresholdFilterOperatorValues() []ThresholdFilterOperator {
+	return []ThresholdFilterOperator{
+		ThresholdFilterOperatorGte,
+		ThresholdFilterOperatorLte,
 	}
 }
 

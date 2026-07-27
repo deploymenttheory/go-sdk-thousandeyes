@@ -68,6 +68,8 @@ func (s *Usage) GetUsage(ctx context.Context, opts ...client.RequestOption) (*Re
 // This operation returns the organization's enterprise agents usage for a
 // specific time period, or the curent billing cycle if no time period is
 // specified.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *Usage) GetEnterpriseAgentsUnitsUsage(ctx context.Context, opts ...client.RequestOption) (*EnterpriseAgentsUsage, *resty.Response, error) {
 
 	endpoint := "/usage/units/enterprise-agents"
@@ -112,6 +114,8 @@ func (s *Usage) GetEnterpriseAgentsUnitsUsage(ctx context.Context, opts ...clien
 // This operation returns the cloud and enterprise agents usage for all the
 // tests for a specific time period, or the curent billing cycle if no time
 // period is specified.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *Usage) GetTestsUnitsUsage(ctx context.Context, opts ...client.RequestOption) (*TestsUsage, *resty.Response, error) {
 
 	endpoint := "/usage/units/tests"

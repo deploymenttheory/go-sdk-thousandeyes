@@ -52,3 +52,8 @@ type Link struct {
 type SelfLinks struct {
 	Self Link `json:"self,omitempty"`
 }
+
+// ResourceTagAssignment is generated from the OpenAPI specification.
+type ResourceTagAssignment struct {
+	Assignments []Assignment `json:"assignments,omitempty"`
+}

@@ -37,6 +37,8 @@ func NewWebFTPServerTestResults(client client.Client) *WebFTPServerTestResults {
 // Optional query params: window, startDate, endDate, cursor
 //
 // Returns test results for FTP server requests.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *WebFTPServerTestResults) GetTestFtpServerResults(ctx context.Context, testId string, opts ...client.RequestOption) (*FtpServerTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

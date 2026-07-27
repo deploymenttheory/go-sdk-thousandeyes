@@ -65,6 +65,11 @@ func (s *LocalNetworkEndpointTestResults) GetLocalNetworksTestResults(ctx contex
 // Optional query params: window, startDate, endDate, cursor, expand
 //
 // Returns a list of all endpoint local network topologies probes.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
+//
+// Multi-page behaviour on this endpoint is UNVERIFIED: no _links.next
+// has been observed from a /filter endpoint. See client.PostPaginated.
 func (s *LocalNetworkEndpointTestResults) FilterLocalNetworksTestResultsTopologies(ctx context.Context, request *EndpointNetworkTopologyResultRequest, opts ...client.RequestOption) (*LocalNetworkTopologyResults, *resty.Response, error) {
 	if request == nil {
 		return nil, nil, fmt.Errorf("request is required")

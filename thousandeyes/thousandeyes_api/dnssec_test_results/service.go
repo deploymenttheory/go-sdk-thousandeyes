@@ -38,6 +38,8 @@ func NewDNSSECTestResults(client client.Client) *DNSSECTestResults {
 //
 // Returns the keychain validity for a record on a domain secured using DNSSEC
 // extensions.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *DNSSECTestResults) GetTestDnsSecResults(ctx context.Context, testId string, opts ...client.RequestOption) (*DnssecTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

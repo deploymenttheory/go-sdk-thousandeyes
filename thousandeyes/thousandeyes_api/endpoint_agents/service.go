@@ -37,6 +37,8 @@ func NewEndpointAgents(client client.Client) *EndpointAgents {
 // Optional query params: max, cursor, expand, includeDeleted, useAllPermittedAids, agentName, computerName
 //
 // Retrieves a list of endpoint agents in a given account group.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *EndpointAgents) GetEndpointAgents(ctx context.Context, opts ...client.RequestOption) (*ListEndpointAgentsResponse, *resty.Response, error) {
 
 	endpoint := "/endpoint/agents"
@@ -106,7 +108,15 @@ func (s *EndpointAgents) GetEndpointAgentsConnectionString(ctx context.Context, 
 //
 // Retrieves a list of endpoint agents within the specified account group that
 // match the specified filters.
-func (s *EndpointAgents) FilterEndpointAgents(ctx context.Context, opts ...client.RequestOption) (*FilterEndpointAgentsResponse, *resty.Response, error) {
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
+//
+// Multi-page behaviour on this endpoint is UNVERIFIED: no _links.next
+// has been observed from a /filter endpoint. See client.PostPaginated.
+func (s *EndpointAgents) FilterEndpointAgents(ctx context.Context, request *AgentSearchRequest, opts ...client.RequestOption) (*FilterEndpointAgentsResponse, *resty.Response, error) {
+	if request == nil {
+		return nil, nil, fmt.Errorf("request is required")
+	}
 
 	endpoint := "/endpoint/agents/filter"
 
@@ -114,6 +124,8 @@ func (s *EndpointAgents) FilterEndpointAgents(ctx context.Context, opts ...clien
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
+		SetHeader("Content-Type", constants.ApplicationJSON).
+		SetBody(request).
 		SetQueryParam("aid", s.client.AccountGroupID())
 
 	// Optional query parameters and per-call overrides.

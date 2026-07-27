@@ -37,6 +37,8 @@ func NewDashboardSnapshots(client client.Client) *DashboardSnapshots {
 // Optional query params: dashboardId, cursor
 //
 // Returns a list of dashboard snapshots within your account group.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *DashboardSnapshots) GetDashboardSnapshots(ctx context.Context, opts ...client.RequestOption) (*DashboardSnapshotsPage, *resty.Response, error) {
 
 	endpoint := "/dashboard-snapshots"

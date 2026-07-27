@@ -22,6 +22,72 @@ type AddressProfile struct {
 	RouterHardwareAddress *string `json:"routerHardwareAddress,omitempty"`
 }
 
+// AgentName Returns only agents with the specified name. This is an exact
+// match only.
+type AgentName string
+
+// AgentSearchFilters is generated from the OpenAPI specification.
+type AgentSearchFilters struct {
+	// Returns only agents with the given name.
+	AgentName []AgentName `json:"agentName,omitempty"`
+	// IDs of devices that has the Cisco Secure Client deployed with the Internet
+	// Security module.
+	AnyConnectDeviceID []string `json:"anyConnectDeviceId,omitempty"`
+	// Returns only agents with the given computer name.
+	ComputerName []ComputerName `json:"computerName,omitempty"`
+	// Returns only agents that are an exact match of the provided identifiers.
+	ID []EndpointAgentId `json:"id,omitempty"`
+	// Filter on the agent's license type
+	LicenseType []AgentLicenseType `json:"licenseType,omitempty"`
+	// This is a prefix match on the city name field.
+	LocationCity []string `json:"locationCity,omitempty"`
+	// Filter using the ISO country code of the location.
+	LocationCountryISO []string `json:"locationCountryISO,omitempty"`
+	// Filter using the code for the first level administrative division within the
+	// country.
+	LocationSubdivision1Code []string `json:"locationSubdivision1Code,omitempty"`
+	// Case-insensitive prefix filter on the OS version.
+	OsVersion []string `json:"osVersion,omitempty"`
+	// Filter on the platform on which the agent is running.
+	Platform []Platform `json:"platform,omitempty"`
+	// Case-insensitive prefix filter on the serial number.
+	SerialNumber []string `json:"serialNumber,omitempty"`
+	// Returns only agents that have at least one user principal name, starting
+	// with one of the provided strings.
+	UserPrincipalName []string `json:"userPrincipalName,omitempty"`
+	// Returns only agents that have at least one user with a name.
+	Username []string `json:"username,omitempty"`
+}
+
+// AgentSearchRequest Parameters for filtering a list of agents.
+type AgentSearchRequest struct {
+	SearchFilters   AgentSearchFilters    `json:"searchFilters,omitempty"`
+	SearchSort      []AgentSearchSort     `json:"searchSort,omitempty"`
+	ThresholdFilter AgentThresholdFilters `json:"thresholdFilter,omitempty"`
+}
+
+// AgentSearchSort is generated from the OpenAPI specification.
+type AgentSearchSort struct {
+	Order SortOrder          `json:"order,omitempty"`
+	Sort  AgentSearchSortKey `json:"sort,omitempty"`
+}
+
+// AgentThresholdFilter The metric is filtered based on the threshold value and
+// operator provided.
+type AgentThresholdFilter struct {
+	Name     *string                 `json:"name,omitempty"`
+	Operator ThresholdFilterOperator `json:"operator,omitempty"`
+	// The threshold value.
+	Value *float64 `json:"value,omitempty"`
+}
+
+// AgentThresholdFilters All filters are applied based on the conditional
+// operator (and/or).
+type AgentThresholdFilters struct {
+	ConditionalOperator ConditionalOperator    `json:"conditionalOperator,omitempty"`
+	Filters             []AgentThresholdFilter `json:"filters,omitempty"`
+}
+
 // BatteryMetrics Battery metrics for the endpoint agent.
 type BatteryMetrics struct {
 	// Battery health as a normalized percentage (0-1).
@@ -56,6 +122,10 @@ type CellularProfile struct {
 	// Signal to Interference and Noise Ratio in dBm.
 	Sinr *float64 `json:"sinr,omitempty"`
 }
+
+// ComputerName Returns only agents with the specified computer name. This is
+// an exact match only.
+type ComputerName string
 
 // ConnectionString is generated from the OpenAPI specification.
 type ConnectionString struct {

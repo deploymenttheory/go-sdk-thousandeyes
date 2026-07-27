@@ -37,6 +37,8 @@ func NewEvents(client client.Client) *Events {
 // Optional query params: window, startDate, endDate, max, cursor, ongoing
 //
 // Retrieves a list of events within the specified time window.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *Events) GetEvents(ctx context.Context, opts ...client.RequestOption) (*ResourceEvents, *resty.Response, error) {
 
 	endpoint := "/events"

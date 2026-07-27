@@ -194,6 +194,8 @@ func (s *Dashboards) UpdateDashboard(ctx context.Context, dashboardId string, re
 // Optional query params: window, startDate, endDate, max, cursor, sort, order
 //
 // Returns the raw data displayed within a widget in the dashboard.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *Dashboards) GetDashboardWidgetData(ctx context.Context, dashboardId string, widgetId string, opts ...client.RequestOption) (*ApiWidgetDataResponse, *resty.Response, error) {
 	if dashboardId == "" {
 		return nil, nil, fmt.Errorf("dashboardId is required")

@@ -37,6 +37,8 @@ func NewUserEvents(client client.Client) *UserEvents {
 // Optional query params: useAllPermittedAids, window, startDate, endDate, cursor
 //
 // Returns a list of activity log events in the current account group.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *UserEvents) GetUserEvents(ctx context.Context, opts ...client.RequestOption) (*AuditUserEvents, *resty.Response, error) {
 
 	endpoint := "/audit-user-events"

@@ -37,6 +37,8 @@ func NewWebHTTPServerTestResults(client client.Client) *WebHTTPServerTestResults
 // Optional query params: window, startDate, endDate, cursor, expand
 //
 // Returns results for requests made over HTTP.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *WebHTTPServerTestResults) GetTestHttpServerResults(ctx context.Context, testId string, opts ...client.RequestOption) (*HttpTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")

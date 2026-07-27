@@ -38,6 +38,8 @@ func NewWebPageLoadTestResults(client client.Client) *WebPageLoadTestResults {
 //
 // Returns results for page load server tests with a focus on page load times
 // and DOM for a web page.
+//
+// Fetches every page. Bound the walk with client.WithMaxPages.
 func (s *WebPageLoadTestResults) GetTestPageLoadResults(ctx context.Context, testId string, opts ...client.RequestOption) (*PageLoadTestResults, *resty.Response, error) {
 	if testId == "" {
 		return nil, nil, fmt.Errorf("testId is required")
