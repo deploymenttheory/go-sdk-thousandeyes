@@ -1,0 +1,41 @@
+openapi: 3.0.1
+info:
+  title: ThousandEyes API
+  version: "7.0.96"
+servers:
+  - url: 'https://api.thousandeyes.com/v7'
+paths:
+  /tests:
+    get:
+      summary: List tests
+      responses:
+        '200':
+          description: OK
+  /tests/{id}:
+    get:
+      summary: Get test
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Delete test
+      responses:
+        '204':
+          description: No content
+  /endpoint/tests/scheduled-tests:
+    parameters:
+      - name: aid
+        in: query
+        schema:
+          type: string
+    get:
+      summary: List endpoint scheduled tests
+      responses:
+        '200':
+          description: OK
+  /legacy/labels:
+    get:
+      summary: List labels
+      responses:
+        '200':
+          description: OK

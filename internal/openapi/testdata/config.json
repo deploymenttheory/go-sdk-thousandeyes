@@ -1,0 +1,56 @@
+{
+  "config": {
+    "enableAI": true
+  },
+  "items": [
+    {
+      "title": "Overview",
+      "content": "index.html",
+      "type": "page"
+    },
+    {
+      "title": "API Reference",
+      "items": [
+        {
+          "title": "Account Management",
+          "items": [
+            {
+              "items": [
+                {
+                  "title": "Administrative API",
+                  "content": "reference/account-management/admin.yaml",
+                  "type": "oas3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Tests",
+          "items": [
+            {
+              "title": "Tests API",
+              "content": "reference/tests/tests.yaml",
+              "type": "oas3"
+            },
+            {
+              "title": "Tests API (duplicate entry)",
+              "content": "reference/tests/tests.yaml",
+              "type": "oas3"
+            }
+          ]
+        },
+        {
+          "title": "Unified",
+          "items": [
+            {
+              "title": "ThousandEyes API",
+              "content": "reference/unified-oas/api.yaml",
+              "type": "oas3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
