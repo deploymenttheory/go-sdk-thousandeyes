@@ -11,7 +11,7 @@ type AccountGroupId string
 
 // DynamicTest is generated from the OpenAPI specification.
 type DynamicTest struct {
-	Links                 DynamicTestLinks            `json:"_links,omitempty"`
+	Links                 *DynamicTestLinks           `json:"_links,omitempty"`
 	AgentSelectorConfig   EndpointAgentSelectorConfig `json:"agentSelectorConfig,omitempty"`
 	AID                   AccountGroupId              `json:"aid,omitempty"`
 	Application           DynamicTestApplication      `json:"application,omitempty"`
@@ -42,8 +42,8 @@ type DynamicTestApplication string
 // DynamicTestLinks A list of links that can be accessed to get more
 // information.
 type DynamicTestLinks struct {
-	Self        DynamicTestSelfLink `json:"self,omitempty"`
-	TestResults DynamicTestResults  `json:"testResults,omitempty"`
+	Self        *DynamicTestSelfLink `json:"self,omitempty"`
+	TestResults DynamicTestResults   `json:"testResults,omitempty"`
 }
 
 // DynamicTestRequest is generated from the OpenAPI specification.
@@ -90,7 +90,7 @@ type DynamicTestSelfLink struct {
 
 // DynamicTests is generated from the OpenAPI specification.
 type DynamicTests struct {
-	Links SelfLinks     `json:"_links,omitempty"`
+	Links *SelfLinks    `json:"_links,omitempty"`
 	Tests []DynamicTest `json:"tests,omitempty"`
 }
 
@@ -187,7 +187,7 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // TagIds List of tag IDs (obtained from `/tags` endpoint).

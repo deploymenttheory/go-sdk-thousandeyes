@@ -10,7 +10,7 @@ package alert_rules
 type AlertNotification struct {
 	// Custom webhook notifications.
 	CustomWebhook []NotificationCustomWebhook `json:"customWebhook,omitempty"`
-	Email         NotificationEmail           `json:"email,omitempty"`
+	Email         *NotificationEmail          `json:"email,omitempty"`
 	// Third party notifications.
 	ThirdParty []NotificationThirdParty `json:"thirdParty,omitempty"`
 	// Webhook notifications.
@@ -21,7 +21,7 @@ type AlertNotification struct {
 // `type`. Refer `/tests/{type}` endpoint to know the set of fields returned by
 // a given `type`.
 type AlertSimpleTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// Indicates if alerts are enabled.
 	AlertsEnabled *bool           `json:"alertsEnabled,omitempty"`
 	CreatedBy     TestCreatedBy   `json:"createdBy,omitempty"`
@@ -152,7 +152,7 @@ type NotificationWebhook struct {
 
 // Rule is generated from the OpenAPI specification.
 type Rule struct {
-	Links          SelfLinks      `json:"_links,omitempty"`
+	Links          *SelfLinks     `json:"_links,omitempty"`
 	AlertGroupType AlertGroupType `json:"alertGroupType,omitempty"`
 	AlertType      AlertType      `json:"alertType"`
 	// A description of the alert rule.
@@ -176,8 +176,8 @@ type Rule struct {
 	MinimumSources *int `json:"minimumSources,omitempty"`
 	// The minimum percentage of all assigned agents or monitors that must meet the
 	// specified criteria to trigger the alert.
-	MinimumSourcesPct *int              `json:"minimumSourcesPct,omitempty"`
-	Notifications     AlertNotification `json:"notifications,omitempty"`
+	MinimumSourcesPct *int               `json:"minimumSourcesPct,omitempty"`
+	Notifications     *AlertNotification `json:"notifications,omitempty"`
 	// Send notification when alert clears.
 	NotifyOnClear       *bool                    `json:"notifyOnClear,omitempty"`
 	RoundsViolatingMode AlertRoundsViolationMode `json:"roundsViolatingMode,omitempty"`
@@ -197,7 +197,7 @@ type Rule struct {
 
 // RuleDetail is generated from the OpenAPI specification.
 type RuleDetail struct {
-	Links          SelfLinks      `json:"_links,omitempty"`
+	Links          *SelfLinks     `json:"_links,omitempty"`
 	AlertGroupType AlertGroupType `json:"alertGroupType,omitempty"`
 	AlertType      AlertType      `json:"alertType"`
 	// A description of the alert rule.
@@ -221,8 +221,8 @@ type RuleDetail struct {
 	MinimumSources *int `json:"minimumSources,omitempty"`
 	// The minimum percentage of all assigned agents or monitors that must meet the
 	// specified criteria to trigger the alert.
-	MinimumSourcesPct *int              `json:"minimumSourcesPct,omitempty"`
-	Notifications     AlertNotification `json:"notifications,omitempty"`
+	MinimumSourcesPct *int               `json:"minimumSourcesPct,omitempty"`
+	Notifications     *AlertNotification `json:"notifications,omitempty"`
 	// Send notification when alert clears.
 	NotifyOnClear       *bool                    `json:"notifyOnClear,omitempty"`
 	RoundsViolatingMode AlertRoundsViolationMode `json:"roundsViolatingMode,omitempty"`
@@ -268,8 +268,8 @@ type RuleDetailUpdate struct {
 	MinimumSources *int `json:"minimumSources,omitempty"`
 	// The minimum percentage of all assigned agents or monitors that must meet the
 	// specified criteria to trigger the alert.
-	MinimumSourcesPct *int              `json:"minimumSourcesPct,omitempty"`
-	Notifications     AlertNotification `json:"notifications,omitempty"`
+	MinimumSourcesPct *int               `json:"minimumSourcesPct,omitempty"`
+	Notifications     *AlertNotification `json:"notifications,omitempty"`
 	// Send notification when alert clears.
 	NotifyOnClear       *bool                    `json:"notifyOnClear,omitempty"`
 	RoundsViolatingMode AlertRoundsViolationMode `json:"roundsViolatingMode,omitempty"`
@@ -296,13 +296,13 @@ type RuleTestIds []string
 
 // Rules is generated from the OpenAPI specification.
 type Rules struct {
-	Links      SelfLinks  `json:"_links,omitempty"`
+	Links      *SelfLinks `json:"_links,omitempty"`
 	AlertRules []BaseRule `json:"alertRules,omitempty"`
 }
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // TestCreatedBy User that created the test.
@@ -313,8 +313,8 @@ type TestCreatedDate string
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestResults Reference to the test results.

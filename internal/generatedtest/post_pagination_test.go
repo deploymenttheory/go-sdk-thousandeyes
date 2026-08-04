@@ -40,7 +40,7 @@ import (
 // presence is the point of these tests: the body must survive every page.
 func searchFilter() *endpoint_agents.AgentSearchRequest {
 	return &endpoint_agents.AgentSearchRequest{
-		SearchFilters: endpoint_agents.AgentSearchFilters{
+		SearchFilters: &endpoint_agents.AgentSearchFilters{
 			ID: []endpoint_agents.EndpointAgentId{"agent-1", "agent-2"},
 		},
 	}

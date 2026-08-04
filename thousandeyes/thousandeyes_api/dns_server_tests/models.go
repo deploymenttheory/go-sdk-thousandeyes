@@ -12,7 +12,7 @@ type AgentResponse struct {
 	// Name of the agent.
 	AgentName   *string                  `json:"agentName,omitempty"`
 	AgentType   CloudEnterpriseAgentType `json:"agentType"`
-	Coordinates Coordinates              `json:"coordinates,omitempty"`
+	Coordinates *Coordinates             `json:"coordinates,omitempty"`
 	// 2-digit ISO country code
 	CountryID *string `json:"countryId,omitempty"`
 	// Flag indicating if the agent is enabled.
@@ -22,8 +22,8 @@ type AgentResponse struct {
 	// Location of the agent.
 	Location *string `json:"location,omitempty"`
 	// Network (including ASN) of agent’s public IP.
-	Network             *string             `json:"network,omitempty"`
-	NetworkProviderInfo NetworkProviderInfo `json:"networkProviderInfo,omitempty"`
+	Network             *string              `json:"network,omitempty"`
+	NetworkProviderInfo *NetworkProviderInfo `json:"networkProviderInfo,omitempty"`
 	// Prefix containing agents public IP address.
 	Prefix *string `json:"prefix,omitempty"`
 	// Array of public IP addresses.
@@ -70,7 +70,7 @@ type Coordinates struct {
 
 // DnsServerTestRequest is generated from the OpenAPI specification.
 type DnsServerTestRequest struct {
-	Links  TestLinks         `json:"_links,omitempty"`
+	Links  *TestLinks        `json:"_links,omitempty"`
 	Agents TestAgentsRequest `json:"agents"`
 	// List of alert rules IDs to apply to the test (get `ruleId` from
 	// `/alerts/rules` endpoint.
@@ -128,7 +128,7 @@ type DnsServerTestRequest struct {
 
 // DnsServerTestResponse is generated from the OpenAPI specification.
 type DnsServerTestResponse struct {
-	Links  TestLinks          `json:"_links,omitempty"`
+	Links  *TestLinks         `json:"_links,omitempty"`
 	Agents TestAgentsResponse `json:"agents,omitempty"`
 	// Contains list of enabled alert rule objects.
 	AlertRules []AlertRule `json:"alertRules,omitempty"`
@@ -180,7 +180,7 @@ type DnsServerTestResponse struct {
 
 // DnsServerTests is generated from the OpenAPI specification.
 type DnsServerTests struct {
-	Links SelfLinks                 `json:"_links,omitempty"`
+	Links *SelfLinks                `json:"_links,omitempty"`
 	Tests []UnexpandedDnsServerTest `json:"tests,omitempty"`
 }
 
@@ -239,7 +239,7 @@ type RuleId string
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // SharedWithAccount is generated from the OpenAPI specification.
@@ -315,8 +315,8 @@ type TestLabels []TestLabel
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestMtuMeasurements Set `true` to measure MTU sizes on network from agents
@@ -383,7 +383,7 @@ type TestUsePublicBgp bool
 
 // UnexpandedDnsServerTest is generated from the OpenAPI specification.
 type UnexpandedDnsServerTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// Indicates if alerts are enabled.
 	AlertsEnabled         *bool                     `json:"alertsEnabled,omitempty"`
 	BandwidthMeasurements TestBandwidthMeasurements `json:"bandwidthMeasurements,omitempty"`

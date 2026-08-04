@@ -35,7 +35,7 @@ type EmulatedDeviceResponse struct {
 
 // EmulatedDeviceResponses is generated from the OpenAPI specification.
 type EmulatedDeviceResponses struct {
-	Links           SelfLinks                `json:"_links,omitempty"`
+	Links           *SelfLinks               `json:"_links,omitempty"`
 	EmulatedDevices []EmulatedDeviceResponse `json:"emulatedDevices,omitempty"`
 }
 
@@ -63,7 +63,7 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // UserAgent is generated from the OpenAPI specification.
@@ -78,6 +78,6 @@ type UserAgent struct {
 
 // UserAgents is generated from the OpenAPI specification.
 type UserAgents struct {
-	Links      SelfLinks   `json:"_links,omitempty"`
+	Links      *SelfLinks  `json:"_links,omitempty"`
 	UserAgents []UserAgent `json:"userAgents,omitempty"`
 }

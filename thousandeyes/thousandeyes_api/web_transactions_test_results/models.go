@@ -66,16 +66,16 @@ type PageHar map[string]any
 
 // PaginationLinks A links object containing pagination related link(s).
 type PaginationLinks struct {
-	Next     Link `json:"next,omitempty"`
-	Previous Link `json:"previous,omitempty"`
-	Self     Link `json:"self,omitempty"`
+	Next     *Link `json:"next,omitempty"`
+	Previous *Link `json:"previous,omitempty"`
+	Self     *Link `json:"self,omitempty"`
 }
 
 // SimpleTest Each test includes additional fields depending on its `type`.
 // Refer `/tests/{type}` endpoint to know the set of fields returned by a given
 // `type`.
 type SimpleTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// Indicates if alerts are enabled.
 	AlertsEnabled *bool           `json:"alertsEnabled,omitempty"`
 	CreatedBy     TestCreatedBy   `json:"createdBy,omitempty"`
@@ -116,8 +116,8 @@ type TestCreatedDate string
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestResultAgent is generated from the OpenAPI specification.
@@ -134,7 +134,7 @@ type TestResultAgent struct {
 
 // TestResultAppLinks is generated from the OpenAPI specification.
 type TestResultAppLinks struct {
-	AppLink Link `json:"appLink,omitempty"`
+	AppLink *Link `json:"appLink,omitempty"`
 }
 
 // TestResultErrorDetails Error details, if an error were encountered
@@ -167,8 +167,8 @@ type TestSelfLink struct {
 
 // WebTransactionDetailTestResult is generated from the OpenAPI specification.
 type WebTransactionDetailTestResult struct {
-	Links TestResultAppLinks `json:"_links,omitempty"`
-	Agent TestResultAgent    `json:"agent,omitempty"`
+	Links *TestResultAppLinks `json:"_links,omitempty"`
+	Agent *TestResultAgent    `json:"agent,omitempty"`
 	// Number of components which did not successfully load
 	ComponentErrors *int `json:"componentErrors,omitempty"`
 	// Data point date UTC (ISO date-time format).
@@ -188,15 +188,15 @@ type WebTransactionDetailTestResult struct {
 
 // WebTransactionDetailTestResults is generated from the OpenAPI specification.
 type WebTransactionDetailTestResults struct {
-	Links   PaginationLinks                  `json:"_links,omitempty"`
+	Links   *PaginationLinks                 `json:"_links,omitempty"`
 	Results []WebTransactionDetailTestResult `json:"results,omitempty"`
-	Test    SimpleTest                       `json:"test,omitempty"`
+	Test    *SimpleTest                      `json:"test,omitempty"`
 }
 
 // WebTransactionPageDetailTestResult is generated from the OpenAPI specification.
 type WebTransactionPageDetailTestResult struct {
-	Links TestResultAppLinks `json:"_links,omitempty"`
-	Agent TestResultAgent    `json:"agent,omitempty"`
+	Links *TestResultAppLinks `json:"_links,omitempty"`
+	Agent *TestResultAgent    `json:"agent,omitempty"`
 	// Number of components which did not successfully load
 	ComponentErrors *int `json:"componentErrors,omitempty"`
 	// Data point date UTC (ISO date-time format).
@@ -217,15 +217,15 @@ type WebTransactionPageDetailTestResult struct {
 
 // WebTransactionPageDetailTestResults is generated from the OpenAPI specification.
 type WebTransactionPageDetailTestResults struct {
-	Links   PaginationLinks                      `json:"_links,omitempty"`
+	Links   *PaginationLinks                     `json:"_links,omitempty"`
 	Results []WebTransactionPageDetailTestResult `json:"results,omitempty"`
-	Test    SimpleTest                           `json:"test,omitempty"`
+	Test    *SimpleTest                          `json:"test,omitempty"`
 }
 
 // WebTransactionTestResult is generated from the OpenAPI specification.
 type WebTransactionTestResult struct {
-	Links TestResultAppLinks `json:"_links,omitempty"`
-	Agent TestResultAgent    `json:"agent,omitempty"`
+	Links *TestResultAppLinks `json:"_links,omitempty"`
+	Agent *TestResultAgent    `json:"agent,omitempty"`
 	// Number of components which did not successfully load
 	ComponentErrors *int `json:"componentErrors,omitempty"`
 	// Data point date UTC (ISO date-time format).
@@ -243,9 +243,9 @@ type WebTransactionTestResult struct {
 
 // WebTransactionTestResults is generated from the OpenAPI specification.
 type WebTransactionTestResults struct {
-	Links     PaginationLinks            `json:"_links,omitempty"`
+	Links     *PaginationLinks           `json:"_links,omitempty"`
 	EndDate   EndDate                    `json:"endDate,omitempty"`
 	Results   []WebTransactionTestResult `json:"results,omitempty"`
 	StartDate StartDate                  `json:"startDate,omitempty"`
-	Test      SimpleTest                 `json:"test,omitempty"`
+	Test      *SimpleTest                `json:"test,omitempty"`
 }

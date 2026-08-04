@@ -27,8 +27,8 @@ type AuditOperationWithUpdate struct {
 
 // CreateStreamResponse is generated from the OpenAPI specification.
 type CreateStreamResponse struct {
-	Links          StreamLinks    `json:"_links,omitempty"`
-	AuditOperation AuditOperation `json:"auditOperation,omitempty"`
+	Links          *StreamLinks    `json:"_links,omitempty"`
+	AuditOperation *AuditOperation `json:"auditOperation,omitempty"`
 	// Custom headers.
 	CustomHeaders    map[string]string `json:"customHeaders,omitempty"`
 	DataModelVersion DataModelVersion  `json:"dataModelVersion,omitempty"`
@@ -41,13 +41,13 @@ type CreateStreamResponse struct {
 	// data is included in the data stream.
 	EndpointAgentTag []EndpointAgentTag `json:"endpointAgentTag,omitempty"`
 	EndpointType     EndpointType       `json:"endpointType,omitempty"`
-	ExporterConfig   ExporterConfig     `json:"exporterConfig,omitempty"`
-	Filters          Filters            `json:"filters,omitempty"`
+	ExporterConfig   *ExporterConfig    `json:"exporterConfig,omitempty"`
+	Filters          *Filters           `json:"filters,omitempty"`
 	// The data stream ID
 	ID                *string           `json:"id,omitempty"`
 	Signal            Signal            `json:"signal,omitempty"`
 	StreamEndpointURL StreamEndpointUrl `json:"streamEndpointUrl,omitempty"`
-	StreamStatus      StreamStatus      `json:"streamStatus,omitempty"`
+	StreamStatus      *StreamStatus     `json:"streamStatus,omitempty"`
 	// A collection of tags that determine what tests are included in the data
 	// stream.
 	TagMatch []TagMatch `json:"tagMatch,omitempty"`
@@ -70,13 +70,13 @@ type EndpointAgentTag struct {
 
 // ExporterConfig Capability to set exporter configuration.
 type ExporterConfig struct {
-	Authorization ExporterConfigAuthorization `json:"authorization,omitempty"`
-	SplunkHec     ExporterConfigSplunkHec     `json:"splunkHec,omitempty"`
+	Authorization *ExporterConfigAuthorization `json:"authorization,omitempty"`
+	SplunkHec     *ExporterConfigSplunkHec     `json:"splunkHec,omitempty"`
 }
 
 // ExporterConfigAuthorization Authentication configuration type.
 type ExporterConfigAuthorization struct {
-	OAuth2 ExporterConfigOAuth2 `json:"oAuth2,omitempty"`
+	OAuth2 *ExporterConfigOAuth2 `json:"oAuth2,omitempty"`
 }
 
 // ExporterConfigOAuth2 OAuth2 authentication configuration.
@@ -107,7 +107,7 @@ type ExporterConfigSplunkHec struct {
 // Filters Provides the ability to filter data points based on the specified
 // test types.
 type Filters struct {
-	TestTypes FiltersTestTypes `json:"testTypes,omitempty"`
+	TestTypes *FiltersTestTypes `json:"testTypes,omitempty"`
 }
 
 // FiltersTestTypes Test types that can be used for filtering data points.
@@ -120,8 +120,8 @@ type FiltersTestTypesValues []TestType
 
 // GetStreamResponse is generated from the OpenAPI specification.
 type GetStreamResponse struct {
-	Links          StreamLinks              `json:"_links,omitempty"`
-	AuditOperation AuditOperationWithUpdate `json:"auditOperation,omitempty"`
+	Links          *StreamLinks              `json:"_links,omitempty"`
+	AuditOperation *AuditOperationWithUpdate `json:"auditOperation,omitempty"`
 	// Custom headers.
 	CustomHeaders    map[string]string `json:"customHeaders,omitempty"`
 	DataModelVersion DataModelVersion  `json:"dataModelVersion,omitempty"`
@@ -134,13 +134,13 @@ type GetStreamResponse struct {
 	// data is included in the data stream.
 	EndpointAgentTag []EndpointAgentTag `json:"endpointAgentTag,omitempty"`
 	EndpointType     EndpointType       `json:"endpointType,omitempty"`
-	ExporterConfig   ExporterConfig     `json:"exporterConfig,omitempty"`
-	Filters          Filters            `json:"filters,omitempty"`
+	ExporterConfig   *ExporterConfig    `json:"exporterConfig,omitempty"`
+	Filters          *Filters           `json:"filters,omitempty"`
 	// The data stream ID
 	ID                *string           `json:"id,omitempty"`
 	Signal            Signal            `json:"signal,omitempty"`
 	StreamEndpointURL StreamEndpointUrl `json:"streamEndpointUrl,omitempty"`
-	StreamStatus      StreamStatus      `json:"streamStatus,omitempty"`
+	StreamStatus      *StreamStatus     `json:"streamStatus,omitempty"`
 	// A collection of tags that determine what tests are included in the data
 	// stream.
 	TagMatch []TagMatch `json:"tagMatch,omitempty"`
@@ -161,8 +161,8 @@ type PutStream struct {
 	// A collection of Endpoint Agent Tag IDs that determines what local network
 	// data is included in the data stream.
 	EndpointAgentTag  []EndpointAgentTag `json:"endpointAgentTag,omitempty"`
-	ExporterConfig    ExporterConfig     `json:"exporterConfig,omitempty"`
-	Filters           Filters            `json:"filters,omitempty"`
+	ExporterConfig    *ExporterConfig    `json:"exporterConfig,omitempty"`
+	Filters           *Filters           `json:"filters,omitempty"`
 	StreamEndpointURL StreamEndpointUrl  `json:"streamEndpointUrl,omitempty"`
 	// A collection of tags that determine what tests are included in the data
 	// stream.
@@ -185,8 +185,8 @@ type Stream struct {
 	// data is included in the data stream.
 	EndpointAgentTag  []EndpointAgentTag `json:"endpointAgentTag,omitempty"`
 	EndpointType      EndpointType       `json:"endpointType,omitempty"`
-	ExporterConfig    ExporterConfig     `json:"exporterConfig,omitempty"`
-	Filters           Filters            `json:"filters,omitempty"`
+	ExporterConfig    *ExporterConfig    `json:"exporterConfig,omitempty"`
+	Filters           *Filters           `json:"filters,omitempty"`
 	Signal            Signal             `json:"signal,omitempty"`
 	StreamEndpointURL StreamEndpointUrl  `json:"streamEndpointUrl,omitempty"`
 	// A collection of tags that determine what tests are included in the data
@@ -214,7 +214,7 @@ type StreamEndpointUrl string
 
 // StreamLinks is generated from the OpenAPI specification.
 type StreamLinks struct {
-	Self StreamSelfLink `json:"self,omitempty"`
+	Self *StreamSelfLink `json:"self,omitempty"`
 }
 
 // StreamSelfLink is generated from the OpenAPI specification.

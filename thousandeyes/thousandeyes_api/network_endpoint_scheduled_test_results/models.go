@@ -108,7 +108,7 @@ type EndpointAgentTagsSelectorType string
 
 // EndpointAgentToServerTest is generated from the OpenAPI specification.
 type EndpointAgentToServerTest struct {
-	Links                 EndpointTestLinks           `json:"_links,omitempty"`
+	Links                 *EndpointTestLinks          `json:"_links,omitempty"`
 	AgentSelectorConfig   EndpointAgentSelectorConfig `json:"agentSelectorConfig,omitempty"`
 	AID                   AccountGroupId              `json:"aid,omitempty"`
 	CreatedDate           TestCreatedDate             `json:"createdDate,omitempty"`
@@ -147,7 +147,7 @@ type EndpointAllAgentsSelectorType string
 
 // EndpointHttpServerTest is generated from the OpenAPI specification.
 type EndpointHttpServerTest struct {
-	Links                 EndpointTestLinks           `json:"_links,omitempty"`
+	Links                 *EndpointTestLinks          `json:"_links,omitempty"`
 	AgentSelectorConfig   EndpointAgentSelectorConfig `json:"agentSelectorConfig,omitempty"`
 	AID                   AccountGroupId              `json:"aid,omitempty"`
 	AuthType              EndpointTestAuthType        `json:"authType,omitempty"`
@@ -271,8 +271,8 @@ type EndpointTestEthernetProfile struct {
 // EndpointTestLinks A list of links that can be accessed to get more
 // information.
 type EndpointTestLinks struct {
-	Self        EndpointTestSelfLink `json:"self,omitempty"`
-	TestResults ScheduledTestResults `json:"testResults,omitempty"`
+	Self        *EndpointTestSelfLink `json:"self,omitempty"`
+	TestResults ScheduledTestResults  `json:"testResults,omitempty"`
 }
 
 // EndpointTestMaxMachines Maximum number of agents which can execute the test.
@@ -308,9 +308,9 @@ type EndpointTestSelfLink struct {
 
 // EndpointTestsDataRoundsSearch is generated from the OpenAPI specification.
 type EndpointTestsDataRoundsSearch struct {
-	SearchFilters   EndpointTestsDataSearchFilter     `json:"searchFilters,omitempty"`
-	SearchSort      []EndpointTestsDataSearchSort     `json:"searchSort,omitempty"`
-	ThresholdFilter EndpointTestsDataThresholdFilters `json:"thresholdFilter,omitempty"`
+	SearchFilters   *EndpointTestsDataSearchFilter     `json:"searchFilters,omitempty"`
+	SearchSort      []EndpointTestsDataSearchSort      `json:"searchSort,omitempty"`
+	ThresholdFilter *EndpointTestsDataThresholdFilters `json:"thresholdFilter,omitempty"`
 }
 
 // EndpointTestsDataSearchFilter is generated from the OpenAPI specification.
@@ -383,9 +383,9 @@ type Link struct {
 
 // MultiTestIdEndpointTestsDataRoundsSearch is generated from the OpenAPI specification.
 type MultiTestIdEndpointTestsDataRoundsSearch struct {
-	SearchFilters   MultiTestIdEndpointTestsDataSearchFilter `json:"searchFilters,omitempty"`
-	SearchSort      []EndpointTestsDataSearchSort            `json:"searchSort,omitempty"`
-	ThresholdFilter EndpointTestsDataThresholdFilters        `json:"thresholdFilter,omitempty"`
+	SearchFilters   *MultiTestIdEndpointTestsDataSearchFilter `json:"searchFilters,omitempty"`
+	SearchSort      []EndpointTestsDataSearchSort             `json:"searchSort,omitempty"`
+	ThresholdFilter *EndpointTestsDataThresholdFilters        `json:"thresholdFilter,omitempty"`
 }
 
 // MultiTestIdEndpointTestsDataSearchFilter is generated from the OpenAPI specification.
@@ -397,7 +397,7 @@ type MultiTestIdEndpointTestsDataSearchFilter struct {
 
 // MultiTestIdNetworkEndpointTestResults is generated from the OpenAPI specification.
 type MultiTestIdNetworkEndpointTestResults struct {
-	Links     PaginationNextLink          `json:"_links,omitempty"`
+	Links     *PaginationNextLink         `json:"_links,omitempty"`
 	EndDate   EndDate                     `json:"endDate,omitempty"`
 	Results   []NetworkEndpointTestResult `json:"results,omitempty"`
 	StartDate StartDate                   `json:"startDate,omitempty"`
@@ -409,9 +409,9 @@ type NetworkEndpointTestResult struct {
 	AgentID EndpointAgentId `json:"agentId,omitempty"`
 	AID     AccountGroupId  `json:"aid,omitempty"`
 	// Average RTT for packets sent to destination.
-	AvgLatency      *float64        `json:"avgLatency,omitempty"`
-	BatteryMetrics  BatteryMetrics  `json:"batteryMetrics,omitempty"`
-	CellularProfile CellularProfile `json:"cellularProfile,omitempty"`
+	AvgLatency      *float64         `json:"avgLatency,omitempty"`
+	BatteryMetrics  *BatteryMetrics  `json:"batteryMetrics,omitempty"`
+	CellularProfile *CellularProfile `json:"cellularProfile,omitempty"`
 	// Error details, if an error was encountered.
 	ErrorDetails  *string     `json:"errorDetails,omitempty"`
 	IsIcmpBlocked IcmpBlocked `json:"isIcmpBlocked,omitempty"`
@@ -422,24 +422,24 @@ type NetworkEndpointTestResult struct {
 	// Maximum RTT for packets sent to destination.
 	MaxLatency *float64 `json:"maxLatency,omitempty"`
 	// Minimum RTT for packets sent to destination.
-	MinLatency            *float64                   `json:"minLatency,omitempty"`
-	NetworkProfile        NetworkProfile             `json:"networkProfile,omitempty"`
-	OriginalTargetProfile TargetProfile              `json:"originalTargetProfile,omitempty"`
-	Platform              Platform                   `json:"platform,omitempty"`
-	RoundID               RoundId                    `json:"roundId,omitempty"`
-	Score                 EndpointPingDataPointScore `json:"score,omitempty"`
+	MinLatency            *float64                    `json:"minLatency,omitempty"`
+	NetworkProfile        *NetworkProfile             `json:"networkProfile,omitempty"`
+	OriginalTargetProfile *TargetProfile              `json:"originalTargetProfile,omitempty"`
+	Platform              Platform                    `json:"platform,omitempty"`
+	RoundID               RoundId                     `json:"roundId,omitempty"`
+	Score                 *EndpointPingDataPointScore `json:"score,omitempty"`
 	// IP address of target server.
 	ServerIP      *string              `json:"serverIp,omitempty"`
-	SystemMetrics SystemMetrics        `json:"systemMetrics,omitempty"`
+	SystemMetrics *SystemMetrics       `json:"systemMetrics,omitempty"`
 	TestID        TestId               `json:"testId,omitempty"`
-	UserProfile   UserProfile          `json:"userProfile,omitempty"`
-	VpnProfile    VpnProfile           `json:"vpnProfile,omitempty"`
+	UserProfile   *UserProfile         `json:"userProfile,omitempty"`
+	VpnProfile    *VpnProfile          `json:"vpnProfile,omitempty"`
 	ZtaMetrics    []EndpointZtaMetrics `json:"ztaMetrics,omitempty"`
 }
 
 // NetworkEndpointTestResults is generated from the OpenAPI specification.
 type NetworkEndpointTestResults struct {
-	Links     PaginationNextLink          `json:"_links,omitempty"`
+	Links     *PaginationNextLink         `json:"_links,omitempty"`
 	EndDate   EndDate                     `json:"endDate,omitempty"`
 	Results   []NetworkEndpointTestResult `json:"results,omitempty"`
 	StartDate StartDate                   `json:"startDate,omitempty"`
@@ -471,8 +471,8 @@ type NetworkProfile struct {
 	// Network DNS servers.
 	DnsServers []string `json:"dnsServers,omitempty"`
 	// Only present when there is an error
-	Error           *string                     `json:"error,omitempty"`
-	EthernetProfile EndpointTestEthernetProfile `json:"ethernetProfile,omitempty"`
+	Error           *string                      `json:"error,omitempty"`
+	EthernetProfile *EndpointTestEthernetProfile `json:"ethernetProfile,omitempty"`
 	// Network gateway address.
 	Gateway      *string               `json:"gateway,omitempty"`
 	HardwareType InterfaceHardwareType `json:"hardwareType,omitempty"`
@@ -481,16 +481,16 @@ type NetworkProfile struct {
 	// Network IP address.
 	IpAddress *string `json:"ipAddress,omitempty"`
 	// Network local prefix.
-	LocalPrefix       *string             `json:"localPrefix,omitempty"`
-	PreviousInterface NetworkInterface    `json:"previousInterface,omitempty"`
-	ProxyProfile      NetworkProxyProfile `json:"proxyProfile,omitempty"`
+	LocalPrefix       *string              `json:"localPrefix,omitempty"`
+	PreviousInterface *NetworkInterface    `json:"previousInterface,omitempty"`
+	ProxyProfile      *NetworkProxyProfile `json:"proxyProfile,omitempty"`
 	// Network public IP address.
 	PublicIpAddress *string `json:"publicIpAddress,omitempty"`
 	// Network public IP range.
 	PublicIpRange *string `json:"publicIpRange,omitempty"`
 	// Network subnet mask - only for IPv4.
-	SubnetMask      *string                `json:"subnetMask,omitempty"`
-	WirelessProfile NetworkWirelessProfile `json:"wirelessProfile,omitempty"`
+	SubnetMask      *string                 `json:"subnetMask,omitempty"`
+	WirelessProfile *NetworkWirelessProfile `json:"wirelessProfile,omitempty"`
 }
 
 // NetworkProxy is generated from the OpenAPI specification.
@@ -535,25 +535,25 @@ type NetworkWirelessProfile struct {
 // PaginationNextAndSelfLink A links object containing a related link for
 // forward pagination.
 type PaginationNextAndSelfLink struct {
-	Next Link `json:"next,omitempty"`
-	Self Link `json:"self,omitempty"`
+	Next *Link `json:"next,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // PaginationNextLink A links object containing a related link for forward
 // pagination.
 type PaginationNextLink struct {
-	Next Link `json:"next,omitempty"`
+	Next *Link `json:"next,omitempty"`
 }
 
 // PathVisDetailEndpointTestResult is generated from the OpenAPI specification.
 type PathVisDetailEndpointTestResult struct {
-	AgentID               EndpointAgentId `json:"agentId,omitempty"`
-	AID                   AccountGroupId  `json:"aid,omitempty"`
-	AsnDetails            AsnDetails      `json:"asnDetails,omitempty"`
-	BatteryMetrics        BatteryMetrics  `json:"batteryMetrics,omitempty"`
-	CellularProfile       CellularProfile `json:"cellularProfile,omitempty"`
-	NetworkProfile        NetworkProfile  `json:"networkProfile,omitempty"`
-	OriginalTargetProfile TargetProfile   `json:"originalTargetProfile,omitempty"`
+	AgentID               EndpointAgentId  `json:"agentId,omitempty"`
+	AID                   AccountGroupId   `json:"aid,omitempty"`
+	AsnDetails            *AsnDetails      `json:"asnDetails,omitempty"`
+	BatteryMetrics        *BatteryMetrics  `json:"batteryMetrics,omitempty"`
+	CellularProfile       *CellularProfile `json:"cellularProfile,omitempty"`
+	NetworkProfile        *NetworkProfile  `json:"networkProfile,omitempty"`
+	OriginalTargetProfile *TargetProfile   `json:"originalTargetProfile,omitempty"`
 	// Shows iterations of path trace, with each iteration specified by a pathId.
 	PathTraces []EndpointPathVisRoute `json:"pathTraces,omitempty"`
 	Platform   Platform               `json:"platform,omitempty"`
@@ -565,34 +565,34 @@ type PathVisDetailEndpointTestResult struct {
 	// IP address of source endpoint agent.
 	SourceIP *string `json:"sourceIp,omitempty"`
 	// IP prefix of source endpoint agent.
-	SourcePrefix  *string       `json:"sourcePrefix,omitempty"`
-	SystemMetrics SystemMetrics `json:"systemMetrics,omitempty"`
-	TestID        TestId        `json:"testId,omitempty"`
-	UserProfile   UserProfile   `json:"userProfile,omitempty"`
+	SourcePrefix  *string        `json:"sourcePrefix,omitempty"`
+	SystemMetrics *SystemMetrics `json:"systemMetrics,omitempty"`
+	TestID        TestId         `json:"testId,omitempty"`
+	UserProfile   *UserProfile   `json:"userProfile,omitempty"`
 	// Shows iterations of the VPN path trace, with each iteration specified by a
 	// pathId.
 	VpnPathTraces []EndpointPathVisRoute `json:"vpnPathTraces,omitempty"`
-	VpnProfile    VpnProfile             `json:"vpnProfile,omitempty"`
+	VpnProfile    *VpnProfile            `json:"vpnProfile,omitempty"`
 }
 
 // PathVisDetailEndpointTestResults is generated from the OpenAPI specification.
 type PathVisDetailEndpointTestResults struct {
-	Links   SelfLinks                         `json:"_links,omitempty"`
+	Links   *SelfLinks                        `json:"_links,omitempty"`
 	Results []PathVisDetailEndpointTestResult `json:"results,omitempty"`
 	Test    EndpointScheduledTest             `json:"test,omitempty"`
 }
 
 // PathVisEndpointTestResult is generated from the OpenAPI specification.
 type PathVisEndpointTestResult struct {
-	AgentID         EndpointAgentId `json:"agentId,omitempty"`
-	AID             AccountGroupId  `json:"aid,omitempty"`
-	AsnDetails      AsnDetails      `json:"asnDetails,omitempty"`
-	BatteryMetrics  BatteryMetrics  `json:"batteryMetrics,omitempty"`
-	CellularProfile CellularProfile `json:"cellularProfile,omitempty"`
+	AgentID         EndpointAgentId  `json:"agentId,omitempty"`
+	AID             AccountGroupId   `json:"aid,omitempty"`
+	AsnDetails      *AsnDetails      `json:"asnDetails,omitempty"`
+	BatteryMetrics  *BatteryMetrics  `json:"batteryMetrics,omitempty"`
+	CellularProfile *CellularProfile `json:"cellularProfile,omitempty"`
 	// Geographic location of the path visualization.
-	Location              *string        `json:"location,omitempty"`
-	NetworkProfile        NetworkProfile `json:"networkProfile,omitempty"`
-	OriginalTargetProfile TargetProfile  `json:"originalTargetProfile,omitempty"`
+	Location              *string         `json:"location,omitempty"`
+	NetworkProfile        *NetworkProfile `json:"networkProfile,omitempty"`
+	OriginalTargetProfile *TargetProfile  `json:"originalTargetProfile,omitempty"`
 	// Shows an iteration of path trace, with each iteration specified by a pathId.
 	PathTraces []EndpointPathTrace `json:"pathTraces,omitempty"`
 	Platform   Platform            `json:"platform,omitempty"`
@@ -604,16 +604,16 @@ type PathVisEndpointTestResult struct {
 	// IP address of source endpoint agent.
 	SourceIP *string `json:"sourceIp,omitempty"`
 	// IP prefix of source endpoint agent.
-	SourcePrefix  *string       `json:"sourcePrefix,omitempty"`
-	SystemMetrics SystemMetrics `json:"systemMetrics,omitempty"`
-	TestID        TestId        `json:"testId,omitempty"`
-	UserProfile   UserProfile   `json:"userProfile,omitempty"`
-	VpnProfile    VpnProfile    `json:"vpnProfile,omitempty"`
+	SourcePrefix  *string        `json:"sourcePrefix,omitempty"`
+	SystemMetrics *SystemMetrics `json:"systemMetrics,omitempty"`
+	TestID        TestId         `json:"testId,omitempty"`
+	UserProfile   *UserProfile   `json:"userProfile,omitempty"`
+	VpnProfile    *VpnProfile    `json:"vpnProfile,omitempty"`
 }
 
 // PathVisEndpointTestResults is generated from the OpenAPI specification.
 type PathVisEndpointTestResults struct {
-	Links     PaginationNextAndSelfLink   `json:"_links,omitempty"`
+	Links     *PaginationNextAndSelfLink  `json:"_links,omitempty"`
 	EndDate   EndDate                     `json:"endDate,omitempty"`
 	Results   []PathVisEndpointTestResult `json:"results,omitempty"`
 	StartDate StartDate                   `json:"startDate,omitempty"`
@@ -644,7 +644,7 @@ type ScheduledTestResults []Link
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // StartDate (Optional) When passing `window` or `startDate` parameter, the
@@ -654,13 +654,13 @@ type StartDate string
 
 // SystemMetrics is generated from the OpenAPI specification.
 type SystemMetrics struct {
-	CpuUtilization CpuUtilization `json:"cpuUtilization,omitempty"`
+	CpuUtilization *CpuUtilization `json:"cpuUtilization,omitempty"`
 	// The end time of metrics collection, expressed in milliseconds since the
 	// Epoch.
 	EndTimeMs *int64 `json:"endTimeMs,omitempty"`
 	// Total physical memory of the system.
-	PhysicalMemoryTotalBytes *int64                  `json:"physicalMemoryTotalBytes,omitempty"`
-	PhysicalMemoryUsedBytes  PhysicalMemoryUsedBytes `json:"physicalMemoryUsedBytes,omitempty"`
+	PhysicalMemoryTotalBytes *int64                   `json:"physicalMemoryTotalBytes,omitempty"`
+	PhysicalMemoryUsedBytes  *PhysicalMemoryUsedBytes `json:"physicalMemoryUsedBytes,omitempty"`
 	// The start time of metrics collection, expressed in milliseconds since the
 	// Epoch.
 	StartTimeMs *int64 `json:"startTimeMs,omitempty"`

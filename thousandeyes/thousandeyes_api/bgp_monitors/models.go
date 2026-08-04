@@ -44,11 +44,11 @@ type Monitor struct {
 
 // Monitors is generated from the OpenAPI specification.
 type Monitors struct {
-	Links    SelfLinks `json:"_links,omitempty"`
-	Monitors []Monitor `json:"monitors,omitempty"`
+	Links    *SelfLinks `json:"_links,omitempty"`
+	Monitors []Monitor  `json:"monitors,omitempty"`
 }
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

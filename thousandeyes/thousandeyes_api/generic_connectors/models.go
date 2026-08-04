@@ -7,8 +7,8 @@ package generic_connectors
 
 // Assignments A list of assigned items.
 type Assignments struct {
-	Links SelfLinks `json:"_links,omitempty"`
-	Items []string  `json:"items,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
+	Items []string   `json:"items,omitempty"`
 }
 
 // BasicAuthentication is generated from the OpenAPI specification.
@@ -26,7 +26,7 @@ type BearerTokenAuthentication struct {
 
 // GenericConnector is generated from the OpenAPI specification.
 type GenericConnector struct {
-	Links          SelfLinks            `json:"_links,omitempty"`
+	Links          *SelfLinks           `json:"_links,omitempty"`
 	Authentication GenericConnectorAuth `json:"authentication,omitempty"`
 	Headers        []Header             `json:"headers,omitempty"`
 	ID             *string              `json:"id,omitempty"`
@@ -40,7 +40,7 @@ type GenericConnector struct {
 
 // ResourceGenericConnectors is generated from the OpenAPI specification.
 type ResourceGenericConnectors struct {
-	Links SelfLinks          `json:"_links,omitempty"`
+	Links *SelfLinks         `json:"_links,omitempty"`
 	Items []GenericConnector `json:"items,omitempty"`
 }
 
@@ -103,5 +103,5 @@ type OtherTokenAuthentication struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

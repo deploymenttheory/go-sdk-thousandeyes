@@ -7,7 +7,7 @@ package agent_proxies
 
 // ResourceAgentProxies is generated from the OpenAPI specification.
 type ResourceAgentProxies struct {
-	Links        SelfLinks    `json:"_links,omitempty"`
+	Links        *SelfLinks   `json:"_links,omitempty"`
 	AgentProxies []AgentProxy `json:"agentProxies,omitempty"`
 }
 
@@ -61,5 +61,5 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

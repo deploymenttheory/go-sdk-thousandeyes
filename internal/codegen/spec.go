@@ -69,6 +69,13 @@ type RawOperation struct {
 	Description string
 	Tag         string
 	Op          map[string]any
+
+	// PathItemParams are the parameters declared on the path item rather than on
+	// the operation. OpenAPI shares them across every method of the path, and the
+	// specification uses that form: /endpoint/labels/{id} declares its id there
+	// and nowhere else, which is how three generated methods came to send a
+	// literal "{id}" to the API.
+	PathItemParams []any
 }
 
 // Operations returns every operation in the document, sorted for deterministic
@@ -79,6 +86,8 @@ func (s *Spec) Operations() []RawOperation {
 	var ops []RawOperation
 
 	for path, item := range s.Paths {
+		shared, _ := item["parameters"].([]any)
+
 		for method, raw := range item {
 			if _, ok := httpMethods[strings.ToLower(method)]; !ok {
 				continue
@@ -106,13 +115,14 @@ func (s *Spec) Operations() []RawOperation {
 			description, _ := op["description"].(string)
 
 			ops = append(ops, RawOperation{
-				Path:        path,
-				Method:      strings.ToUpper(method),
-				OperationID: id,
-				Summary:     summary,
-				Description: description,
-				Tag:         tag,
-				Op:          op,
+				Path:           path,
+				Method:         strings.ToUpper(method),
+				OperationID:    id,
+				Summary:        summary,
+				Description:    description,
+				Tag:            tag,
+				Op:             op,
+				PathItemParams: shared,
 			})
 		}
 	}

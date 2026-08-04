@@ -74,13 +74,13 @@ type OrganizationsQuotasUnassign struct {
 // Quota is generated from the OpenAPI specification.
 type Quota struct {
 	AccountGroupQuotas []AccountGroupQuota `json:"accountGroupQuotas,omitempty"`
-	OrganizationQuota  OrganizationQuota   `json:"organizationQuota,omitempty"`
+	OrganizationQuota  *OrganizationQuota  `json:"organizationQuota,omitempty"`
 }
 
 // ResourceQuotas is generated from the OpenAPI specification.
 type ResourceQuotas struct {
-	Links  SelfLinks `json:"_links,omitempty"`
-	Quotas []Quota   `json:"quotas,omitempty"`
+	Links  *SelfLinks `json:"_links,omitempty"`
+	Quotas []Quota    `json:"quotas,omitempty"`
 }
 
 // QuotasAssignRequest is generated from the OpenAPI specification.
@@ -100,5 +100,5 @@ type QuotasUnassign struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

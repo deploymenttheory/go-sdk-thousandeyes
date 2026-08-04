@@ -25,7 +25,7 @@ type AwsInventoryIntegrationRequest struct {
 
 // AwsMonitoringIntegration is generated from the OpenAPI specification.
 type AwsMonitoringIntegration struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// The external ID associated with the account group.
 	ExternalID string `json:"externalId"`
 	// The unique ID for the AWS inventory or flow logs monitoring integration.
@@ -43,7 +43,7 @@ type AwsMonitoringIntegration struct {
 // AwsMonitoringIntegrations A HAL resource containing a list of AWS monitoring
 // integrations and navigation links.
 type AwsMonitoringIntegrations struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// The list of AWS inventory and flow logs monitoring integrations.
 	Integrations []AwsMonitoringIntegration `json:"integrations"`
 }
@@ -80,7 +80,7 @@ type AzureInventoryIntegrationRequest struct {
 
 // AzureMonitoringIntegration is generated from the OpenAPI specification.
 type AzureMonitoringIntegration struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// The Application (client) ID of the service principal.
 	AppID string `json:"appId"`
 	// The Azure Active Directory tenant ID.
@@ -100,7 +100,7 @@ type AzureMonitoringIntegration struct {
 // AzureMonitoringIntegrations A HAL resource containing a list of Azure
 // inventory and flow logs monitoring integrations.
 type AzureMonitoringIntegrations struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// The list of Azure inventory and flow logs monitoring integrations.
 	Integrations []AzureMonitoringIntegration `json:"integrations"`
 }
@@ -129,5 +129,5 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

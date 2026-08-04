@@ -14,7 +14,7 @@ type AccountGroup struct {
 
 // AccountGroupDetail is generated from the OpenAPI specification.
 type AccountGroupDetail struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// Account group name
 	AccountGroupName *string           `json:"accountGroupName,omitempty"`
 	AccountToken     AccountGroupToken `json:"accountToken,omitempty"`
@@ -66,7 +66,7 @@ type AccountGroupToken string
 
 // ResourceAccountGroups is generated from the OpenAPI specification.
 type ResourceAccountGroups struct {
-	Links         SelfLinks          `json:"_links,omitempty"`
+	Links         *SelfLinks         `json:"_links,omitempty"`
 	AccountGroups []AccountGroupInfo `json:"accountGroups,omitempty"`
 }
 
@@ -113,7 +113,7 @@ type Coordinates struct {
 
 // CreatedAccountGroup is generated from the OpenAPI specification.
 type CreatedAccountGroup struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// Account group name
 	AccountGroupName *string        `json:"accountGroupName,omitempty"`
 	AID              AccountGroupId `json:"aid,omitempty"`
@@ -142,7 +142,7 @@ type EnterpriseAgent struct {
 	AgentState     EnterpriseAgentState     `json:"agentState,omitempty"`
 	AgentType      CloudEnterpriseAgentType `json:"agentType"`
 	ClusterMembers ClusterMembers           `json:"clusterMembers,omitempty"`
-	Coordinates    Coordinates              `json:"coordinates,omitempty"`
+	Coordinates    *Coordinates             `json:"coordinates,omitempty"`
 	// 2-digit ISO country code
 	CountryID *string `json:"countryId,omitempty"`
 	// UTC Agent creation date (ISO date-time format).
@@ -169,8 +169,8 @@ type EnterpriseAgent struct {
 	// Location of the agent.
 	Location *string `json:"location,omitempty"`
 	// Network (including ASN) of agent’s public IP.
-	Network             *string             `json:"network,omitempty"`
-	NetworkProviderInfo NetworkProviderInfo `json:"networkProviderInfo,omitempty"`
+	Network             *string              `json:"network,omitempty"`
+	NetworkProviderInfo *NetworkProviderInfo `json:"networkProviderInfo,omitempty"`
 	// Prefix containing agents public IP address.
 	Prefix *string `json:"prefix,omitempty"`
 	// Array of public IP addresses.
@@ -255,14 +255,14 @@ type Role struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // SimpleTest Each test includes additional fields depending on its `type`.
 // Refer `/tests/{type}` endpoint to know the set of fields returned by a given
 // `type`.
 type SimpleTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// Indicates if alerts are enabled.
 	AlertsEnabled *bool           `json:"alertsEnabled,omitempty"`
 	CreatedBy     TestCreatedBy   `json:"createdBy,omitempty"`
@@ -298,8 +298,8 @@ type TestIds []int64
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestResults Reference to the test results.

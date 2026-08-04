@@ -54,7 +54,7 @@ type EndpointAgentToServerInstantTest struct {
 
 // EndpointAgentToServerTest is generated from the OpenAPI specification.
 type EndpointAgentToServerTest struct {
-	Links                 EndpointTestLinks           `json:"_links,omitempty"`
+	Links                 *EndpointTestLinks          `json:"_links,omitempty"`
 	AgentSelectorConfig   EndpointAgentSelectorConfig `json:"agentSelectorConfig,omitempty"`
 	AID                   AccountGroupId              `json:"aid,omitempty"`
 	CreatedDate           TestCreatedDate             `json:"createdDate,omitempty"`
@@ -114,8 +114,8 @@ type EndpointTestAgents []string
 // EndpointTestLinks A list of links that can be accessed to get more
 // information.
 type EndpointTestLinks struct {
-	Self        EndpointTestSelfLink `json:"self,omitempty"`
-	TestResults ScheduledTestResults `json:"testResults,omitempty"`
+	Self        *EndpointTestSelfLink `json:"self,omitempty"`
+	TestResults ScheduledTestResults  `json:"testResults,omitempty"`
 }
 
 // EndpointTestMaxMachines Maximum number of agents which can execute the test.

@@ -665,7 +665,7 @@ type SchemaVersionConfig struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // SharingSettings The Template to change the sharing settings for.
@@ -698,14 +698,14 @@ type SharingSettingsLink struct {
 // SharingSettingsLinks A list of links that can be accessed to get more
 // information.
 type SharingSettingsLinks struct {
-	Self     SharingSettingsLink `json:"self,omitempty"`
-	Template TemplateLink        `json:"template,omitempty"`
+	Self     *SharingSettingsLink `json:"self,omitempty"`
+	Template *TemplateLink        `json:"template,omitempty"`
 }
 
 // SharingSettingsResponse is generated from the OpenAPI specification.
 type SharingSettingsResponse struct {
-	Links SharingSettingsLinks `json:"_links,omitempty"`
-	Scope SharingScope         `json:"scope"`
+	Links *SharingSettingsLinks `json:"_links,omitempty"`
+	Scope SharingScope          `json:"scope"`
 }
 
 // SipProtocolTemplate The SIP protocol to use for SIP transport layer;
@@ -853,7 +853,7 @@ type Template struct {
 	Name string `json:"name"`
 	// A map of `<assetKey, ResourceInclusion>` pairs.
 	ResourceInclusion map[string]ResourceInclusion `json:"resourceInclusion,omitempty"`
-	SchemaVersion     SchemaVersionConfig          `json:"schemaVersion,omitempty"`
+	SchemaVersion     *SchemaVersionConfig         `json:"schemaVersion,omitempty"`
 	// A map of <name, TagConfiguration> objects.
 	Tags map[string]TagConfigurationTemplate `json:"tags,omitempty"`
 	// A map of <name, TestConfiguration> objects.
@@ -907,7 +907,7 @@ type TemplateLink struct {
 
 // TemplateResponse is generated from the OpenAPI specification.
 type TemplateResponse struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// A map of <key, AlertRuleConfigurationTemplate> objects.
 	AlertRules map[string]AlertRuleConfigurationTemplate `json:"alertRules,omitempty"`
 	// The certification level of the Template.
@@ -940,7 +940,7 @@ type TemplateResponse struct {
 	Name string `json:"name"`
 	// A map of `<assetKey, ResourceInclusion>` pairs.
 	ResourceInclusion map[string]ResourceInclusion `json:"resourceInclusion,omitempty"`
-	SchemaVersion     SchemaVersionConfig          `json:"schemaVersion,omitempty"`
+	SchemaVersion     *SchemaVersionConfig         `json:"schemaVersion,omitempty"`
 	// A map of <name, TagConfiguration> objects.
 	Tags map[string]TagConfigurationTemplate `json:"tags,omitempty"`
 	// A map of <name, TestConfiguration> objects.
@@ -951,7 +951,7 @@ type TemplateResponse struct {
 
 // TemplatesResponse is generated from the OpenAPI specification.
 type TemplatesResponse struct {
-	Links     SelfLinks          `json:"_links,omitempty"`
+	Links     *SelfLinks         `json:"_links,omitempty"`
 	Templates []TemplateResponse `json:"templates,omitempty"`
 }
 

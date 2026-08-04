@@ -14,7 +14,7 @@ type Assignment struct {
 
 // BulkTagAssignment is generated from the OpenAPI specification.
 type BulkTagAssignment struct {
-	Links       SelfLinks    `json:"_links,omitempty"`
+	Links       *SelfLinks   `json:"_links,omitempty"`
 	Assignments []Assignment `json:"assignments,omitempty"`
 	// The ID of the tag to assign
 	TagID *string `json:"tagId,omitempty"`
@@ -22,7 +22,7 @@ type BulkTagAssignment struct {
 
 // BulkTagAssignments is generated from the OpenAPI specification.
 type BulkTagAssignments struct {
-	Links SelfLinks           `json:"_links,omitempty"`
+	Links *SelfLinks          `json:"_links,omitempty"`
 	Tags  []BulkTagAssignment `json:"tags,omitempty"`
 }
 
@@ -50,7 +50,7 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // ResourceTagAssignment is generated from the OpenAPI specification.

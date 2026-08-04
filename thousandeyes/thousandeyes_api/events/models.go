@@ -49,15 +49,15 @@ type AffectedTests struct {
 
 // AgentBranchEventDetail is generated from the OpenAPI specification.
 type AgentBranchEventDetail struct {
-	Links           SelfLinks                `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents           `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets          `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests            `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType           `json:"agentType,omitempty"`
-	AID             AccountGroupId           `json:"aid,omitempty"`
-	Cause           Cause                    `json:"cause,omitempty"`
-	EndDate         EventEndDate             `json:"endDate,omitempty"`
-	Grouping        AgentBranchEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks                `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents           `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets          `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests            `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType            `json:"agentType,omitempty"`
+	AID             AccountGroupId            `json:"aid,omitempty"`
+	Cause           Cause                     `json:"cause,omitempty"`
+	EndDate         EventEndDate              `json:"endDate,omitempty"`
+	Grouping        *AgentBranchEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -83,15 +83,15 @@ type AgentBranchEventType string
 
 // AgentEventDetail is generated from the OpenAPI specification.
 type AgentEventDetail struct {
-	Links           SelfLinks          `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents     `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets    `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests      `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType     `json:"agentType,omitempty"`
-	AID             AccountGroupId     `json:"aid,omitempty"`
-	Cause           Cause              `json:"cause,omitempty"`
-	EndDate         EventEndDate       `json:"endDate,omitempty"`
-	Grouping        AgentEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks          `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents     `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets    `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests      `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType      `json:"agentType,omitempty"`
+	AID             AccountGroupId      `json:"aid,omitempty"`
+	Cause           Cause               `json:"cause,omitempty"`
+	EndDate         EventEndDate        `json:"endDate,omitempty"`
+	Grouping        *AgentEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -115,20 +115,20 @@ type AgentEventType string
 
 // AgentLinks A links object containing the agent link.
 type AgentLinks struct {
-	Agent Link `json:"agent,omitempty"`
+	Agent *Link `json:"agent,omitempty"`
 }
 
 // AgentLocalEventDetail is generated from the OpenAPI specification.
 type AgentLocalEventDetail struct {
-	Links           SelfLinks               `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents          `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets         `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests           `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType          `json:"agentType,omitempty"`
-	AID             AccountGroupId          `json:"aid,omitempty"`
-	Cause           Cause                   `json:"cause,omitempty"`
-	EndDate         EventEndDate            `json:"endDate,omitempty"`
-	Grouping        AgentLocalEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks               `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents          `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets         `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests           `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType           `json:"agentType,omitempty"`
+	AID             AccountGroupId           `json:"aid,omitempty"`
+	Cause           Cause                    `json:"cause,omitempty"`
+	EndDate         EventEndDate             `json:"endDate,omitempty"`
+	Grouping        *AgentLocalEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -168,15 +168,15 @@ type ApiAffectedTarget struct {
 
 // ApplicationEventDetail is generated from the OpenAPI specification.
 type ApplicationEventDetail struct {
-	Links           SelfLinks                `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents           `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets          `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests            `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType           `json:"agentType,omitempty"`
-	AID             AccountGroupId           `json:"aid,omitempty"`
-	Cause           Cause                    `json:"cause,omitempty"`
-	EndDate         EventEndDate             `json:"endDate,omitempty"`
-	Grouping        ApplicationEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks                `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents           `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets          `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests            `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType            `json:"agentType,omitempty"`
+	AID             AccountGroupId            `json:"aid,omitempty"`
+	Cause           Cause                     `json:"cause,omitempty"`
+	EndDate         EventEndDate              `json:"endDate,omitempty"`
+	Grouping        *ApplicationEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -203,15 +203,15 @@ type Cause []string
 
 // DnsEventDetail is generated from the OpenAPI specification.
 type DnsEventDetail struct {
-	Links           SelfLinks        `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents   `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets  `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests    `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType   `json:"agentType,omitempty"`
-	AID             AccountGroupId   `json:"aid,omitempty"`
-	Cause           Cause            `json:"cause,omitempty"`
-	EndDate         EventEndDate     `json:"endDate,omitempty"`
-	Grouping        DnsEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks        `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents   `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets  `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests    `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType    `json:"agentType,omitempty"`
+	AID             AccountGroupId    `json:"aid,omitempty"`
+	Cause           Cause             `json:"cause,omitempty"`
+	EndDate         EventEndDate      `json:"endDate,omitempty"`
+	Grouping        *DnsEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -235,15 +235,15 @@ type DnsEventType string
 
 // DnsNameEventDetail is generated from the OpenAPI specification.
 type DnsNameEventDetail struct {
-	Links           SelfLinks            `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents       `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets      `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests        `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType       `json:"agentType,omitempty"`
-	AID             AccountGroupId       `json:"aid,omitempty"`
-	Cause           Cause                `json:"cause,omitempty"`
-	EndDate         EventEndDate         `json:"endDate,omitempty"`
-	Grouping        DnsNameEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks            `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents       `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets      `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests        `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType        `json:"agentType,omitempty"`
+	AID             AccountGroupId        `json:"aid,omitempty"`
+	Cause           Cause                 `json:"cause,omitempty"`
+	EndDate         EventEndDate          `json:"endDate,omitempty"`
+	Grouping        *DnsNameEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -267,15 +267,15 @@ type DnsNameEventType string
 
 // DnsServerEventDetail is generated from the OpenAPI specification.
 type DnsServerEventDetail struct {
-	Links           SelfLinks              `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents         `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets        `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests          `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType         `json:"agentType,omitempty"`
-	AID             AccountGroupId         `json:"aid,omitempty"`
-	Cause           Cause                  `json:"cause,omitempty"`
-	EndDate         EventEndDate           `json:"endDate,omitempty"`
-	Grouping        DnsServerEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks              `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents         `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets        `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests          `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType          `json:"agentType,omitempty"`
+	AID             AccountGroupId          `json:"aid,omitempty"`
+	Cause           Cause                   `json:"cause,omitempty"`
+	EndDate         EventEndDate            `json:"endDate,omitempty"`
+	Grouping        *DnsServerEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -299,15 +299,15 @@ type DnsServerEventType string
 
 // DomainEventDetail is generated from the OpenAPI specification.
 type DomainEventDetail struct {
-	Links           SelfLinks           `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents      `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets     `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests       `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType      `json:"agentType,omitempty"`
-	AID             AccountGroupId      `json:"aid,omitempty"`
-	Cause           Cause               `json:"cause,omitempty"`
-	EndDate         EventEndDate        `json:"endDate,omitempty"`
-	Grouping        DomainEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks           `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents      `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets     `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests       `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType       `json:"agentType,omitempty"`
+	AID             AccountGroupId       `json:"aid,omitempty"`
+	Cause           Cause                `json:"cause,omitempty"`
+	EndDate         EventEndDate         `json:"endDate,omitempty"`
+	Grouping        *DomainEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -336,10 +336,10 @@ type EndDate string
 
 // Event is generated from the OpenAPI specification.
 type Event struct {
-	Links           SelfLinks      `json:"_links,omitempty"`
-	AffectedAgents  AffectedCount  `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedCount  `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedCount  `json:"affectedTests,omitempty"`
+	Links           *SelfLinks     `json:"_links,omitempty"`
+	AffectedAgents  *AffectedCount `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedCount `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedCount `json:"affectedTests,omitempty"`
 	AgentType       EventAgentType `json:"agentType,omitempty"`
 	EndDate         EventEndDate   `json:"endDate,omitempty"`
 	// A unique ID for each event.
@@ -356,7 +356,7 @@ type Event struct {
 
 // EventApiAffectedAgent is generated from the OpenAPI specification.
 type EventApiAffectedAgent struct {
-	Links AgentLinks `json:"_links,omitempty"`
+	Links *AgentLinks `json:"_links,omitempty"`
 	// An array of unique target IDs that contributed data points which generated
 	// the signal for the event.
 	AffectedTargetIds []string `json:"affectedTargetIds,omitempty"`
@@ -376,7 +376,7 @@ type EventApiAffectedAgent struct {
 
 // EventApiAffectedTest is generated from the OpenAPI specification.
 type EventApiAffectedTest struct {
-	Links EventTestLinks `json:"_links,omitempty"`
+	Links *EventTestLinks `json:"_links,omitempty"`
 	// An array of unique agent IDs that contributed data points which generated
 	// the signal for the event.
 	AffectedAgentIds []string `json:"affectedAgentIds,omitempty"`
@@ -401,29 +401,29 @@ type EventStartDate string
 
 // EventTestLinks A links object containing the self link.
 type EventTestLinks struct {
-	Test Link `json:"test,omitempty"`
+	Test *Link `json:"test,omitempty"`
 }
 
 // ResourceEvents is generated from the OpenAPI specification.
 type ResourceEvents struct {
-	Links     PaginationNextAndSelfLinks `json:"_links,omitempty"`
-	AID       AccountGroupId             `json:"aid,omitempty"`
-	EndDate   EndDate                    `json:"endDate,omitempty"`
-	Events    []Event                    `json:"events,omitempty"`
-	StartDate StartDate                  `json:"startDate,omitempty"`
+	Links     *PaginationNextAndSelfLinks `json:"_links,omitempty"`
+	AID       AccountGroupId              `json:"aid,omitempty"`
+	EndDate   EndDate                     `json:"endDate,omitempty"`
+	Events    []Event                     `json:"events,omitempty"`
+	StartDate StartDate                   `json:"startDate,omitempty"`
 }
 
 // GatewayEventDetail is generated from the OpenAPI specification.
 type GatewayEventDetail struct {
-	Links           SelfLinks            `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents       `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets      `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests        `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType       `json:"agentType,omitempty"`
-	AID             AccountGroupId       `json:"aid,omitempty"`
-	Cause           Cause                `json:"cause,omitempty"`
-	EndDate         EventEndDate         `json:"endDate,omitempty"`
-	Grouping        GatewayEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks            `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents       `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets      `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests        `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType        `json:"agentType,omitempty"`
+	AID             AccountGroupId        `json:"aid,omitempty"`
+	Cause           Cause                 `json:"cause,omitempty"`
+	EndDate         EventEndDate          `json:"endDate,omitempty"`
+	Grouping        *GatewayEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -471,15 +471,15 @@ type Link struct {
 
 // NameServerEventDetail is generated from the OpenAPI specification.
 type NameServerEventDetail struct {
-	Links           SelfLinks               `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents          `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets         `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests           `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType          `json:"agentType,omitempty"`
-	AID             AccountGroupId          `json:"aid,omitempty"`
-	Cause           Cause                   `json:"cause,omitempty"`
-	EndDate         EventEndDate            `json:"endDate,omitempty"`
-	Grouping        NameServerEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks               `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents          `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets         `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests           `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType           `json:"agentType,omitempty"`
+	AID             AccountGroupId           `json:"aid,omitempty"`
+	Cause           Cause                    `json:"cause,omitempty"`
+	EndDate         EventEndDate             `json:"endDate,omitempty"`
+	Grouping        *NameServerEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -503,15 +503,15 @@ type NameServerEventType string
 
 // NetworkEventDetail is generated from the OpenAPI specification.
 type NetworkEventDetail struct {
-	Links           SelfLinks            `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents       `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets      `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests        `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType       `json:"agentType,omitempty"`
-	AID             AccountGroupId       `json:"aid,omitempty"`
-	Cause           Cause                `json:"cause,omitempty"`
-	EndDate         EventEndDate         `json:"endDate,omitempty"`
-	Grouping        NetworkEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks            `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents       `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets      `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests        `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType        `json:"agentType,omitempty"`
+	AID             AccountGroupId        `json:"aid,omitempty"`
+	Cause           Cause                 `json:"cause,omitempty"`
+	EndDate         EventEndDate          `json:"endDate,omitempty"`
+	Grouping        *NetworkEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -539,15 +539,15 @@ type NetworkEventType string
 
 // NetworkPopEventDetail is generated from the OpenAPI specification.
 type NetworkPopEventDetail struct {
-	Links           SelfLinks            `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents       `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets      `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests        `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType       `json:"agentType,omitempty"`
-	AID             AccountGroupId       `json:"aid,omitempty"`
-	Cause           Cause                `json:"cause,omitempty"`
-	EndDate         EventEndDate         `json:"endDate,omitempty"`
-	Grouping        NetworkEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks            `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents       `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets      `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests        `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType        `json:"agentType,omitempty"`
+	AID             AccountGroupId        `json:"aid,omitempty"`
+	Cause           Cause                 `json:"cause,omitempty"`
+	EndDate         EventEndDate          `json:"endDate,omitempty"`
+	Grouping        *NetworkEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -566,21 +566,21 @@ type NetworkPopEventType string
 // PaginationNextAndSelfLinks A links object containing pagination-related
 // links, including only next and self.
 type PaginationNextAndSelfLinks struct {
-	Next Link `json:"next,omitempty"`
-	Self Link `json:"self,omitempty"`
+	Next *Link `json:"next,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // ProxyEventDetail is generated from the OpenAPI specification.
 type ProxyEventDetail struct {
-	Links           SelfLinks          `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents     `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets    `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests      `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType     `json:"agentType,omitempty"`
-	AID             AccountGroupId     `json:"aid,omitempty"`
-	Cause           Cause              `json:"cause,omitempty"`
-	EndDate         EventEndDate       `json:"endDate,omitempty"`
-	Grouping        ProxyEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks          `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents     `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets    `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests      `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType      `json:"agentType,omitempty"`
+	AID             AccountGroupId      `json:"aid,omitempty"`
+	Cause           Cause               `json:"cause,omitempty"`
+	EndDate         EventEndDate        `json:"endDate,omitempty"`
+	Grouping        *ProxyEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -604,7 +604,7 @@ type ProxyEventType string
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // StartDate (Optional) When passing `window` or `startDate` parameter, the
@@ -614,15 +614,15 @@ type StartDate string
 
 // TargetEventDetail is generated from the OpenAPI specification.
 type TargetEventDetail struct {
-	Links           SelfLinks           `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents      `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets     `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests       `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType      `json:"agentType,omitempty"`
-	AID             AccountGroupId      `json:"aid,omitempty"`
-	Cause           Cause               `json:"cause,omitempty"`
-	EndDate         EventEndDate        `json:"endDate,omitempty"`
-	Grouping        TargetEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks           `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents      `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets     `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests       `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType       `json:"agentType,omitempty"`
+	AID             AccountGroupId       `json:"aid,omitempty"`
+	Cause           Cause                `json:"cause,omitempty"`
+	EndDate         EventEndDate         `json:"endDate,omitempty"`
+	Grouping        *TargetEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -646,15 +646,15 @@ type TargetEventType string
 
 // TargetNetworkEventDetail is generated from the OpenAPI specification.
 type TargetNetworkEventDetail struct {
-	Links           SelfLinks                  `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents             `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets            `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests              `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType             `json:"agentType,omitempty"`
-	AID             AccountGroupId             `json:"aid,omitempty"`
-	Cause           Cause                      `json:"cause,omitempty"`
-	EndDate         EventEndDate               `json:"endDate,omitempty"`
-	Grouping        TargetNetworkEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks                  `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents             `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets            `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests              `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType              `json:"agentType,omitempty"`
+	AID             AccountGroupId              `json:"aid,omitempty"`
+	Cause           Cause                       `json:"cause,omitempty"`
+	EndDate         EventEndDate                `json:"endDate,omitempty"`
+	Grouping        *TargetNetworkEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -678,15 +678,15 @@ type TargetNetworkEventType string
 
 // VpnEventDetail is generated from the OpenAPI specification.
 type VpnEventDetail struct {
-	Links           SelfLinks        `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents   `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets  `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests    `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType   `json:"agentType,omitempty"`
-	AID             AccountGroupId   `json:"aid,omitempty"`
-	Cause           Cause            `json:"cause,omitempty"`
-	EndDate         EventEndDate     `json:"endDate,omitempty"`
-	Grouping        VpnEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks        `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents   `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets  `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests    `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType    `json:"agentType,omitempty"`
+	AID             AccountGroupId    `json:"aid,omitempty"`
+	Cause           Cause             `json:"cause,omitempty"`
+	EndDate         EventEndDate      `json:"endDate,omitempty"`
+	Grouping        *VpnEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`
@@ -712,15 +712,15 @@ type VpnEventType string
 
 // WirelessEventDetail is generated from the OpenAPI specification.
 type WirelessEventDetail struct {
-	Links           SelfLinks             `json:"_links,omitempty"`
-	AffectedAgents  AffectedAgents        `json:"affectedAgents,omitempty"`
-	AffectedTargets AffectedTargets       `json:"affectedTargets,omitempty"`
-	AffectedTests   AffectedTests         `json:"affectedTests,omitempty"`
-	AgentType       EventAgentType        `json:"agentType,omitempty"`
-	AID             AccountGroupId        `json:"aid,omitempty"`
-	Cause           Cause                 `json:"cause,omitempty"`
-	EndDate         EventEndDate          `json:"endDate,omitempty"`
-	Grouping        WirelessEventGrouping `json:"grouping,omitempty"`
+	Links           *SelfLinks             `json:"_links,omitempty"`
+	AffectedAgents  *AffectedAgents        `json:"affectedAgents,omitempty"`
+	AffectedTargets *AffectedTargets       `json:"affectedTargets,omitempty"`
+	AffectedTests   *AffectedTests         `json:"affectedTests,omitempty"`
+	AgentType       EventAgentType         `json:"agentType,omitempty"`
+	AID             AccountGroupId         `json:"aid,omitempty"`
+	Cause           Cause                  `json:"cause,omitempty"`
+	EndDate         EventEndDate           `json:"endDate,omitempty"`
+	Grouping        *WirelessEventGrouping `json:"grouping,omitempty"`
 	// A unique ID for each event.
 	ID        *string            `json:"id,omitempty"`
 	Severity  EventAlertSeverity `json:"severity,omitempty"`

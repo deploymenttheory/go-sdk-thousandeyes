@@ -35,12 +35,12 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // WebhookOperation is generated from the OpenAPI specification.
 type WebhookOperation struct {
-	Links    SelfLinks         `json:"_links,omitempty"`
+	Links    *SelfLinks        `json:"_links,omitempty"`
 	Category OperationCategory `json:"category"`
 	Enabled  *bool             `json:"enabled,omitempty"`
 	Headers  []Header          `json:"headers,omitempty"`
@@ -57,6 +57,6 @@ type WebhookOperation struct {
 
 // ResourceWebhookOperations is generated from the OpenAPI specification.
 type ResourceWebhookOperations struct {
-	Links SelfLinks          `json:"_links,omitempty"`
+	Links *SelfLinks         `json:"_links,omitempty"`
 	Items []WebhookOperation `json:"items,omitempty"`
 }

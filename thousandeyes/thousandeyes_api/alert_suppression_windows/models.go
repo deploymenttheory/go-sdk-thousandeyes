@@ -7,17 +7,17 @@ package alert_suppression_windows
 
 // AlertSuppressionWindow is generated from the OpenAPI specification.
 type AlertSuppressionWindow struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// Unique ID of the alert suppression window.
 	AlertSuppressionWindowID *string `json:"alertSuppressionWindowId,omitempty"`
 	// Duration in seconds the suppression window is active.
-	Duration  *int      `json:"duration,omitempty"`
-	EndRepeat EndRepeat `json:"endRepeat,omitempty"`
+	Duration  *int       `json:"duration,omitempty"`
+	EndRepeat *EndRepeat `json:"endRepeat,omitempty"`
 	// Set to `false` for `disabled`, `true` for `enabled`.
 	IsEnabled *bool `json:"isEnabled,omitempty"`
 	// Name of the alert suppression window.
 	Name   *string `json:"name,omitempty"`
-	Repeat Repeat  `json:"repeat,omitempty"`
+	Repeat *Repeat `json:"repeat,omitempty"`
 	// The date/time when the alert suppression window starts (ISO date-time
 	// format).
 	StartDate *string                     `json:"startDate,omitempty"`
@@ -26,17 +26,17 @@ type AlertSuppressionWindow struct {
 
 // AlertSuppressionWindowDetail is generated from the OpenAPI specification.
 type AlertSuppressionWindowDetail struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// Unique ID of the alert suppression window.
 	AlertSuppressionWindowID *string `json:"alertSuppressionWindowId,omitempty"`
 	// Duration in seconds the suppression window is active.
-	Duration  *int      `json:"duration,omitempty"`
-	EndRepeat EndRepeat `json:"endRepeat,omitempty"`
+	Duration  *int       `json:"duration,omitempty"`
+	EndRepeat *EndRepeat `json:"endRepeat,omitempty"`
 	// Set to `false` for `disabled`, `true` for `enabled`.
 	IsEnabled *bool `json:"isEnabled,omitempty"`
 	// Name of the alert suppression window.
 	Name   *string `json:"name,omitempty"`
-	Repeat Repeat  `json:"repeat,omitempty"`
+	Repeat *Repeat `json:"repeat,omitempty"`
 	// The date/time when the alert suppression window starts (ISO date-time
 	// format).
 	StartDate *string                     `json:"startDate,omitempty"`
@@ -50,13 +50,13 @@ type AlertSuppressionWindowRequest struct {
 	// Unique ID of the alert suppression window.
 	AlertSuppressionWindowID *string `json:"alertSuppressionWindowId,omitempty"`
 	// Duration in seconds the suppression window is active.
-	Duration  *int      `json:"duration,omitempty"`
-	EndRepeat EndRepeat `json:"endRepeat,omitempty"`
+	Duration  *int       `json:"duration,omitempty"`
+	EndRepeat *EndRepeat `json:"endRepeat,omitempty"`
 	// Set to `false` for `disabled`, `true` for `enabled`.
 	IsEnabled *bool `json:"isEnabled,omitempty"`
 	// Name of the alert suppression window.
 	Name   *string `json:"name,omitempty"`
-	Repeat Repeat  `json:"repeat,omitempty"`
+	Repeat *Repeat `json:"repeat,omitempty"`
 	// The date/time when the alert suppression window starts (ISO date-time
 	// format).
 	StartDate *string                     `json:"startDate,omitempty"`
@@ -67,7 +67,7 @@ type AlertSuppressionWindowRequest struct {
 
 // ResourceAlertSuppressionWindows Alert suppression windows.
 type ResourceAlertSuppressionWindows struct {
-	Links                   SelfLinks                `json:"_links,omitempty"`
+	Links                   *SelfLinks               `json:"_links,omitempty"`
 	AlertSuppressionWindows []AlertSuppressionWindow `json:"alertSuppressionWindows,omitempty"`
 }
 
@@ -118,14 +118,14 @@ type Repeat struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // SimpleTest Each test includes additional fields depending on its `type`.
 // Refer `/tests/{type}` endpoint to know the set of fields returned by a given
 // `type`.
 type SimpleTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// Indicates if alerts are enabled.
 	AlertsEnabled *bool           `json:"alertsEnabled,omitempty"`
 	CreatedBy     TestCreatedBy   `json:"createdBy,omitempty"`
@@ -158,8 +158,8 @@ type TestCreatedDate string
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestResults Reference to the test results.

@@ -40,8 +40,8 @@ type Link struct {
 
 // NetworkTestResult is generated from the OpenAPI specification.
 type NetworkTestResult struct {
-	Links TestResultAppLinks `json:"_links,omitempty"`
-	Agent TestResultAgent    `json:"agent,omitempty"`
+	Links *TestResultAppLinks `json:"_links,omitempty"`
+	Agent *TestResultAgent    `json:"agent,omitempty"`
 	// The bandwidth from the client to the server measured in Mbps.
 	AvailableBandwidth *float64 `json:"availableBandwidth,omitempty"`
 	// Average RTT for packets sent to destination
@@ -87,18 +87,18 @@ type NetworkTestResult struct {
 
 // ResourceNetworkTestResults is generated from the OpenAPI specification.
 type ResourceNetworkTestResults struct {
-	Links     PaginationLinks     `json:"_links,omitempty"`
+	Links     *PaginationLinks    `json:"_links,omitempty"`
 	EndDate   EndDate             `json:"endDate,omitempty"`
 	Results   []NetworkTestResult `json:"results,omitempty"`
 	StartDate StartDate           `json:"startDate,omitempty"`
-	Test      SimpleTest          `json:"test,omitempty"`
+	Test      *SimpleTest         `json:"test,omitempty"`
 }
 
 // PaginationLinks A links object containing pagination related link(s).
 type PaginationLinks struct {
-	Next     Link `json:"next,omitempty"`
-	Previous Link `json:"previous,omitempty"`
-	Self     Link `json:"self,omitempty"`
+	Next     *Link `json:"next,omitempty"`
+	Previous *Link `json:"previous,omitempty"`
+	Self     *Link `json:"self,omitempty"`
 }
 
 // PathTrace is generated from the OpenAPI specification.
@@ -119,8 +119,8 @@ type PathTrace struct {
 
 // PathVisDetailTestResult is generated from the OpenAPI specification.
 type PathVisDetailTestResult struct {
-	Links TestResultAppLinks `json:"_links,omitempty"`
-	Agent TestResultAgent    `json:"agent,omitempty"`
+	Links *TestResultAppLinks `json:"_links,omitempty"`
+	Agent *TestResultAgent    `json:"agent,omitempty"`
 	// Data point date UTC (ISO date-time format).
 	Date      *string          `json:"date,omitempty"`
 	Direction PathVisDirection `json:"direction,omitempty"`
@@ -144,9 +144,9 @@ type PathVisDetailTestResult struct {
 
 // PathVisDetailTestResults is generated from the OpenAPI specification.
 type PathVisDetailTestResults struct {
-	Links   SelfLinks                 `json:"_links,omitempty"`
+	Links   *SelfLinks                `json:"_links,omitempty"`
 	Results []PathVisDetailTestResult `json:"results,omitempty"`
-	Test    SimpleTest                `json:"test,omitempty"`
+	Test    *SimpleTest               `json:"test,omitempty"`
 }
 
 // PathVisHop is generated from the OpenAPI specification.
@@ -179,8 +179,8 @@ type PathVisRoute struct {
 
 // PathVisTestResult is generated from the OpenAPI specification.
 type PathVisTestResult struct {
-	Links TestResultAppLinks `json:"_links,omitempty"`
-	Agent TestResultAgent    `json:"agent,omitempty"`
+	Links *TestResultAppLinks `json:"_links,omitempty"`
+	Agent *TestResultAgent    `json:"agent,omitempty"`
 	// Data point date UTC (ISO date-time format).
 	Date      *string          `json:"date,omitempty"`
 	Direction PathVisDirection `json:"direction,omitempty"`
@@ -205,23 +205,23 @@ type PathVisTestResult struct {
 
 // PathVisTestResults is generated from the OpenAPI specification.
 type PathVisTestResults struct {
-	Links     PaginationLinks     `json:"_links,omitempty"`
+	Links     *PaginationLinks    `json:"_links,omitempty"`
 	EndDate   EndDate             `json:"endDate,omitempty"`
 	Results   []PathVisTestResult `json:"results,omitempty"`
 	StartDate StartDate           `json:"startDate,omitempty"`
-	Test      SimpleTest          `json:"test,omitempty"`
+	Test      *SimpleTest         `json:"test,omitempty"`
 }
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // SimpleTest Each test includes additional fields depending on its `type`.
 // Refer `/tests/{type}` endpoint to know the set of fields returned by a given
 // `type`.
 type SimpleTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// Indicates if alerts are enabled.
 	AlertsEnabled *bool           `json:"alertsEnabled,omitempty"`
 	CreatedBy     TestCreatedBy   `json:"createdBy,omitempty"`
@@ -262,8 +262,8 @@ type TestCreatedDate string
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestResultAgent is generated from the OpenAPI specification.
@@ -280,7 +280,7 @@ type TestResultAgent struct {
 
 // TestResultAppLinks is generated from the OpenAPI specification.
 type TestResultAppLinks struct {
-	AppLink Link `json:"appLink,omitempty"`
+	AppLink *Link `json:"appLink,omitempty"`
 }
 
 // TestResults Reference to the test results.

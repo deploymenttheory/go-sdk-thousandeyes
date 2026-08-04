@@ -39,10 +39,10 @@ type ApiAgentStatusAgent struct {
 	// Identifier of the agent.
 	AgentID *string `json:"agentId,omitempty"`
 	// Name of the agent
-	AgentName *string              `json:"agentName,omitempty"`
-	IpInfo    ApiAgentStatusIpInfo `json:"ipInfo,omitempty"`
-	Location  ApiAgentLocation     `json:"location,omitempty"`
-	Status    EnterpriseAgentState `json:"status,omitempty"`
+	AgentName *string               `json:"agentName,omitempty"`
+	IpInfo    *ApiAgentStatusIpInfo `json:"ipInfo,omitempty"`
+	Location  *ApiAgentLocation     `json:"location,omitempty"`
+	Status    EnterpriseAgentState  `json:"status,omitempty"`
 }
 
 // ApiAgentStatusIpInfo IP information of the agent.
@@ -67,7 +67,7 @@ type ApiAgentStatusSummary struct {
 
 // ApiAgentStatusWidget is generated from the OpenAPI specification.
 type ApiAgentStatusWidget struct {
-	Links      SelfLinks                `json:"_links,omitempty"`
+	Links      *SelfLinks               `json:"_links,omitempty"`
 	Agents     AgentWidgetType          `json:"agents,omitempty"`
 	ApiLink    *string                  `json:"apiLink,omitempty"`
 	DataSource AgentStatusDatasource    `json:"dataSource,omitempty"`
@@ -75,14 +75,14 @@ type ApiAgentStatusWidget struct {
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string       `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters `json:"filters,omitempty"`
-	FixedTimespan ApiDuration   `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration  `json:"fixedTimespan,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
-	IsEmbedded  *bool            `json:"isEmbedded,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
+	IsEmbedded  *bool             `json:"isEmbedded,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
 	ShouldExcludeAlertSuppressionWindows *bool           `json:"shouldExcludeAlertSuppressionWindows,omitempty"`
 	Show                                 AgentWidgetShow `json:"show,omitempty"`
@@ -119,8 +119,8 @@ type ApiAlertListAlertType LegacyAlertListAlertType
 // ApiAlertListWidget A widget that displays a list of alerts based on
 // specified criteria, such as alert type and time frame.
 type ApiAlertListWidget struct {
-	Links        SelfLinks    `json:"_links,omitempty"`
-	ActiveWithin ActiveWithin `json:"activeWithin,omitempty"`
+	Links        *SelfLinks    `json:"_links,omitempty"`
+	ActiveWithin *ActiveWithin `json:"activeWithin,omitempty"`
 	// List of alert types configured in the widget, an empty list means all alert
 	// types.
 	AlertTypes []ApiAlertListAlertType  `json:"alertTypes,omitempty"`
@@ -130,16 +130,16 @@ type ApiAlertListWidget struct {
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string       `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters `json:"filters,omitempty"`
-	FixedTimespan ApiDuration   `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration  `json:"fixedTimespan,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
 	IsEmbedded *bool `json:"isEmbedded,omitempty"`
 	// Limit the number of alerts displayed in the widget.
-	LimitTo     *int             `json:"limitTo,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
+	LimitTo     *int              `json:"limitTo,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
 	ShouldExcludeAlertSuppressionWindows *bool `json:"shouldExcludeAlertSuppressionWindows,omitempty"`
 	// Title of the widget
@@ -152,24 +152,24 @@ type ApiAlertListWidget struct {
 // mapping data points over time with key statistics: median, range, and
 // quartiles.
 type ApiBoxAndWhiskersWidget struct {
-	Links      SelfLinks                `json:"_links,omitempty"`
+	Links      *SelfLinks               `json:"_links,omitempty"`
 	ApiLink    *string                  `json:"apiLink,omitempty"`
 	DataSource BoxAndWhiskersDatasource `json:"dataSource,omitempty"`
 	Direction  DashboardMetricDirection `json:"direction,omitempty"`
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string              `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters        `json:"filters,omitempty"`
-	FixedTimespan ApiDuration          `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration         `json:"fixedTimespan,omitempty"`
 	GroupBy       ApiAggregateProperty `json:"groupBy,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
 	IsEmbedded *bool `json:"isEmbedded,omitempty"`
 	// Maximum scale configured in the widget.
-	MaxScale    *float64         `json:"maxScale,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
+	MaxScale    *float64          `json:"maxScale,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
 	// Minimum scale configured in the widget.
 	MinScale *float64 `json:"minScale,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
@@ -184,7 +184,7 @@ type ApiBoxAndWhiskersWidget struct {
 // ApiColorGridWidget The Color Grid widget displays colored cards arranged in
 // rows and columns.
 type ApiColorGridWidget struct {
-	Links   SelfLinks            `json:"_links,omitempty"`
+	Links   *SelfLinks           `json:"_links,omitempty"`
 	ApiLink *string              `json:"apiLink,omitempty"`
 	Cards   ApiAggregateProperty `json:"cards,omitempty"`
 	// Number of columns: 1 or 2.
@@ -194,7 +194,7 @@ type ApiColorGridWidget struct {
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string              `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters        `json:"filters,omitempty"`
-	FixedTimespan ApiDuration          `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration         `json:"fixedTimespan,omitempty"`
 	GroupCardsBy  ApiAggregateProperty `json:"groupCardsBy,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
@@ -202,10 +202,10 @@ type ApiColorGridWidget struct {
 	IsEmbedded *bool       `json:"isEmbedded,omitempty"`
 	Limit      WidgetLimit `json:"limit,omitempty"`
 	// Maximum scale configured in the widget.
-	MaxScale    *float64         `json:"maxScale,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
+	MaxScale    *float64          `json:"maxScale,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
 	// Minimum scale configured in the widget.
 	MinScale *float64 `json:"minScale,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
@@ -223,7 +223,7 @@ type ApiColorGridWidget struct {
 
 // ApiDashboard Dashboard upon which this dashboard snapshot is based upon.
 type ApiDashboard struct {
-	Links DashboardLinks `json:"_links,omitempty"`
+	Links *DashboardLinks `json:"_links,omitempty"`
 	// Identifier for the account group associated with a dashboard.
 	AccountID *int64 `json:"accountId,omitempty"`
 	// Identifier for the account group associated with a dashboard.
@@ -239,8 +239,8 @@ type ApiDashboard struct {
 	// Identifier for the user that last modified a dashboard.
 	DashboardModifiedBy *string `json:"dashboardModifiedBy,omitempty"`
 	// UTC date/time when a dashboard was last modified (ISO date-time format).
-	DashboardModifiedDate *string         `json:"dashboardModifiedDate,omitempty"`
-	DefaultTimespan       DefaultTimespan `json:"defaultTimespan,omitempty"`
+	DashboardModifiedDate *string          `json:"dashboardModifiedDate,omitempty"`
+	DefaultTimespan       *DefaultTimespan `json:"defaultTimespan,omitempty"`
 	// A text description of the dashboard's purpose and functionality.
 	Description *string `json:"description,omitempty"`
 	// Default global dashboard filter ID (obtained from `/dashboards/filters`
@@ -261,8 +261,8 @@ type ApiDashboard struct {
 	// True if this dashboard was previously a report.
 	IsMigratedReport *bool `json:"isMigratedReport,omitempty"`
 	// A dashboard can be viewed by other users in the account.
-	IsPrivate *bool           `json:"isPrivate,omitempty"`
-	Layout    DashboardLayout `json:"layout,omitempty"`
+	IsPrivate *bool            `json:"isPrivate,omitempty"`
+	Layout    *DashboardLayout `json:"layout,omitempty"`
 	// True if this dashboard was previously a report.
 	MigratedReport *bool `json:"migratedReport,omitempty"`
 	// Identifier for the user that last modified a dashboard.
@@ -309,14 +309,14 @@ type ApiDuration struct {
 // ApiGeoMapWidget Displays data on a geographic map, highlighting information
 // across different regions.
 type ApiGeoMapWidget struct {
-	Links      SelfLinks                `json:"_links,omitempty"`
+	Links      *SelfLinks               `json:"_links,omitempty"`
 	ApiLink    *string                  `json:"apiLink,omitempty"`
 	DataSource GeoMapDatasource         `json:"dataSource,omitempty"`
 	Direction  DashboardMetricDirection `json:"direction,omitempty"`
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string              `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters        `json:"filters,omitempty"`
-	FixedTimespan ApiDuration          `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration         `json:"fixedTimespan,omitempty"`
 	GroupBy       ApiAggregateProperty `json:"groupBy,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
@@ -326,10 +326,10 @@ type ApiGeoMapWidget struct {
 	// widget.
 	IsGeoMapPerTest *bool `json:"isGeoMapPerTest,omitempty"`
 	// Maximum scale configured in the widget.
-	MaxScale    *float64         `json:"maxScale,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
+	MaxScale    *float64          `json:"maxScale,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
 	// Minimum scale configured in the widget.
 	MinScale *float64 `json:"minScale,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
@@ -354,7 +354,7 @@ type ApiGraphletPoint struct {
 // ApiGroupedBarchartWidget Displays grouped bars, each representing multiple
 // data points. You can configure the bars to align horizontally or vertically.
 type ApiGroupedBarchartWidget struct {
-	Links       SelfLinks                 `json:"_links,omitempty"`
+	Links       *SelfLinks                `json:"_links,omitempty"`
 	ApiLink     *string                   `json:"apiLink,omitempty"`
 	AxisGroupBy ApiAggregateProperty      `json:"axisGroupBy,omitempty"`
 	DataSource  GroupedBarChartDatasource `json:"dataSource,omitempty"`
@@ -362,17 +362,17 @@ type ApiGroupedBarchartWidget struct {
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string              `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters        `json:"filters,omitempty"`
-	FixedTimespan ApiDuration          `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration         `json:"fixedTimespan,omitempty"`
 	GroupBy       ApiAggregateProperty `json:"groupBy,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
-	IsEmbedded           *bool            `json:"isEmbedded,omitempty"`
-	IsHorizontalBarChart *bool            `json:"isHorizontalBarChart,omitempty"`
-	Limit                WidgetLimit      `json:"limit,omitempty"`
-	Measure              ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric               DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup          MetricGroup      `json:"metricGroup,omitempty"`
+	IsEmbedded           *bool             `json:"isEmbedded,omitempty"`
+	IsHorizontalBarChart *bool             `json:"isHorizontalBarChart,omitempty"`
+	Limit                WidgetLimit       `json:"limit,omitempty"`
+	Measure              *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric               DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup          MetricGroup       `json:"metricGroup,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
 	ShouldExcludeAlertSuppressionWindows *bool `json:"shouldExcludeAlertSuppressionWindows,omitempty"`
 	// Displays labels on each bar when set to `true`.
@@ -388,7 +388,7 @@ type ApiGroupedBarchartWidget struct {
 // ApiHeatmapWidget Displays metric intensity across row and column groupings
 // in a grid to help compare relative values across two dimensions.
 type ApiHeatmapWidget struct {
-	Links         SelfLinks                `json:"_links,omitempty"`
+	Links         *SelfLinks               `json:"_links,omitempty"`
 	ApiLink       *string                  `json:"apiLink,omitempty"`
 	ColumnGroupBy ApiAggregateProperty     `json:"columnGroupBy,omitempty"`
 	DataSource    HeatmapDatasource        `json:"dataSource,omitempty"`
@@ -396,13 +396,13 @@ type ApiHeatmapWidget struct {
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string       `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters `json:"filters,omitempty"`
-	FixedTimespan ApiDuration   `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration  `json:"fixedTimespan,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
 	IsEmbedded  *bool                `json:"isEmbedded,omitempty"`
 	Limit       WidgetLimit          `json:"limit,omitempty"`
-	Measure     ApiWidgetMeasure     `json:"measure,omitempty"`
+	Measure     *ApiWidgetMeasure    `json:"measure,omitempty"`
 	Metric      DashboardMetric      `json:"metric,omitempty"`
 	MetricGroup MetricGroup          `json:"metricGroup,omitempty"`
 	RowGroupBy  ApiAggregateProperty `json:"rowGroupBy,omitempty"`
@@ -419,22 +419,22 @@ type ApiHeatmapWidget struct {
 // ApiListWidget A widget that displays a list of items, such as events. It can
 // use a time range to limit the items shown.
 type ApiListWidget struct {
-	Links        SelfLinks                `json:"_links,omitempty"`
-	ActiveWithin ActiveWithin             `json:"activeWithin,omitempty"`
+	Links        *SelfLinks               `json:"_links,omitempty"`
+	ActiveWithin *ActiveWithin            `json:"activeWithin,omitempty"`
 	ApiLink      *string                  `json:"apiLink,omitempty"`
 	DataSource   ListDatasource           `json:"dataSource,omitempty"`
 	Direction    DashboardMetricDirection `json:"direction,omitempty"`
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string       `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters `json:"filters,omitempty"`
-	FixedTimespan ApiDuration   `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration  `json:"fixedTimespan,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
-	IsEmbedded  *bool            `json:"isEmbedded,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
+	IsEmbedded  *bool             `json:"isEmbedded,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
 	ShouldExcludeAlertSuppressionWindows *bool               `json:"shouldExcludeAlertSuppressionWindows,omitempty"`
 	SortDirection                        WidgetSortDirection `json:"sortDirection,omitempty"`
@@ -447,12 +447,12 @@ type ApiListWidget struct {
 // ApiMultiMetricColumn Defines a column within a table that aggregates and
 // displays various metrics (Multi-Metric table).
 type ApiMultiMetricColumn struct {
-	Links       SelfLinks                   `json:"_links,omitempty"`
+	Links       *SelfLinks                  `json:"_links,omitempty"`
 	DataSource  MultiMetricsTableDatasource `json:"dataSource,omitempty"`
 	Direction   DashboardMetricDirection    `json:"direction,omitempty"`
 	Filters     WidgetFilters               `json:"filters,omitempty"`
 	ID          *string                     `json:"id,omitempty"`
-	Measure     ApiWidgetMeasure            `json:"measure,omitempty"`
+	Measure     *ApiWidgetMeasure           `json:"measure,omitempty"`
 	Metric      DashboardMetric             `json:"metric,omitempty"`
 	MetricGroup MetricGroup                 `json:"metricGroup,omitempty"`
 }
@@ -460,7 +460,7 @@ type ApiMultiMetricColumn struct {
 // ApiMultiMetricColumnData The data presented within a single column of a
 // Multi-Metric table.
 type ApiMultiMetricColumnData struct {
-	Links                   SelfLinks         `json:"_links,omitempty"`
+	Links                   *SelfLinks        `json:"_links,omitempty"`
 	AlertSuppressionWindows []ApiDashboardAsw `json:"alertSuppressionWindows,omitempty"`
 	BinSize                 BinSize           `json:"binSize,omitempty"`
 	// Identifier of the column.
@@ -473,8 +473,8 @@ type ApiMultiMetricColumnData struct {
 // representing a different metric, offering a comprehensive view rather than
 // restricting to a single metric.
 type ApiMultiMetricTableWidget struct {
-	Links   SelfLinks `json:"_links,omitempty"`
-	ApiLink *string   `json:"apiLink,omitempty"`
+	Links   *SelfLinks `json:"_links,omitempty"`
+	ApiLink *string    `json:"apiLink,omitempty"`
 	// Enables comparison of the current metric value with the previous value.
 	CompareToPreviousValue *bool                       `json:"compareToPreviousValue,omitempty"`
 	DataSource             MultiMetricsTableDatasource `json:"dataSource,omitempty"`
@@ -482,13 +482,13 @@ type ApiMultiMetricTableWidget struct {
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string       `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters `json:"filters,omitempty"`
-	FixedTimespan ApiDuration   `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration  `json:"fixedTimespan,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
 	IsEmbedded         *bool                  `json:"isEmbedded,omitempty"`
 	Limit              WidgetLimit            `json:"limit,omitempty"`
-	Measure            ApiWidgetMeasure       `json:"measure,omitempty"`
+	Measure            *ApiWidgetMeasure      `json:"measure,omitempty"`
 	Metric             DashboardMetric        `json:"metric,omitempty"`
 	MetricGroup        MetricGroup            `json:"metricGroup,omitempty"`
 	MultiMetricColumns []ApiMultiMetricColumn `json:"multiMetricColumns,omitempty"`
@@ -513,21 +513,21 @@ type ApiMultiSearchFilterApiTestTableFilterKey struct {
 
 // ApiNumbersCard An individual number card within the numbers card widget.
 type ApiNumbersCard struct {
-	Links                  SelfLinks             `json:"_links,omitempty"`
+	Links                  *SelfLinks            `json:"_links,omitempty"`
 	CompareToPreviousValue *bool                 `json:"compareToPreviousValue,omitempty"`
 	DataSource             NumbersCardDatasource `json:"dataSource,omitempty"`
 	// Description of the number card.
 	Description   *string                  `json:"description,omitempty"`
 	Direction     DashboardMetricDirection `json:"direction,omitempty"`
 	Filters       WidgetFilters            `json:"filters,omitempty"`
-	FixedTimespan ApiDuration              `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration             `json:"fixedTimespan,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Maximum scale configured in the widget.
-	MaxScale    *float64         `json:"maxScale,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
+	MaxScale    *float64          `json:"maxScale,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
 	// Minimum scale configured in the widget.
 	MinScale *float64 `json:"minScale,omitempty"`
 	// Excludes alert suppression windows from the widget when set to `true`.
@@ -537,7 +537,7 @@ type ApiNumbersCard struct {
 
 // ApiNumbersCardData The data displayed on a numbers card.
 type ApiNumbersCardData struct {
-	Links                   SelfLinks         `json:"_links,omitempty"`
+	Links                   *SelfLinks        `json:"_links,omitempty"`
 	AlertSuppressionWindows []ApiDashboardAsw `json:"alertSuppressionWindows,omitempty"`
 	BinSize                 BinSize           `json:"binSize,omitempty"`
 	// Identifier of the card.
@@ -561,22 +561,22 @@ type ApiNumbersCardData struct {
 // singular metric, such as average packet loss, page load time, or alert
 // count.
 type ApiNumbersCardWidget struct {
-	Links      SelfLinks                `json:"_links,omitempty"`
+	Links      *SelfLinks               `json:"_links,omitempty"`
 	ApiLink    *string                  `json:"apiLink,omitempty"`
 	DataSource NumbersCardDatasource    `json:"dataSource,omitempty"`
 	Direction  DashboardMetricDirection `json:"direction,omitempty"`
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string       `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters `json:"filters,omitempty"`
-	FixedTimespan ApiDuration   `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration  `json:"fixedTimespan,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
-	IsEmbedded  *bool            `json:"isEmbedded,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
-	NumberCards []ApiNumbersCard `json:"numberCards,omitempty"`
+	IsEmbedded  *bool             `json:"isEmbedded,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
+	NumberCards []ApiNumbersCard  `json:"numberCards,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
 	ShouldExcludeAlertSuppressionWindows *bool `json:"shouldExcludeAlertSuppressionWindows,omitempty"`
 	// Title of the widget
@@ -588,22 +588,22 @@ type ApiNumbersCardWidget struct {
 // ApiPieChartWidget Displays data as segments of a pie, with each slice
 // representing a portion of the total value.
 type ApiPieChartWidget struct {
-	Links      SelfLinks                `json:"_links,omitempty"`
+	Links      *SelfLinks               `json:"_links,omitempty"`
 	ApiLink    *string                  `json:"apiLink,omitempty"`
 	DataSource PieChartDatasource       `json:"dataSource,omitempty"`
 	Direction  DashboardMetricDirection `json:"direction,omitempty"`
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string              `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters        `json:"filters,omitempty"`
-	FixedTimespan ApiDuration          `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration         `json:"fixedTimespan,omitempty"`
 	GroupBy       ApiAggregateProperty `json:"groupBy,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
-	IsEmbedded  *bool            `json:"isEmbedded,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
+	IsEmbedded  *bool             `json:"isEmbedded,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
 	ShouldExcludeAlertSuppressionWindows *bool          `json:"shouldExcludeAlertSuppressionWindows,omitempty"`
 	ShowSubmetrics                       ShowSubmetrics `json:"showSubmetrics,omitempty"`
@@ -637,24 +637,24 @@ type ApiReportDataComponentLabelMapEntry struct {
 // other metrics, revealing the progression of values across a timeline. Use
 // this chart to replace stacked bar charts for temporal data analysis.
 type ApiStackedAreaChartWidget struct {
-	Links      SelfLinks                  `json:"_links,omitempty"`
+	Links      *SelfLinks                 `json:"_links,omitempty"`
 	ApiLink    *string                    `json:"apiLink,omitempty"`
 	DataSource StackedAreaChartDatasource `json:"dataSource,omitempty"`
 	Direction  DashboardMetricDirection   `json:"direction,omitempty"`
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string              `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters        `json:"filters,omitempty"`
-	FixedTimespan ApiDuration          `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration         `json:"fixedTimespan,omitempty"`
 	GroupBy       ApiAggregateProperty `json:"groupBy,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
 	IsEmbedded *bool `json:"isEmbedded,omitempty"`
 	// Maximum scale configured in the widget.
-	MaxScale    *float64         `json:"maxScale,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
+	MaxScale    *float64          `json:"maxScale,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
 	// Minimum scale configured in the widget.
 	MinScale *float64 `json:"minScale,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
@@ -669,7 +669,7 @@ type ApiStackedAreaChartWidget struct {
 
 // ApiStackedBarchartWidget is generated from the OpenAPI specification.
 type ApiStackedBarchartWidget struct {
-	Links       SelfLinks                 `json:"_links,omitempty"`
+	Links       *SelfLinks                `json:"_links,omitempty"`
 	ApiLink     *string                   `json:"apiLink,omitempty"`
 	AxisGroupBy ApiAggregateProperty      `json:"axisGroupBy,omitempty"`
 	DataSource  StackedBarChartDatasource `json:"dataSource,omitempty"`
@@ -677,17 +677,17 @@ type ApiStackedBarchartWidget struct {
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string       `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters `json:"filters,omitempty"`
-	FixedTimespan ApiDuration   `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration  `json:"fixedTimespan,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
 	IsEmbedded *bool `json:"isEmbedded,omitempty"`
 	// Set to `true` to display bars horizontally in the widget.
-	IsHorizontalBarChart *bool            `json:"isHorizontalBarChart,omitempty"`
-	Limit                WidgetLimit      `json:"limit,omitempty"`
-	Measure              ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric               DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup          MetricGroup      `json:"metricGroup,omitempty"`
+	IsHorizontalBarChart *bool             `json:"isHorizontalBarChart,omitempty"`
+	Limit                WidgetLimit       `json:"limit,omitempty"`
+	Measure              *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric               DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup          MetricGroup       `json:"metricGroup,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
 	ShouldExcludeAlertSuppressionWindows *bool               `json:"shouldExcludeAlertSuppressionWindows,omitempty"`
 	ShowLabels                           *bool               `json:"showLabels,omitempty"`
@@ -702,7 +702,7 @@ type ApiStackedBarchartWidget struct {
 // ApiTableWidget Organizes data in rows and columns, with options to list by
 // test, geographic location, data source, or aggregated categories.
 type ApiTableWidget struct {
-	Links                  SelfLinks                `json:"_links,omitempty"`
+	Links                  *SelfLinks               `json:"_links,omitempty"`
 	ApiLink                *string                  `json:"apiLink,omitempty"`
 	ColumnGroupBy          ApiAggregateProperty     `json:"columnGroupBy,omitempty"`
 	CompareToPreviousValue *bool                    `json:"compareToPreviousValue,omitempty"`
@@ -711,13 +711,13 @@ type ApiTableWidget struct {
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string       `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters `json:"filters,omitempty"`
-	FixedTimespan ApiDuration   `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration  `json:"fixedTimespan,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
 	IsEmbedded  *bool                `json:"isEmbedded,omitempty"`
 	Limit       WidgetLimit          `json:"limit,omitempty"`
-	Measure     ApiWidgetMeasure     `json:"measure,omitempty"`
+	Measure     *ApiWidgetMeasure    `json:"measure,omitempty"`
 	Metric      DashboardMetric      `json:"metric,omitempty"`
 	MetricGroup MetricGroup          `json:"metricGroup,omitempty"`
 	RowGroupBy  ApiAggregateProperty `json:"rowGroupBy,omitempty"`
@@ -763,23 +763,23 @@ type ApiTestTableGraphletsData struct {
 // filter. It can be set to show only certain tests, like those with specific
 // labels or failing tests.
 type ApiTestTableWidget struct {
-	Links      SelfLinks                `json:"_links,omitempty"`
+	Links      *SelfLinks               `json:"_links,omitempty"`
 	ApiLink    *string                  `json:"apiLink,omitempty"`
 	DataSource TestTableDatasource      `json:"dataSource,omitempty"`
 	Direction  DashboardMetricDirection `json:"direction,omitempty"`
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
-	EmbedURL      *string                              `json:"embedUrl,omitempty"`
-	Exclude       ApiWidgetFilterApiTestTableFilterKey `json:"exclude,omitempty"`
-	Filter        ApiWidgetFilterApiTestTableFilterKey `json:"filter,omitempty"`
-	Filters       WidgetFilters                        `json:"filters,omitempty"`
-	FixedTimespan ApiDuration                          `json:"fixedTimespan,omitempty"`
+	EmbedURL      *string                               `json:"embedUrl,omitempty"`
+	Exclude       *ApiWidgetFilterApiTestTableFilterKey `json:"exclude,omitempty"`
+	Filter        *ApiWidgetFilterApiTestTableFilterKey `json:"filter,omitempty"`
+	Filters       WidgetFilters                         `json:"filters,omitempty"`
+	FixedTimespan *ApiDuration                          `json:"fixedTimespan,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
 	// Set to `true` if widget is marked as embedded; otherwise, set to `false`.
-	IsEmbedded  *bool            `json:"isEmbedded,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
+	IsEmbedded  *bool             `json:"isEmbedded,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
 	ShouldExcludeAlertSuppressionWindows *bool `json:"shouldExcludeAlertSuppressionWindows,omitempty"`
 	// Title of the widget
@@ -791,14 +791,14 @@ type ApiTestTableWidget struct {
 // ApiTimeseriesWidget The Timeseries widget graphs data over time, with the
 // chosen metric displayed on the vertical axis. vertical axis
 type ApiTimeseriesWidget struct {
-	Links      SelfLinks                `json:"_links,omitempty"`
+	Links      *SelfLinks               `json:"_links,omitempty"`
 	ApiLink    *string                  `json:"apiLink,omitempty"`
 	DataSource TimeseriesDatasource     `json:"dataSource,omitempty"`
 	Direction  DashboardMetricDirection `json:"direction,omitempty"`
 	// When `isEmbedded` is set to `true`, an `embedUrl` is provided.
 	EmbedURL      *string              `json:"embedUrl,omitempty"`
 	Filters       WidgetFilters        `json:"filters,omitempty"`
-	FixedTimespan ApiDuration          `json:"fixedTimespan,omitempty"`
+	FixedTimespan *ApiDuration         `json:"fixedTimespan,omitempty"`
 	GroupBy       ApiAggregateProperty `json:"groupBy,omitempty"`
 	// Identifier of the widget.
 	ID *string `json:"id,omitempty"`
@@ -807,10 +807,10 @@ type ApiTimeseriesWidget struct {
 	// Displays a separate chart for each line if set to `true`.
 	IsTimeseriesOneChartPerLine *bool `json:"isTimeseriesOneChartPerLine,omitempty"`
 	// Maximum scale configured in the widget.
-	MaxScale    *float64         `json:"maxScale,omitempty"`
-	Measure     ApiWidgetMeasure `json:"measure,omitempty"`
-	Metric      DashboardMetric  `json:"metric,omitempty"`
-	MetricGroup MetricGroup      `json:"metricGroup,omitempty"`
+	MaxScale    *float64          `json:"maxScale,omitempty"`
+	Measure     *ApiWidgetMeasure `json:"measure,omitempty"`
+	Metric      DashboardMetric   `json:"metric,omitempty"`
+	MetricGroup MetricGroup       `json:"metricGroup,omitempty"`
 	// Minimum scale configured in the widget.
 	MinScale *float64 `json:"minScale,omitempty"`
 	// Excludes alert suppression window data if set to `true`.
@@ -835,9 +835,9 @@ type ApiWidgetDataPoint struct {
 
 // ApiWidgetDataResponse is generated from the OpenAPI specification.
 type ApiWidgetDataResponse struct {
-	Links       PaginationLinks                  `json:"_links,omitempty"`
+	Links       *PaginationLinks                 `json:"_links,omitempty"`
 	BinSize     BinSize                          `json:"binSize,omitempty"`
-	Data        ApiWidgetsDataV2                 `json:"data,omitempty"`
+	Data        *ApiWidgetsDataV2                `json:"data,omitempty"`
 	EndDate     EndDate                          `json:"endDate,omitempty"`
 	GroupLabels []ApiReportDataComponentLabelMap `json:"groupLabels,omitempty"`
 	StartDate   StartDate                        `json:"startDate,omitempty"`
@@ -867,10 +867,10 @@ type ApiWidgetsDataV2 struct {
 	Columns                 []ApiMultiMetricColumnData `json:"columns,omitempty"`
 	Points                  []ApiWidgetDataPoint       `json:"points,omitempty"`
 	// Epoch time (seconds) indicating the start time of the round.
-	StartRound *int64                `json:"startRound,omitempty"`
-	Status     WidgetStatus          `json:"status,omitempty"`
-	Summary    ApiAgentStatusSummary `json:"summary,omitempty"`
-	Tests      []ApiTestTableData    `json:"tests,omitempty"`
+	StartRound *int64                 `json:"startRound,omitempty"`
+	Status     WidgetStatus           `json:"status,omitempty"`
+	Summary    *ApiAgentStatusSummary `json:"summary,omitempty"`
+	Tests      []ApiTestTableData     `json:"tests,omitempty"`
 	// Total number of active alerts within configured timespan.
 	TotalAlerts *int64 `json:"totalAlerts,omitempty"`
 }
@@ -892,14 +892,14 @@ type ColorGridWidgetType string
 
 // Dashboard Dashboard upon which this dashboard snapshot is based upon.
 type Dashboard struct {
-	Links DashboardLinks `json:"_links,omitempty"`
+	Links *DashboardLinks `json:"_links,omitempty"`
 	// Identifier for the account group associated with a dashboard.
 	AID *string `json:"aid,omitempty"`
 	// Identifier for the user that created a dashboard.
 	CreatedBy *string `json:"createdBy,omitempty"`
 	// Identifier of a dashboard.
-	DashboardID     *string         `json:"dashboardId,omitempty"`
-	DefaultTimespan DefaultTimespan `json:"defaultTimespan,omitempty"`
+	DashboardID     *string          `json:"dashboardId,omitempty"`
+	DefaultTimespan *DefaultTimespan `json:"defaultTimespan,omitempty"`
 	// A text description of the dashboard's purpose and functionality.
 	Description *string `json:"description,omitempty"`
 	// Default global dashboard filter ID (obtained from `/dashboards/filters`
@@ -917,8 +917,8 @@ type Dashboard struct {
 	// True if this dashboard was previously a report.
 	IsMigratedReport *bool `json:"isMigratedReport,omitempty"`
 	// A dashboard can be viewed by other users in the account.
-	IsPrivate *bool           `json:"isPrivate,omitempty"`
-	Layout    DashboardLayout `json:"layout,omitempty"`
+	IsPrivate *bool            `json:"isPrivate,omitempty"`
+	Layout    *DashboardLayout `json:"layout,omitempty"`
 	// Identifier for the user that last modified a dashboard.
 	ModifiedBy *string `json:"modifiedBy,omitempty"`
 	// UTC date/time when a dashboard was last modified (ISO date-time format).
@@ -930,7 +930,7 @@ type Dashboard struct {
 
 // DashboardLayout Dashboard layout configuration for arranging widgets.
 type DashboardLayout struct {
-	Details DashboardLayoutDetails `json:"details,omitempty"`
+	Details *DashboardLayoutDetails `json:"details,omitempty"`
 	// Unique identifier for the layout.
 	LayoutID *string             `json:"layoutId,omitempty"`
 	Type     DashboardLayoutType `json:"type"`
@@ -944,8 +944,8 @@ type DashboardLayoutDetails struct {
 
 // DashboardLinks A links object containing the self and the snapshots links.
 type DashboardLinks struct {
-	Self      Link `json:"self,omitempty"`
-	Snapshots Link `json:"snapshots,omitempty"`
+	Self      *Link `json:"self,omitempty"`
+	Snapshots *Link `json:"snapshots,omitempty"`
 }
 
 // DefaultTimespan is generated from the OpenAPI specification.
@@ -1011,9 +1011,9 @@ type NumberWidgetType string
 
 // PaginationLinks A links object containing pagination related link(s).
 type PaginationLinks struct {
-	Next     Link `json:"next,omitempty"`
-	Previous Link `json:"previous,omitempty"`
-	Self     Link `json:"self,omitempty"`
+	Next     *Link `json:"next,omitempty"`
+	Previous *Link `json:"previous,omitempty"`
+	Self     *Link `json:"self,omitempty"`
 }
 
 // PieChartWidgetType Pie Chart widget type
@@ -1021,7 +1021,7 @@ type PieChartWidgetType string
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // ShowSubmetrics Controls how metrics with submetric components are displayed.

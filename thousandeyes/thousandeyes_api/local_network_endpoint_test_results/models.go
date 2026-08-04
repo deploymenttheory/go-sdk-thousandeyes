@@ -82,8 +82,8 @@ type EndpointAgentId string
 
 // EndpointNetworkTopologyResultRequest is generated from the OpenAPI specification.
 type EndpointNetworkTopologyResultRequest struct {
-	SearchFilters   EndpointNetworkTopologyResultRequestFilter `json:"searchFilters,omitempty"`
-	ThresholdFilter EndpointNetworkTopologyThresholdFilter     `json:"thresholdFilter,omitempty"`
+	SearchFilters   *EndpointNetworkTopologyResultRequestFilter `json:"searchFilters,omitempty"`
+	ThresholdFilter *EndpointNetworkTopologyThresholdFilter     `json:"thresholdFilter,omitempty"`
 }
 
 // EndpointNetworkTopologyResultRequestFilter is generated from the OpenAPI specification.
@@ -199,13 +199,13 @@ type LocalNetworkResult struct {
 
 // LocalNetworkResults is generated from the OpenAPI specification.
 type LocalNetworkResults struct {
-	Links         SelfLinks            `json:"_links,omitempty"`
+	Links         *SelfLinks           `json:"_links,omitempty"`
 	LocalNetworks []LocalNetworkResult `json:"localNetworks,omitempty"`
 }
 
 // LocalNetworkTopologyDetailResults is generated from the OpenAPI specification.
 type LocalNetworkTopologyDetailResults struct {
-	Links   SelfLinks                    `json:"_links,omitempty"`
+	Links   *SelfLinks                   `json:"_links,omitempty"`
 	Results []LocalNetworkTopologyResult `json:"results,omitempty"`
 }
 
@@ -218,69 +218,69 @@ type LocalNetworkTopologyDnsServerTest struct {
 
 // LocalNetworkTopologyResult is generated from the OpenAPI specification.
 type LocalNetworkTopologyResult struct {
-	AgentID         EndpointAgentId                 `json:"agentId,omitempty"`
-	AgentScore      EndpointProbeAgentScore         `json:"agentScore,omitempty"`
-	BatteryMetrics  BatteryMetrics                  `json:"batteryMetrics,omitempty"`
-	CellularProfile CellularProfile                 `json:"cellularProfile,omitempty"`
-	ConnectionScore EndpointProbeConnectionScore    `json:"connectionScore,omitempty"`
-	Coordinates     RealUserEndpointTestCoordinates `json:"coordinates,omitempty"`
+	AgentID         EndpointAgentId                  `json:"agentId,omitempty"`
+	AgentScore      *EndpointProbeAgentScore         `json:"agentScore,omitempty"`
+	BatteryMetrics  *BatteryMetrics                  `json:"batteryMetrics,omitempty"`
+	CellularProfile *CellularProfile                 `json:"cellularProfile,omitempty"`
+	ConnectionScore *EndpointProbeConnectionScore    `json:"connectionScore,omitempty"`
+	Coordinates     *RealUserEndpointTestCoordinates `json:"coordinates,omitempty"`
 	// UTC date when endpoint network topology took place (ISO date-time format).
-	Date            *string                           `json:"date,omitempty"`
-	DnsServerTest   LocalNetworkTopologyDnsServerTest `json:"dnsServerTest,omitempty"`
-	GatewayScore    EndpointProbeGatewayScore         `json:"gatewayScore,omitempty"`
-	IcmpPing        NetworkPing                       `json:"icmpPing,omitempty"`
-	IcmpTraceroute  Traceroute                        `json:"icmpTraceroute,omitempty"`
-	IcmpTraceroutes []Traceroute                      `json:"icmpTraceroutes,omitempty"`
-	IsIcmpBlocked   IcmpBlocked                       `json:"isIcmpBlocked,omitempty"`
-	NetworkProfile  NetworkProfile                    `json:"networkProfile,omitempty"`
+	Date            *string                            `json:"date,omitempty"`
+	DnsServerTest   *LocalNetworkTopologyDnsServerTest `json:"dnsServerTest,omitempty"`
+	GatewayScore    *EndpointProbeGatewayScore         `json:"gatewayScore,omitempty"`
+	IcmpPing        *NetworkPing                       `json:"icmpPing,omitempty"`
+	IcmpTraceroute  *Traceroute                        `json:"icmpTraceroute,omitempty"`
+	IcmpTraceroutes []Traceroute                       `json:"icmpTraceroutes,omitempty"`
+	IsIcmpBlocked   IcmpBlocked                        `json:"isIcmpBlocked,omitempty"`
+	NetworkProfile  *NetworkProfile                    `json:"networkProfile,omitempty"`
 	// Network topology ID.
-	NetworkTopologyID   *string                 `json:"networkTopologyId,omitempty"`
-	Platform            Platform                `json:"platform,omitempty"`
-	ProxyScore          EndpointProbeProxyScore `json:"proxyScore,omitempty"`
-	RoundID             RoundId                 `json:"roundId,omitempty"`
-	SystemMetricDetails SystemMetricDetails     `json:"systemMetricDetails,omitempty"`
-	SystemMetrics       SystemMetrics           `json:"systemMetrics,omitempty"`
+	NetworkTopologyID   *string                  `json:"networkTopologyId,omitempty"`
+	Platform            Platform                 `json:"platform,omitempty"`
+	ProxyScore          *EndpointProbeProxyScore `json:"proxyScore,omitempty"`
+	RoundID             RoundId                  `json:"roundId,omitempty"`
+	SystemMetricDetails *SystemMetricDetails     `json:"systemMetricDetails,omitempty"`
+	SystemMetrics       *SystemMetrics           `json:"systemMetrics,omitempty"`
 	// IP of the target the network topology was performed against.
 	Target *string `json:"target,omitempty"`
 	// Port of the target the network topology was performed against.
-	TargetPort *int                  `json:"targetPort,omitempty"`
-	TcpConnect TcpConnect            `json:"tcpConnect,omitempty"`
-	Type       NetworkTopologyType   `json:"type,omitempty"`
-	VpnScore   EndpointProbeVpnScore `json:"vpnScore,omitempty"`
+	TargetPort *int                   `json:"targetPort,omitempty"`
+	TcpConnect *TcpConnect            `json:"tcpConnect,omitempty"`
+	Type       NetworkTopologyType    `json:"type,omitempty"`
+	VpnScore   *EndpointProbeVpnScore `json:"vpnScore,omitempty"`
 }
 
 // LocalNetworkTopologyResultBase is generated from the OpenAPI specification.
 type LocalNetworkTopologyResultBase struct {
-	AgentID         EndpointAgentId              `json:"agentId,omitempty"`
-	AgentScore      EndpointProbeAgentScore      `json:"agentScore,omitempty"`
-	BatteryMetrics  BatteryMetrics               `json:"batteryMetrics,omitempty"`
-	CellularProfile CellularProfile              `json:"cellularProfile,omitempty"`
-	ConnectionScore EndpointProbeConnectionScore `json:"connectionScore,omitempty"`
+	AgentID         EndpointAgentId               `json:"agentId,omitempty"`
+	AgentScore      *EndpointProbeAgentScore      `json:"agentScore,omitempty"`
+	BatteryMetrics  *BatteryMetrics               `json:"batteryMetrics,omitempty"`
+	CellularProfile *CellularProfile              `json:"cellularProfile,omitempty"`
+	ConnectionScore *EndpointProbeConnectionScore `json:"connectionScore,omitempty"`
 	// UTC date when endpoint network topology took place (ISO date-time format).
-	Date          *string                           `json:"date,omitempty"`
-	DnsServerTest LocalNetworkTopologyDnsServerTest `json:"dnsServerTest,omitempty"`
-	GatewayScore  EndpointProbeGatewayScore         `json:"gatewayScore,omitempty"`
-	IcmpPing      NetworkPing                       `json:"icmpPing,omitempty"`
-	IsIcmpBlocked IcmpBlocked                       `json:"isIcmpBlocked,omitempty"`
+	Date          *string                            `json:"date,omitempty"`
+	DnsServerTest *LocalNetworkTopologyDnsServerTest `json:"dnsServerTest,omitempty"`
+	GatewayScore  *EndpointProbeGatewayScore         `json:"gatewayScore,omitempty"`
+	IcmpPing      *NetworkPing                       `json:"icmpPing,omitempty"`
+	IsIcmpBlocked IcmpBlocked                        `json:"isIcmpBlocked,omitempty"`
 	// Network topology ID.
-	NetworkTopologyID   *string                 `json:"networkTopologyId,omitempty"`
-	Platform            Platform                `json:"platform,omitempty"`
-	ProxyScore          EndpointProbeProxyScore `json:"proxyScore,omitempty"`
-	RoundID             RoundId                 `json:"roundId,omitempty"`
-	SystemMetricDetails SystemMetricDetails     `json:"systemMetricDetails,omitempty"`
-	SystemMetrics       SystemMetrics           `json:"systemMetrics,omitempty"`
+	NetworkTopologyID   *string                  `json:"networkTopologyId,omitempty"`
+	Platform            Platform                 `json:"platform,omitempty"`
+	ProxyScore          *EndpointProbeProxyScore `json:"proxyScore,omitempty"`
+	RoundID             RoundId                  `json:"roundId,omitempty"`
+	SystemMetricDetails *SystemMetricDetails     `json:"systemMetricDetails,omitempty"`
+	SystemMetrics       *SystemMetrics           `json:"systemMetrics,omitempty"`
 	// IP of the target the network topology was performed against.
 	Target *string `json:"target,omitempty"`
 	// Port of the target the network topology was performed against.
-	TargetPort *int                  `json:"targetPort,omitempty"`
-	TcpConnect TcpConnect            `json:"tcpConnect,omitempty"`
-	Type       NetworkTopologyType   `json:"type,omitempty"`
-	VpnScore   EndpointProbeVpnScore `json:"vpnScore,omitempty"`
+	TargetPort *int                   `json:"targetPort,omitempty"`
+	TcpConnect *TcpConnect            `json:"tcpConnect,omitempty"`
+	Type       NetworkTopologyType    `json:"type,omitempty"`
+	VpnScore   *EndpointProbeVpnScore `json:"vpnScore,omitempty"`
 }
 
 // LocalNetworkTopologyResults is generated from the OpenAPI specification.
 type LocalNetworkTopologyResults struct {
-	Links     PaginationNextLink               `json:"_links,omitempty"`
+	Links     *PaginationNextLink              `json:"_links,omitempty"`
 	EndDate   EndDate                          `json:"endDate,omitempty"`
 	Results   []LocalNetworkTopologyResultBase `json:"results,omitempty"`
 	StartDate StartDate                        `json:"startDate,omitempty"`
@@ -340,8 +340,8 @@ type NetworkProfile struct {
 	// Network DNS servers.
 	DnsServers []string `json:"dnsServers,omitempty"`
 	// Only present when there is an error
-	Error           *string                     `json:"error,omitempty"`
-	EthernetProfile EndpointTestEthernetProfile `json:"ethernetProfile,omitempty"`
+	Error           *string                      `json:"error,omitempty"`
+	EthernetProfile *EndpointTestEthernetProfile `json:"ethernetProfile,omitempty"`
 	// Network gateway address.
 	Gateway      *string               `json:"gateway,omitempty"`
 	HardwareType InterfaceHardwareType `json:"hardwareType,omitempty"`
@@ -350,16 +350,16 @@ type NetworkProfile struct {
 	// Network IP address.
 	IpAddress *string `json:"ipAddress,omitempty"`
 	// Network local prefix.
-	LocalPrefix       *string             `json:"localPrefix,omitempty"`
-	PreviousInterface NetworkInterface    `json:"previousInterface,omitempty"`
-	ProxyProfile      NetworkProxyProfile `json:"proxyProfile,omitempty"`
+	LocalPrefix       *string              `json:"localPrefix,omitempty"`
+	PreviousInterface *NetworkInterface    `json:"previousInterface,omitempty"`
+	ProxyProfile      *NetworkProxyProfile `json:"proxyProfile,omitempty"`
 	// Network public IP address.
 	PublicIpAddress *string `json:"publicIpAddress,omitempty"`
 	// Network public IP range.
 	PublicIpRange *string `json:"publicIpRange,omitempty"`
 	// Network subnet mask - only for IPv4.
-	SubnetMask      *string                `json:"subnetMask,omitempty"`
-	WirelessProfile NetworkWirelessProfile `json:"wirelessProfile,omitempty"`
+	SubnetMask      *string                 `json:"subnetMask,omitempty"`
+	WirelessProfile *NetworkWirelessProfile `json:"wirelessProfile,omitempty"`
 }
 
 // NetworkProxy is generated from the OpenAPI specification.
@@ -404,7 +404,7 @@ type NetworkWirelessProfile struct {
 // PaginationNextLink A links object containing a related link for forward
 // pagination.
 type PaginationNextLink struct {
-	Next Link `json:"next,omitempty"`
+	Next *Link `json:"next,omitempty"`
 }
 
 // PhysicalMemoryUsedBytes is generated from the OpenAPI specification.
@@ -453,7 +453,7 @@ type RoundId int
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // StartDate (Optional) When passing `window` or `startDate` parameter, the
@@ -472,13 +472,13 @@ type SystemMetricDetails struct {
 
 // SystemMetrics is generated from the OpenAPI specification.
 type SystemMetrics struct {
-	CpuUtilization CpuUtilization `json:"cpuUtilization,omitempty"`
+	CpuUtilization *CpuUtilization `json:"cpuUtilization,omitempty"`
 	// The end time of metrics collection, expressed in milliseconds since the
 	// Epoch.
 	EndTimeMs *int64 `json:"endTimeMs,omitempty"`
 	// Total physical memory of the system.
-	PhysicalMemoryTotalBytes *int64                  `json:"physicalMemoryTotalBytes,omitempty"`
-	PhysicalMemoryUsedBytes  PhysicalMemoryUsedBytes `json:"physicalMemoryUsedBytes,omitempty"`
+	PhysicalMemoryTotalBytes *int64                   `json:"physicalMemoryTotalBytes,omitempty"`
+	PhysicalMemoryUsedBytes  *PhysicalMemoryUsedBytes `json:"physicalMemoryUsedBytes,omitempty"`
 	// The start time of metrics collection, expressed in milliseconds since the
 	// Epoch.
 	StartTimeMs *int64 `json:"startTimeMs,omitempty"`

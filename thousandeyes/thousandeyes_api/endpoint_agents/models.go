@@ -61,9 +61,9 @@ type AgentSearchFilters struct {
 
 // AgentSearchRequest Parameters for filtering a list of agents.
 type AgentSearchRequest struct {
-	SearchFilters   AgentSearchFilters    `json:"searchFilters,omitempty"`
-	SearchSort      []AgentSearchSort     `json:"searchSort,omitempty"`
-	ThresholdFilter AgentThresholdFilters `json:"thresholdFilter,omitempty"`
+	SearchFilters   *AgentSearchFilters    `json:"searchFilters,omitempty"`
+	SearchSort      []AgentSearchSort      `json:"searchSort,omitempty"`
+	ThresholdFilter *AgentThresholdFilters `json:"thresholdFilter,omitempty"`
 }
 
 // AgentSearchSort is generated from the OpenAPI specification.
@@ -129,7 +129,7 @@ type ComputerName string
 
 // ConnectionString is generated from the OpenAPI specification.
 type ConnectionString struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// The connection string is used for some integrations and other client types.
 	ConnectionString *string `json:"connectionString,omitempty"`
 }
@@ -137,12 +137,12 @@ type ConnectionString struct {
 // EndpointAgent The `EndpointAgent` object, which may include multiple
 // clients.
 type EndpointAgent struct {
-	Links           SelfLinks          `json:"_links,omitempty"`
-	AgentType       *string            `json:"agentType,omitempty"`
-	AID             AccountId          `json:"aid,omitempty"`
-	AsnDetails      EndpointAsnDetails `json:"asnDetails,omitempty"`
-	BatteryMetrics  BatteryMetrics     `json:"batteryMetrics,omitempty"`
-	CellularProfile CellularProfile    `json:"cellularProfile,omitempty"`
+	Links           *SelfLinks          `json:"_links,omitempty"`
+	AgentType       *string             `json:"agentType,omitempty"`
+	AID             AccountId           `json:"aid,omitempty"`
+	AsnDetails      *EndpointAsnDetails `json:"asnDetails,omitempty"`
+	BatteryMetrics  *BatteryMetrics     `json:"batteryMetrics,omitempty"`
+	CellularProfile *CellularProfile    `json:"cellularProfile,omitempty"`
 	// List of clients (user accounts) that the agent works with.
 	Clients          []EndpointClient `json:"clients,omitempty"`
 	ComputerName     *string          `json:"computerName,omitempty"`
@@ -154,11 +154,11 @@ type EndpointAgent struct {
 	ID                      EndpointAgentId `json:"id,omitempty"`
 	KernelVersion           *string         `json:"kernelVersion,omitempty"`
 	// The last time the agent checked-in.
-	LastSeen     *string               `json:"lastSeen,omitempty"`
-	LicenseType  AgentLicenseType      `json:"licenseType,omitempty"`
-	Location     EndpointAgentLocation `json:"location,omitempty"`
-	Manufacturer *string               `json:"manufacturer,omitempty"`
-	Model        *string               `json:"model,omitempty"`
+	LastSeen     *string                `json:"lastSeen,omitempty"`
+	LicenseType  AgentLicenseType       `json:"licenseType,omitempty"`
+	Location     *EndpointAgentLocation `json:"location,omitempty"`
+	Manufacturer *string                `json:"manufacturer,omitempty"`
+	Model        *string                `json:"model,omitempty"`
 	// The name of the agent.
 	Name *string `json:"name,omitempty"`
 	// List of network interfaces on the agent.
@@ -240,7 +240,7 @@ type EndpointBrowserExtension struct {
 // EndpointClient Information about the user who has the agent installed.
 type EndpointClient struct {
 	BrowserExtensions []EndpointBrowserExtension `json:"browserExtensions,omitempty"`
-	UserProfile       EndpointUserProfile        `json:"userProfile,omitempty"`
+	UserProfile       *EndpointUserProfile       `json:"userProfile,omitempty"`
 }
 
 // EndpointUserProfile is generated from the OpenAPI specification.
@@ -278,19 +278,19 @@ type ExternalMetadataItem struct {
 
 // FilterEndpointAgentsResponse is generated from the OpenAPI specification.
 type FilterEndpointAgentsResponse struct {
-	Links  PaginationNextLink `json:"_links,omitempty"`
-	Agents []EndpointAgent    `json:"agents,omitempty"`
+	Links  *PaginationNextLink `json:"_links,omitempty"`
+	Agents []EndpointAgent     `json:"agents,omitempty"`
 	// The total number of agents.
 	TotalAgents *int `json:"totalAgents,omitempty"`
 }
 
 // InterfaceProfile is generated from the OpenAPI specification.
 type InterfaceProfile struct {
-	AddressProfiles []AddressProfile             `json:"addressProfiles,omitempty"`
-	EthernetProfile EndpointAgentEthernetProfile `json:"ethernetProfile,omitempty"`
-	HardwareType    InterfaceHardwareType        `json:"hardwareType,omitempty"`
-	InterfaceName   *string                      `json:"interfaceName,omitempty"`
-	WirelessProfile WirelessProfile              `json:"wirelessProfile,omitempty"`
+	AddressProfiles []AddressProfile              `json:"addressProfiles,omitempty"`
+	EthernetProfile *EndpointAgentEthernetProfile `json:"ethernetProfile,omitempty"`
+	HardwareType    InterfaceHardwareType         `json:"hardwareType,omitempty"`
+	InterfaceName   *string                       `json:"interfaceName,omitempty"`
+	WirelessProfile *WirelessProfile              `json:"wirelessProfile,omitempty"`
 }
 
 // Link A hyperlink from the containing resource to a URI.
@@ -317,8 +317,8 @@ type Link struct {
 
 // ListEndpointAgentsResponse is generated from the OpenAPI specification.
 type ListEndpointAgentsResponse struct {
-	Links  PaginationNextAndSelfLink `json:"_links,omitempty"`
-	Agents []EndpointAgent           `json:"agents,omitempty"`
+	Links  *PaginationNextAndSelfLink `json:"_links,omitempty"`
+	Agents []EndpointAgent            `json:"agents,omitempty"`
 	// The total number of agents.
 	TotalAgents *int `json:"totalAgents,omitempty"`
 }
@@ -326,19 +326,19 @@ type ListEndpointAgentsResponse struct {
 // PaginationNextAndSelfLink A links object containing a related link for
 // forward pagination.
 type PaginationNextAndSelfLink struct {
-	Next Link `json:"next,omitempty"`
-	Self Link `json:"self,omitempty"`
+	Next *Link `json:"next,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // PaginationNextLink A links object containing a related link for forward
 // pagination.
 type PaginationNextLink struct {
-	Next Link `json:"next,omitempty"`
+	Next *Link `json:"next,omitempty"`
 }
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // WirelessProfile is generated from the OpenAPI specification.

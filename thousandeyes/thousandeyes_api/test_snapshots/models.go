@@ -32,8 +32,8 @@ type Link struct {
 
 // SnapshotLinks is generated from the OpenAPI specification.
 type SnapshotLinks struct {
-	AppLink Link `json:"appLink,omitempty"`
-	Self    Link `json:"self,omitempty"`
+	AppLink *Link `json:"appLink,omitempty"`
+	Self    *Link `json:"self,omitempty"`
 }
 
 // SnapshotRequest is generated from the OpenAPI specification.
@@ -50,7 +50,7 @@ type SnapshotRequest struct {
 
 // SnapshotResponse is generated from the OpenAPI specification.
 type SnapshotResponse struct {
-	Links SnapshotLinks `json:"_links,omitempty"`
+	Links *SnapshotLinks `json:"_links,omitempty"`
 	// Snapshot title.
 	DisplayName *string `json:"displayName,omitempty"`
 	// The end time of the test snapshot, represented in epoch time format (in
@@ -70,8 +70,8 @@ type SnapshotResponse struct {
 	SourceTestID *string `json:"sourceTestId,omitempty"`
 	// The start time of the test snapshot, represented in epoch time format (in
 	// seconds).
-	StartRoundID *int         `json:"startRoundId,omitempty"`
-	Test         SnapshotTest `json:"test,omitempty"`
+	StartRoundID *int          `json:"startRoundId,omitempty"`
+	Test         *SnapshotTest `json:"test,omitempty"`
 	// Snapshot test ID.
 	TestID *string `json:"testId,omitempty"`
 	// User ID.
@@ -80,7 +80,7 @@ type SnapshotResponse struct {
 
 // SnapshotTest is generated from the OpenAPI specification.
 type SnapshotTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// Indicates if alerts are enabled.
 	AlertsEnabled *bool           `json:"alertsEnabled,omitempty"`
 	CreatedBy     TestCreatedBy   `json:"createdBy,omitempty"`
@@ -113,8 +113,8 @@ type TestCreatedDate string
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestResults Reference to the test results.

@@ -403,7 +403,14 @@ func (r *TypeResolver) inlineStruct(schema map[string]any) string {
 			tag += ",omitempty"
 			// Optional scalars take a pointer so an unset value is
 			// distinguishable from a zero one, which matters on PATCH.
-			if isScalar(goType) {
+			//
+			// Optional structs take one for a stronger reason: encoding/json
+			// cannot omit a value-typed struct at all, so the field travelled as
+			// an empty object in every request that did not set it -- and the
+			// dashboards API refuses "layout":{} and "defaultTimespan":{}
+			// outright, which made the whole resource ungeneratable downstream.
+			// A nil pointer is the only spelling of "not sent" a struct has.
+			if isScalar(goType) || r.isStructType(goType) {
 				goType = "*" + goType
 			}
 		}
@@ -524,6 +531,17 @@ func typeOf(schema map[string]any) string {
 		return "object"
 	}
 	return ""
+}
+
+// isStructType reports whether a resolved Go type names a struct -- a registered
+// struct model or an inline struct literal. Enums and other named scalars keep
+// their value form: their zero is a representable value, not an unomittable {}.
+func (r *TypeResolver) isStructType(goType string) bool {
+	if strings.HasPrefix(goType, "struct {") {
+		return true
+	}
+	m, ok := r.models[goType]
+	return ok && strings.HasPrefix(m.Definition, "struct {")
 }
 
 func isScalar(goType string) bool {

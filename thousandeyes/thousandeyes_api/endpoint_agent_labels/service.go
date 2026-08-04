@@ -113,9 +113,12 @@ func (s *EndpointAgentLabels) CreateEndpointLabel(ctx context.Context, request *
 // URL: DELETE /endpoint/labels/{id}
 //
 // Deletes the label from your account.
-func (s *EndpointAgentLabels) DeleteEndpointLabel(ctx context.Context, opts ...client.RequestOption) (*resty.Response, error) {
+func (s *EndpointAgentLabels) DeleteEndpointLabel(ctx context.Context, id string, opts ...client.RequestOption) (*resty.Response, error) {
+	if id == "" {
+		return nil, fmt.Errorf("id is required")
+	}
 
-	endpoint := "/endpoint/labels/{id}"
+	endpoint := fmt.Sprintf("/endpoint/labels/%s", id)
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
@@ -139,9 +142,12 @@ func (s *EndpointAgentLabels) DeleteEndpointLabel(ctx context.Context, opts ...c
 // Optional query params: expand
 //
 // Returns a single label using its ID.
-func (s *EndpointAgentLabels) GetEndpointLabel(ctx context.Context, opts ...client.RequestOption) (*LabelResponse, *resty.Response, error) {
+func (s *EndpointAgentLabels) GetEndpointLabel(ctx context.Context, id string, opts ...client.RequestOption) (*LabelResponse, *resty.Response, error) {
+	if id == "" {
+		return nil, nil, fmt.Errorf("id is required")
+	}
 
-	endpoint := "/endpoint/labels/{id}"
+	endpoint := fmt.Sprintf("/endpoint/labels/%s", id)
 
 	var result LabelResponse
 
@@ -167,12 +173,15 @@ func (s *EndpointAgentLabels) GetEndpointLabel(ctx context.Context, opts ...clie
 // URL: PATCH /endpoint/labels/{id}
 //
 // Updates a label using its ID.
-func (s *EndpointAgentLabels) UpdateEndpointLabel(ctx context.Context, request *Label, opts ...client.RequestOption) (*LabelResponse, *resty.Response, error) {
+func (s *EndpointAgentLabels) UpdateEndpointLabel(ctx context.Context, id string, request *Label, opts ...client.RequestOption) (*LabelResponse, *resty.Response, error) {
+	if id == "" {
+		return nil, nil, fmt.Errorf("id is required")
+	}
 	if request == nil {
 		return nil, nil, fmt.Errorf("request is required")
 	}
 
-	endpoint := "/endpoint/labels/{id}"
+	endpoint := fmt.Sprintf("/endpoint/labels/%s", id)
 
 	var result LabelResponse
 
