@@ -34,7 +34,7 @@ type AlertRule struct {
 
 // BgpTest is generated from the OpenAPI specification.
 type BgpTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// A list of enabled alert rule objects.
 	AlertRules []AlertRule `json:"alertRules,omitempty"`
 	// Indicates if alerts are enabled.
@@ -72,7 +72,7 @@ type BgpTest struct {
 
 // BgpTestRequest is generated from the OpenAPI specification.
 type BgpTestRequest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// List of alert rules IDs to apply to the test (get `ruleId` from
 	// `/alerts/rules` endpoint.
 	AlertRules []string `json:"alertRules,omitempty"`
@@ -118,7 +118,7 @@ type BgpTestResponse BgpTest
 
 // BgpTests is generated from the OpenAPI specification.
 type BgpTests struct {
-	Links SelfLinks           `json:"_links,omitempty"`
+	Links *SelfLinks          `json:"_links,omitempty"`
 	Tests []UnexpandedBgpTest `json:"tests,omitempty"`
 }
 
@@ -167,7 +167,7 @@ type RuleId string
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // SharedWithAccount is generated from the OpenAPI specification.
@@ -207,8 +207,8 @@ type TestLabels []TestLabel
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestResults Reference to the test results.
@@ -260,7 +260,7 @@ type TestUsePublicBgp bool
 
 // UnexpandedBgpTest is generated from the OpenAPI specification.
 type UnexpandedBgpTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// Indicates if alerts are enabled.
 	AlertsEnabled *bool           `json:"alertsEnabled,omitempty"`
 	CreatedBy     TestCreatedBy   `json:"createdBy,omitempty"`
@@ -292,7 +292,7 @@ type UnexpandedBgpTest struct {
 
 // UpdateBgpTestRequest is generated from the OpenAPI specification.
 type UpdateBgpTestRequest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// List of alert rules IDs to apply to the test (get `ruleId` from
 	// `/alerts/rules` endpoint.
 	AlertRules []string `json:"alertRules,omitempty"`

@@ -7,7 +7,7 @@ package credentials
 
 // Credential is generated from the OpenAPI specification.
 type Credential struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// Unique ID of the credential.
 	ID *string `json:"id,omitempty"`
 	// The name of the credential.
@@ -26,7 +26,7 @@ type CredentialRequest struct {
 
 // CredentialWithoutValue is generated from the OpenAPI specification.
 type CredentialWithoutValue struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// Unique ID of the credential.
 	ID *string `json:"id,omitempty"`
 	// The name of the credential.
@@ -35,7 +35,7 @@ type CredentialWithoutValue struct {
 
 // ResourceCredentials is generated from the OpenAPI specification.
 type ResourceCredentials struct {
-	Links       SelfLinks    `json:"_links,omitempty"`
+	Links       *SelfLinks   `json:"_links,omitempty"`
 	Credentials []Credential `json:"credentials,omitempty"`
 }
 
@@ -63,5 +63,5 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

@@ -9,18 +9,18 @@ package endpoint_agent_log_items
 type EndpointAgentLogItem struct {
 	AgentLogItemType EndpointAgentLogItemType `json:"agentLogItemType,omitempty"`
 	// Unique ID of the log item.
-	ID                   *string                      `json:"id,omitempty"`
-	OnlineOfflineLogItem EndpointOnlineOfflineLogItem `json:"onlineOfflineLogItem,omitempty"`
-	StateChangesLogItem  EndpointStateChangesLogItem  `json:"stateChangesLogItem,omitempty"`
+	ID                   *string                       `json:"id,omitempty"`
+	OnlineOfflineLogItem *EndpointOnlineOfflineLogItem `json:"onlineOfflineLogItem,omitempty"`
+	StateChangesLogItem  *EndpointStateChangesLogItem  `json:"stateChangesLogItem,omitempty"`
 	// Time when the log item was recorded, in milliseconds since the Unix epoch.
-	TimestampMs *int64              `json:"timestampMs,omitempty"`
-	VpnLogItem  EndpointVpnLogItem  `json:"vpnLogItem,omitempty"`
-	WifiLogItem EndpointWifiLogItem `json:"wifiLogItem,omitempty"`
+	TimestampMs *int64               `json:"timestampMs,omitempty"`
+	VpnLogItem  *EndpointVpnLogItem  `json:"vpnLogItem,omitempty"`
+	WifiLogItem *EndpointWifiLogItem `json:"wifiLogItem,omitempty"`
 }
 
 // EndpointAgentLogItemsResponse is generated from the OpenAPI specification.
 type EndpointAgentLogItemsResponse struct {
-	Links PaginationNextAndSelfLink `json:"_links,omitempty"`
+	Links *PaginationNextAndSelfLink `json:"_links,omitempty"`
 	// Log items for the endpoint agent.
 	Logs []EndpointAgentLogItem `json:"logs"`
 }
@@ -54,9 +54,9 @@ type EndpointWifiLogItem struct {
 	// Wireless channel.
 	Channel *string `json:"channel,omitempty"`
 	// Previous wireless channel.
-	ChannelFrom *string                           `json:"channelFrom,omitempty"`
-	Failure     EndpointWirelessConnectionFailure `json:"failure,omitempty"`
-	LogItemType EndpointWifiLogItemType           `json:"logItemType,omitempty"`
+	ChannelFrom *string                            `json:"channelFrom,omitempty"`
+	Failure     *EndpointWirelessConnectionFailure `json:"failure,omitempty"`
+	LogItemType EndpointWifiLogItemType            `json:"logItemType,omitempty"`
 	// Wireless physical mode.
 	PhysicalMode *string `json:"physicalMode,omitempty"`
 	// Previous wireless physical mode.
@@ -99,6 +99,6 @@ type Link struct {
 // PaginationNextAndSelfLink A links object containing a related link for
 // forward pagination.
 type PaginationNextAndSelfLink struct {
-	Next Link `json:"next,omitempty"`
-	Self Link `json:"self,omitempty"`
+	Next *Link `json:"next,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

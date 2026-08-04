@@ -114,7 +114,7 @@ type EndpointHttpDataPointScore struct {
 
 // EndpointHttpServerTest is generated from the OpenAPI specification.
 type EndpointHttpServerTest struct {
-	Links                 EndpointTestLinks           `json:"_links,omitempty"`
+	Links                 *EndpointTestLinks          `json:"_links,omitempty"`
 	AgentSelectorConfig   EndpointAgentSelectorConfig `json:"agentSelectorConfig,omitempty"`
 	AID                   AccountGroupId              `json:"aid,omitempty"`
 	AuthType              EndpointTestAuthType        `json:"authType,omitempty"`
@@ -188,8 +188,8 @@ type EndpointTestEthernetProfile struct {
 // EndpointTestLinks A list of links that can be accessed to get more
 // information.
 type EndpointTestLinks struct {
-	Self        EndpointTestSelfLink `json:"self,omitempty"`
-	TestResults ScheduledTestResults `json:"testResults,omitempty"`
+	Self        *EndpointTestSelfLink `json:"self,omitempty"`
+	TestResults ScheduledTestResults  `json:"testResults,omitempty"`
 }
 
 // EndpointTestMaxMachines Maximum number of agents which can execute the test.
@@ -225,23 +225,23 @@ type EndpointTestSelfLink struct {
 
 // HttpEndpointTestResult is generated from the OpenAPI specification.
 type HttpEndpointTestResult struct {
-	AgentID         EndpointAgentId `json:"agentId,omitempty"`
-	AID             AccountGroupId  `json:"aid,omitempty"`
-	BatteryMetrics  BatteryMetrics  `json:"batteryMetrics,omitempty"`
-	CellularProfile CellularProfile `json:"cellularProfile,omitempty"`
+	AgentID         EndpointAgentId  `json:"agentId,omitempty"`
+	AID             AccountGroupId   `json:"aid,omitempty"`
+	BatteryMetrics  *BatteryMetrics  `json:"batteryMetrics,omitempty"`
+	CellularProfile *CellularProfile `json:"cellularProfile,omitempty"`
 	// Time required to establish a TCP connection to the server in milliseconds.
 	ConnectTime *int `json:"connectTime,omitempty"`
 	// Time required to resolve DNS in milliseconds.
 	DnsTime *int `json:"dnsTime,omitempty"`
 	// Error details, if an error were encountered.
-	ErrorDetails   *string                       `json:"errorDetails,omitempty"`
-	ErrorType      HttpErrorType                 `json:"errorType,omitempty"`
-	Headers        HttpEndpointTestResultHeaders `json:"headers,omitempty"`
-	NetworkProfile NetworkProfile                `json:"networkProfile,omitempty"`
+	ErrorDetails   *string                        `json:"errorDetails,omitempty"`
+	ErrorType      HttpErrorType                  `json:"errorType,omitempty"`
+	Headers        *HttpEndpointTestResultHeaders `json:"headers,omitempty"`
+	NetworkProfile *NetworkProfile                `json:"networkProfile,omitempty"`
 	// Number of redirects.
-	NumRedirects          *int          `json:"numRedirects,omitempty"`
-	OriginalTargetProfile TargetProfile `json:"originalTargetProfile,omitempty"`
-	Platform              Platform      `json:"platform,omitempty"`
+	NumRedirects          *int           `json:"numRedirects,omitempty"`
+	OriginalTargetProfile *TargetProfile `json:"originalTargetProfile,omitempty"`
+	Platform              Platform       `json:"platform,omitempty"`
 	// Elapsed time between first and last byte of response in milliseconds.
 	ReceiveTime *int `json:"receiveTime,omitempty"`
 	// Cumulative redirect timing in milliseconds.
@@ -249,21 +249,21 @@ type HttpEndpointTestResult struct {
 	// HTTP response code.
 	ResponseCode *int `json:"responseCode,omitempty"`
 	// Time to first byte in milliseconds.
-	ResponseTime *int                       `json:"responseTime,omitempty"`
-	RoundID      RoundId                    `json:"roundId,omitempty"`
-	Score        EndpointHttpDataPointScore `json:"score,omitempty"`
+	ResponseTime *int                        `json:"responseTime,omitempty"`
+	RoundID      RoundId                     `json:"roundId,omitempty"`
+	Score        *EndpointHttpDataPointScore `json:"score,omitempty"`
 	// IP address of destination server.
 	ServerIP *string `json:"serverIp,omitempty"`
 	// Time to negotiate SSL/TLS in milliseconds.
-	SslTime       *int          `json:"sslTime,omitempty"`
-	SystemMetrics SystemMetrics `json:"systemMetrics,omitempty"`
-	TestID        TestId        `json:"testId,omitempty"`
+	SslTime       *int           `json:"sslTime,omitempty"`
+	SystemMetrics *SystemMetrics `json:"systemMetrics,omitempty"`
+	TestID        TestId         `json:"testId,omitempty"`
 	// Amount of data transmitted, in bytes.
 	Throughput *int `json:"throughput,omitempty"`
 	// Total time is the response time + receive time.
-	TotalTime   *int        `json:"totalTime,omitempty"`
-	UserProfile UserProfile `json:"userProfile,omitempty"`
-	VpnProfile  VpnProfile  `json:"vpnProfile,omitempty"`
+	TotalTime   *int         `json:"totalTime,omitempty"`
+	UserProfile *UserProfile `json:"userProfile,omitempty"`
+	VpnProfile  *VpnProfile  `json:"vpnProfile,omitempty"`
 	// Time elapsed between completion of request and first byte of response in
 	// milliseconds.
 	WaitTime *int `json:"waitTime,omitempty"`
@@ -282,19 +282,19 @@ type HttpEndpointTestResultHeaders struct {
 
 // HttpEndpointTestResults is generated from the OpenAPI specification.
 type HttpEndpointTestResults struct {
-	Links     PaginationNextAndSelfLink `json:"_links,omitempty"`
-	EndDate   EndDate                   `json:"endDate,omitempty"`
-	Results   []HttpEndpointTestResult  `json:"results,omitempty"`
-	StartDate StartDate                 `json:"startDate,omitempty"`
-	Test      EndpointHttpServerTest    `json:"test,omitempty"`
-	TotalHits TotalHits                 `json:"totalHits,omitempty"`
+	Links     *PaginationNextAndSelfLink `json:"_links,omitempty"`
+	EndDate   EndDate                    `json:"endDate,omitempty"`
+	Results   []HttpEndpointTestResult   `json:"results,omitempty"`
+	StartDate StartDate                  `json:"startDate,omitempty"`
+	Test      *EndpointHttpServerTest    `json:"test,omitempty"`
+	TotalHits TotalHits                  `json:"totalHits,omitempty"`
 }
 
 // HttpEndpointTestsDataRoundsSearch is generated from the OpenAPI specification.
 type HttpEndpointTestsDataRoundsSearch struct {
-	SearchFilters   HttpEndpointTestsDataSearchFilter     `json:"searchFilters,omitempty"`
-	SearchSort      []HttpEndpointTestsDataSearchSort     `json:"searchSort,omitempty"`
-	ThresholdFilter HttpEndpointTestsDataThresholdFilters `json:"thresholdFilter,omitempty"`
+	SearchFilters   *HttpEndpointTestsDataSearchFilter     `json:"searchFilters,omitempty"`
+	SearchSort      []HttpEndpointTestsDataSearchSort      `json:"searchSort,omitempty"`
+	ThresholdFilter *HttpEndpointTestsDataThresholdFilters `json:"thresholdFilter,omitempty"`
 }
 
 // HttpEndpointTestsDataSearchFilter is generated from the OpenAPI specification.
@@ -330,11 +330,11 @@ type HttpEndpointTestsDataThresholdFilters struct {
 
 // HttpMultiEndpointTestResults is generated from the OpenAPI specification.
 type HttpMultiEndpointTestResults struct {
-	Links     PaginationNextAndSelfLink `json:"_links,omitempty"`
-	EndDate   EndDate                   `json:"endDate,omitempty"`
-	Results   []HttpEndpointTestResult  `json:"results,omitempty"`
-	StartDate StartDate                 `json:"startDate,omitempty"`
-	TotalHits TotalHits                 `json:"totalHits,omitempty"`
+	Links     *PaginationNextAndSelfLink `json:"_links,omitempty"`
+	EndDate   EndDate                    `json:"endDate,omitempty"`
+	Results   []HttpEndpointTestResult   `json:"results,omitempty"`
+	StartDate StartDate                  `json:"startDate,omitempty"`
+	TotalHits TotalHits                  `json:"totalHits,omitempty"`
 }
 
 // Link A hyperlink from the containing resource to a URI.
@@ -383,8 +383,8 @@ type NetworkProfile struct {
 	// Network DNS servers.
 	DnsServers []string `json:"dnsServers,omitempty"`
 	// Only present when there is an error
-	Error           *string                     `json:"error,omitempty"`
-	EthernetProfile EndpointTestEthernetProfile `json:"ethernetProfile,omitempty"`
+	Error           *string                      `json:"error,omitempty"`
+	EthernetProfile *EndpointTestEthernetProfile `json:"ethernetProfile,omitempty"`
 	// Network gateway address.
 	Gateway      *string               `json:"gateway,omitempty"`
 	HardwareType InterfaceHardwareType `json:"hardwareType,omitempty"`
@@ -393,16 +393,16 @@ type NetworkProfile struct {
 	// Network IP address.
 	IpAddress *string `json:"ipAddress,omitempty"`
 	// Network local prefix.
-	LocalPrefix       *string             `json:"localPrefix,omitempty"`
-	PreviousInterface NetworkInterface    `json:"previousInterface,omitempty"`
-	ProxyProfile      NetworkProxyProfile `json:"proxyProfile,omitempty"`
+	LocalPrefix       *string              `json:"localPrefix,omitempty"`
+	PreviousInterface *NetworkInterface    `json:"previousInterface,omitempty"`
+	ProxyProfile      *NetworkProxyProfile `json:"proxyProfile,omitempty"`
 	// Network public IP address.
 	PublicIpAddress *string `json:"publicIpAddress,omitempty"`
 	// Network public IP range.
 	PublicIpRange *string `json:"publicIpRange,omitempty"`
 	// Network subnet mask - only for IPv4.
-	SubnetMask      *string                `json:"subnetMask,omitempty"`
-	WirelessProfile NetworkWirelessProfile `json:"wirelessProfile,omitempty"`
+	SubnetMask      *string                 `json:"subnetMask,omitempty"`
+	WirelessProfile *NetworkWirelessProfile `json:"wirelessProfile,omitempty"`
 }
 
 // NetworkProxy is generated from the OpenAPI specification.
@@ -447,8 +447,8 @@ type NetworkWirelessProfile struct {
 // PaginationNextAndSelfLink A links object containing a related link for
 // forward pagination.
 type PaginationNextAndSelfLink struct {
-	Next Link `json:"next,omitempty"`
-	Self Link `json:"self,omitempty"`
+	Next *Link `json:"next,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // PhysicalMemoryUsedBytes is generated from the OpenAPI specification.
@@ -480,13 +480,13 @@ type StartDate string
 
 // SystemMetrics is generated from the OpenAPI specification.
 type SystemMetrics struct {
-	CpuUtilization CpuUtilization `json:"cpuUtilization,omitempty"`
+	CpuUtilization *CpuUtilization `json:"cpuUtilization,omitempty"`
 	// The end time of metrics collection, expressed in milliseconds since the
 	// Epoch.
 	EndTimeMs *int64 `json:"endTimeMs,omitempty"`
 	// Total physical memory of the system.
-	PhysicalMemoryTotalBytes *int64                  `json:"physicalMemoryTotalBytes,omitempty"`
-	PhysicalMemoryUsedBytes  PhysicalMemoryUsedBytes `json:"physicalMemoryUsedBytes,omitempty"`
+	PhysicalMemoryTotalBytes *int64                   `json:"physicalMemoryTotalBytes,omitempty"`
+	PhysicalMemoryUsedBytes  *PhysicalMemoryUsedBytes `json:"physicalMemoryUsedBytes,omitempty"`
 	// The start time of metrics collection, expressed in milliseconds since the
 	// Epoch.
 	StartTimeMs *int64 `json:"startTimeMs,omitempty"`

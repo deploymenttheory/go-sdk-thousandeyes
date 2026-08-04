@@ -188,6 +188,14 @@ func (g *Generator) buildOperation(raw RawOperation, resolver *TypeResolver) Ope
 func (g *Generator) parameters(raw RawOperation) (path, query []Param) {
 	params, _ := raw.Op["parameters"].([]any)
 
+	// Path-item parameters apply to every operation on the path, with the
+	// operation's own list overriding by name -- OpenAPI's stated semantics.
+	// They come first so an operation-level redeclaration wins below.
+	merged := make([]any, 0, len(raw.PathItemParams)+len(params))
+	merged = append(merged, raw.PathItemParams...)
+	merged = append(merged, params...)
+	params = dedupeParamsByName(g, merged)
+
 	for _, item := range params {
 		p, ok := item.(map[string]any)
 		if !ok {
@@ -232,6 +240,40 @@ func (g *Generator) parameters(raw RawOperation) (path, query []Param) {
 		}
 	}
 	return path, filtered
+}
+
+// dedupeParamsByName keeps the last declaration of each parameter name -- the
+// operation's own, since path-item parameters are prepended.
+func dedupeParamsByName(g *Generator, params []any) []any {
+	nameOf := func(item any) string {
+		p, ok := item.(map[string]any)
+		if !ok {
+			return ""
+		}
+		if ref, ok := p["$ref"].(string); ok {
+			if resolved, _, found := g.spec.Resolve(ref); found {
+				p = resolved
+			}
+		}
+		name, _ := p["name"].(string)
+		return name
+	}
+
+	last := map[string]int{}
+	for i, item := range params {
+		if n := nameOf(item); n != "" {
+			last[n] = i
+		}
+	}
+
+	out := make([]any, 0, len(params))
+	for i, item := range params {
+		n := nameOf(item)
+		if n == "" || last[n] == i {
+			out = append(out, item)
+		}
+	}
+	return out
 }
 
 // requestBody returns the Go type of the request body, if the operation has one.

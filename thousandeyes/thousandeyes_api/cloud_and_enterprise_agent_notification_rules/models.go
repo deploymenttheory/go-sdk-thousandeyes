@@ -7,7 +7,7 @@ package cloud_and_enterprise_agent_notification_rules
 
 // AgentNotification Alert notification object.
 type AgentNotification struct {
-	Email      AlertEmail             `json:"email,omitempty"`
+	Email      *AlertEmail            `json:"email,omitempty"`
 	ThirdParty []AlertIntegrationBase `json:"thirdParty,omitempty"`
 	Webhook    []AlertIntegrationBase `json:"webhook,omitempty"`
 }
@@ -19,7 +19,7 @@ type AgentResponse struct {
 	// Name of the agent.
 	AgentName   *string                  `json:"agentName,omitempty"`
 	AgentType   CloudEnterpriseAgentType `json:"agentType"`
-	Coordinates Coordinates              `json:"coordinates,omitempty"`
+	Coordinates *Coordinates             `json:"coordinates,omitempty"`
 	// 2-digit ISO country code
 	CountryID *string `json:"countryId,omitempty"`
 	// Flag indicating if the agent is enabled.
@@ -29,8 +29,8 @@ type AgentResponse struct {
 	// Location of the agent.
 	Location *string `json:"location,omitempty"`
 	// Network (including ASN) of agent’s public IP.
-	Network             *string             `json:"network,omitempty"`
-	NetworkProviderInfo NetworkProviderInfo `json:"networkProviderInfo,omitempty"`
+	Network             *string              `json:"network,omitempty"`
+	NetworkProviderInfo *NetworkProviderInfo `json:"networkProviderInfo,omitempty"`
 	// Prefix containing agents public IP address.
 	Prefix *string `json:"prefix,omitempty"`
 	// Array of public IP addresses.
@@ -99,7 +99,7 @@ type Link struct {
 
 // ListNotificationRulesResponse is generated from the OpenAPI specification.
 type ListNotificationRulesResponse struct {
-	Links           SelfLinks          `json:"_links,omitempty"`
+	Links           *SelfLinks         `json:"_links,omitempty"`
 	AgentAlertRules []NotificationRule `json:"agentAlertRules,omitempty"`
 }
 
@@ -130,14 +130,14 @@ type NotificationRule struct {
 
 // NotificationRuleDetail is generated from the OpenAPI specification.
 type NotificationRuleDetail struct {
-	Links  SelfLinks       `json:"_links,omitempty"`
+	Links  *SelfLinks      `json:"_links,omitempty"`
 	Agents []AgentResponse `json:"agents,omitempty"`
 	// Expression of agent notification rule
 	Expression *string `json:"expression,omitempty"`
 	// Agent notification rule will be automatically included on all new Enterprise
 	// Agents.
-	IsDefault     *bool             `json:"isDefault,omitempty"`
-	Notifications AgentNotification `json:"notifications,omitempty"`
+	IsDefault     *bool              `json:"isDefault,omitempty"`
+	Notifications *AgentNotification `json:"notifications,omitempty"`
 	// Send notification when notification clears
 	NotifyOnClear *bool `json:"notifyOnClear,omitempty"`
 	// Agent notification rule ID
@@ -148,5 +148,5 @@ type NotificationRuleDetail struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

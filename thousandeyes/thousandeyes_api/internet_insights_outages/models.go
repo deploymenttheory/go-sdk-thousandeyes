@@ -20,7 +20,7 @@ type ApiApplicationOutageAffectedServer struct {
 
 // ApiApplicationOutageDetails is generated from the OpenAPI specification.
 type ApiApplicationOutageDetails struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// List of affected agents.
 	AffectedAgents []InternetInsightsApiAffectedAgent `json:"affectedAgents,omitempty"`
 	// List of affected domains.
@@ -60,7 +60,7 @@ type ApiNetworkOutageAffectedLocation struct {
 
 // ApiNetworkOutageDetails is generated from the OpenAPI specification.
 type ApiNetworkOutageDetails struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// List of affected agents.
 	AffectedAgents []InternetInsightsApiAffectedAgent `json:"affectedAgents,omitempty"`
 	// List of affected domains.
@@ -93,7 +93,7 @@ type ApiNetworkOutageDetails struct {
 
 // ApiOutage List of outages.
 type ApiOutage struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// The number of affected interfaces.
 	AffectedInterfacesCount *int `json:"affectedInterfacesCount,omitempty"`
 	// The number of affected locations.
@@ -148,7 +148,7 @@ type ApiOutageFilter struct {
 
 // ApiOutagesResponse is generated from the OpenAPI specification.
 type ApiOutagesResponse struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// List of application outages.
 	Outages []ApiOutage `json:"outages,omitempty"`
 }
@@ -192,5 +192,5 @@ type OutageLocation string
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

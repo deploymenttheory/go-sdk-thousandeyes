@@ -62,7 +62,7 @@ type EndpointSpecificAgentsSelectorType string
 
 // EndpointTest is generated from the OpenAPI specification.
 type EndpointTest struct {
-	Links                 EndpointTestLinks           `json:"_links,omitempty"`
+	Links                 *EndpointTestLinks          `json:"_links,omitempty"`
 	AgentSelectorConfig   EndpointAgentSelectorConfig `json:"agentSelectorConfig,omitempty"`
 	AID                   AccountGroupId              `json:"aid,omitempty"`
 	CreatedDate           TestCreatedDate             `json:"createdDate,omitempty"`
@@ -95,8 +95,8 @@ type EndpointTestAgents []string
 // EndpointTestLinks A list of links that can be accessed to get more
 // information.
 type EndpointTestLinks struct {
-	Self        EndpointTestSelfLink `json:"self,omitempty"`
-	TestResults ScheduledTestResults `json:"testResults,omitempty"`
+	Self        *EndpointTestSelfLink `json:"self,omitempty"`
+	TestResults ScheduledTestResults  `json:"testResults,omitempty"`
 }
 
 // EndpointTestMaxMachines Maximum number of agents which can execute the test.
@@ -129,7 +129,7 @@ type EndpointTestSelfLink struct {
 
 // EndpointTests is generated from the OpenAPI specification.
 type EndpointTests struct {
-	Links SelfLinks      `json:"_links,omitempty"`
+	Links *SelfLinks     `json:"_links,omitempty"`
 	Tests []EndpointTest `json:"tests,omitempty"`
 }
 
@@ -160,7 +160,7 @@ type ScheduledTestResults []Link
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // TagIds List of tag IDs (obtained from `/tags` endpoint).

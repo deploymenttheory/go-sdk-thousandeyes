@@ -15,7 +15,7 @@ type ApiAsn struct {
 
 // ApiCatalogProvider Catalog provider
 type ApiCatalogProvider struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// The number of ASN's covered by the provider.
 	AsnsCount *int `json:"asnsCount,omitempty"`
 	// The number of countries covered by the provider.
@@ -35,7 +35,7 @@ type ApiCatalogProvider struct {
 
 // ApiCatalogProviderDetails is generated from the OpenAPI specification.
 type ApiCatalogProviderDetails struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// List of ASN's covered by the Provider.
 	Asns     []ApiAsn  `json:"asns,omitempty"`
 	DataType DataType  `json:"dataType,omitempty"`
@@ -67,7 +67,7 @@ type ApiCatalogProviderFilter struct {
 
 // ApiCatalogProviderResponse is generated from the OpenAPI specification.
 type ApiCatalogProviderResponse struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// List of catalog providers.
 	Providers []ApiCatalogProvider `json:"providers,omitempty"`
 }
@@ -119,5 +119,5 @@ type Region string
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

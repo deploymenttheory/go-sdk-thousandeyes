@@ -41,7 +41,7 @@ type LabelRequest struct {
 
 // LabelResponse is generated from the OpenAPI specification.
 type LabelResponse struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// UI color
 	Color *string `json:"color,omitempty"`
 	// The filters combined using the matchType to determine the label's match.
@@ -54,8 +54,8 @@ type LabelResponse struct {
 
 // Labels A list of Labels.
 type Labels struct {
-	Links  PaginationNextAndSelfLink `json:"_links,omitempty"`
-	Labels []LabelResponse           `json:"labels,omitempty"`
+	Links  *PaginationNextAndSelfLink `json:"_links,omitempty"`
+	Labels []LabelResponse            `json:"labels,omitempty"`
 }
 
 // Link A hyperlink from the containing resource to a URI.
@@ -83,11 +83,11 @@ type Link struct {
 // PaginationNextAndSelfLink A links object containing a related link for
 // forward pagination.
 type PaginationNextAndSelfLink struct {
-	Next Link `json:"next,omitempty"`
-	Self Link `json:"self,omitempty"`
+	Next *Link `json:"next,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

@@ -20,7 +20,7 @@ type AgentResponse struct {
 	// Name of the agent.
 	AgentName   *string                  `json:"agentName,omitempty"`
 	AgentType   CloudEnterpriseAgentType `json:"agentType"`
-	Coordinates Coordinates              `json:"coordinates,omitempty"`
+	Coordinates *Coordinates             `json:"coordinates,omitempty"`
 	// 2-digit ISO country code
 	CountryID *string `json:"countryId,omitempty"`
 	// Flag indicating if the agent is enabled.
@@ -30,8 +30,8 @@ type AgentResponse struct {
 	// Location of the agent.
 	Location *string `json:"location,omitempty"`
 	// Network (including ASN) of agent’s public IP.
-	Network             *string             `json:"network,omitempty"`
-	NetworkProviderInfo NetworkProviderInfo `json:"networkProviderInfo,omitempty"`
+	Network             *string              `json:"network,omitempty"`
+	NetworkProviderInfo *NetworkProviderInfo `json:"networkProviderInfo,omitempty"`
 	// Prefix containing agents public IP address.
 	Prefix *string `json:"prefix,omitempty"`
 	// Array of public IP addresses.
@@ -100,8 +100,8 @@ type OAuth struct {
 
 // PageLoadInstantTestRequest is generated from the OpenAPI specification.
 type PageLoadInstantTestRequest struct {
-	Links           TestLinks       `json:"_links,omitempty"`
-	AgentInterfaces AgentInterfaces `json:"agentInterfaces,omitempty"`
+	Links           *TestLinks       `json:"_links,omitempty"`
+	AgentInterfaces *AgentInterfaces `json:"agentInterfaces,omitempty"`
 	// A list of objects with `agentId` (required) and `sourceIpAddress`
 	// (optional).
 	Agents                         []TestAgent                        `json:"agents"`
@@ -117,10 +117,10 @@ type PageLoadInstantTestRequest struct {
 	ClientCertificate              TestClientCertificate              `json:"clientCertificate,omitempty"`
 	CollectProxyNetworkData        TestCollectProxyNetworkData        `json:"collectProxyNetworkData,omitempty"`
 	// Content regex, this field does not require escaping.
-	ContentRegex  *string           `json:"contentRegex,omitempty"`
-	CreatedBy     TestCreatedBy     `json:"createdBy,omitempty"`
-	CreatedDate   TestCreatedDate   `json:"createdDate,omitempty"`
-	CustomHeaders TestCustomHeaders `json:"customHeaders,omitempty"`
+	ContentRegex  *string            `json:"contentRegex,omitempty"`
+	CreatedBy     TestCreatedBy      `json:"createdBy,omitempty"`
+	CreatedDate   TestCreatedDate    `json:"createdDate,omitempty"`
+	CustomHeaders *TestCustomHeaders `json:"customHeaders,omitempty"`
 	// A description of the test.
 	Description        *string                `json:"description,omitempty"`
 	DesiredStatusCode  TestDesiredStatusCode  `json:"desiredStatusCode,omitempty"`
@@ -150,7 +150,7 @@ type PageLoadInstantTestRequest struct {
 	MtuMeasurements     TestMtuMeasurements     `json:"mtuMeasurements,omitempty"`
 	NetworkMeasurements TestNetworkMeasurements `json:"networkMeasurements,omitempty"`
 	NumPathTraces       TestNumPathTraces       `json:"numPathTraces,omitempty"`
-	OAuth               OAuth                   `json:"oAuth,omitempty"`
+	OAuth               *OAuth                  `json:"oAuth,omitempty"`
 	OverrideAgentProxy  TestOverrideAgentProxy  `json:"overrideAgentProxy,omitempty"`
 	OverrideProxyID     TestOverrideProxyId     `json:"overrideProxyId,omitempty"`
 	// Target time for page load completion, specified in seconds and cannot exceed
@@ -189,8 +189,8 @@ type PageLoadInstantTestRequest struct {
 
 // PageLoadInstantTestResponse is generated from the OpenAPI specification.
 type PageLoadInstantTestResponse struct {
-	Links                          TestLinks                          `json:"_links,omitempty"`
-	AgentInterfaces                AgentInterfaces                    `json:"agentInterfaces,omitempty"`
+	Links                          *TestLinks                         `json:"_links,omitempty"`
+	AgentInterfaces                *AgentInterfaces                   `json:"agentInterfaces,omitempty"`
 	Agents                         TestAgentsResponse                 `json:"agents,omitempty"`
 	AllowGeolocation               TestAllowGeolocation               `json:"allowGeolocation,omitempty"`
 	AllowMicAndCamera              TestAllowMicAndCamera              `json:"allowMicAndCamera,omitempty"`
@@ -204,10 +204,10 @@ type PageLoadInstantTestResponse struct {
 	ClientCertificate              TestClientCertificate              `json:"clientCertificate,omitempty"`
 	CollectProxyNetworkData        TestCollectProxyNetworkData        `json:"collectProxyNetworkData,omitempty"`
 	// Content regex, this field does not require escaping.
-	ContentRegex  *string           `json:"contentRegex,omitempty"`
-	CreatedBy     TestCreatedBy     `json:"createdBy,omitempty"`
-	CreatedDate   TestCreatedDate   `json:"createdDate,omitempty"`
-	CustomHeaders TestCustomHeaders `json:"customHeaders,omitempty"`
+	ContentRegex  *string            `json:"contentRegex,omitempty"`
+	CreatedBy     TestCreatedBy      `json:"createdBy,omitempty"`
+	CreatedDate   TestCreatedDate    `json:"createdDate,omitempty"`
+	CustomHeaders *TestCustomHeaders `json:"customHeaders,omitempty"`
 	// A description of the test.
 	Description        *string                `json:"description,omitempty"`
 	DesiredStatusCode  TestDesiredStatusCode  `json:"desiredStatusCode,omitempty"`
@@ -236,7 +236,7 @@ type PageLoadInstantTestResponse struct {
 	MtuMeasurements     TestMtuMeasurements     `json:"mtuMeasurements,omitempty"`
 	NetworkMeasurements TestNetworkMeasurements `json:"networkMeasurements,omitempty"`
 	NumPathTraces       TestNumPathTraces       `json:"numPathTraces,omitempty"`
-	OAuth               OAuth                   `json:"oAuth,omitempty"`
+	OAuth               *OAuth                  `json:"oAuth,omitempty"`
 	OverrideAgentProxy  TestOverrideAgentProxy  `json:"overrideAgentProxy,omitempty"`
 	OverrideProxyID     TestOverrideProxyId     `json:"overrideProxyId,omitempty"`
 	// Target time for page load completion, specified in seconds and cannot exceed
@@ -406,8 +406,8 @@ type TestLabels []TestLabel
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestMtuMeasurements Set `true` to measure MTU sizes on network from agents

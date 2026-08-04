@@ -7,13 +7,13 @@ package cyberark_conjur_connectors
 
 // Assignments A list of assigned items.
 type Assignments struct {
-	Links SelfLinks `json:"_links,omitempty"`
-	Items []string  `json:"items,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
+	Items []string   `json:"items,omitempty"`
 }
 
 // ConjurConnector is generated from the OpenAPI specification.
 type ConjurConnector struct {
-	Links          SelfLinks                `json:"_links,omitempty"`
+	Links          *SelfLinks               `json:"_links,omitempty"`
 	Account        string                   `json:"account"`
 	Authentication ConjurHostAuthentication `json:"authentication"`
 	ID             *string                  `json:"id,omitempty"`
@@ -27,7 +27,7 @@ type ConjurConnector struct {
 
 // ConjurConnectors is generated from the OpenAPI specification.
 type ConjurConnectors struct {
-	Links SelfLinks         `json:"_links,omitempty"`
+	Links *SelfLinks        `json:"_links,omitempty"`
 	Items []ConjurConnector `json:"items,omitempty"`
 }
 
@@ -62,5 +62,5 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

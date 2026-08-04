@@ -21,7 +21,7 @@ type InterfaceGroup struct {
 
 // InterfaceGroups is generated from the OpenAPI specification.
 type InterfaceGroups struct {
-	Links                  SelfLinks        `json:"_links,omitempty"`
+	Links                  *SelfLinks       `json:"_links,omitempty"`
 	PathVisInterfaceGroups []InterfaceGroup `json:"pathVisInterfaceGroups,omitempty"`
 }
 
@@ -49,5 +49,5 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

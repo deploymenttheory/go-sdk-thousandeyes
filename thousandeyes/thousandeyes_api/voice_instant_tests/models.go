@@ -12,7 +12,7 @@ type AgentResponse struct {
 	// Name of the agent.
 	AgentName   *string                  `json:"agentName,omitempty"`
 	AgentType   CloudEnterpriseAgentType `json:"agentType"`
-	Coordinates Coordinates              `json:"coordinates,omitempty"`
+	Coordinates *Coordinates             `json:"coordinates,omitempty"`
 	// 2-digit ISO country code
 	CountryID *string `json:"countryId,omitempty"`
 	// Flag indicating if the agent is enabled.
@@ -22,8 +22,8 @@ type AgentResponse struct {
 	// Location of the agent.
 	Location *string `json:"location,omitempty"`
 	// Network (including ASN) of agent’s public IP.
-	Network             *string             `json:"network,omitempty"`
-	NetworkProviderInfo NetworkProviderInfo `json:"networkProviderInfo,omitempty"`
+	Network             *string              `json:"network,omitempty"`
+	NetworkProviderInfo *NetworkProviderInfo `json:"networkProviderInfo,omitempty"`
 	// Prefix containing agents public IP address.
 	Prefix *string `json:"prefix,omitempty"`
 	// Array of public IP addresses.
@@ -119,8 +119,8 @@ type TestLabels []TestLabel
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestNumPathTraces Number of path traces executed by the agent.
@@ -175,7 +175,7 @@ type TestTags []TestTag
 
 // VoiceInstantTestRequest is generated from the OpenAPI specification.
 type VoiceInstantTestRequest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// A list of objects with `agentId` (required) and `sourceIpAddress`
 	// (optional).
 	Agents []TestAgent `json:"agents"`
@@ -224,7 +224,7 @@ type VoiceInstantTestRequest struct {
 
 // VoiceInstantTestResponse is generated from the OpenAPI specification.
 type VoiceInstantTestResponse struct {
-	Links  TestLinks          `json:"_links,omitempty"`
+	Links  *TestLinks         `json:"_links,omitempty"`
 	Agents TestAgentsResponse `json:"agents,omitempty"`
 	// Codec label
 	Codec *string `json:"codec,omitempty"`

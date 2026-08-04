@@ -58,7 +58,7 @@ type Role struct {
 
 // RoleDetail is generated from the OpenAPI specification.
 type RoleDetail struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// Flag indicating if the role is built-in (Account Admin, Organization Admin,
 	// Regular User).
 	IsBuiltin *bool `json:"isBuiltin,omitempty"`
@@ -80,11 +80,11 @@ type RoleRequestBody struct {
 
 // ResourceRoles is generated from the OpenAPI specification.
 type ResourceRoles struct {
-	Links SelfLinks `json:"_links,omitempty"`
-	Roles []Role    `json:"roles,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
+	Roles []Role     `json:"roles,omitempty"`
 }
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

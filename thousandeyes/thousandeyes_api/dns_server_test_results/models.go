@@ -7,8 +7,8 @@ package dns_server_test_results
 
 // DnsServerTestResult is generated from the OpenAPI specification.
 type DnsServerTestResult struct {
-	Links TestResultAppLinks `json:"_links,omitempty"`
-	Agent TestResultAgent    `json:"agent,omitempty"`
+	Links *TestResultAppLinks `json:"_links,omitempty"`
+	Agent *TestResultAgent    `json:"agent,omitempty"`
 	// Data point date UTC (ISO date-time format).
 	Date         *string                `json:"date,omitempty"`
 	EndTime      EndTime                `json:"endTime,omitempty"`
@@ -29,11 +29,11 @@ type DnsServerTestResult struct {
 
 // DnsServerTestResults is generated from the OpenAPI specification.
 type DnsServerTestResults struct {
-	Links     PaginationLinks       `json:"_links,omitempty"`
+	Links     *PaginationLinks      `json:"_links,omitempty"`
 	EndDate   EndDate               `json:"endDate,omitempty"`
 	Results   []DnsServerTestResult `json:"results,omitempty"`
 	StartDate StartDate             `json:"startDate,omitempty"`
-	Test      SimpleTest            `json:"test,omitempty"`
+	Test      *SimpleTest           `json:"test,omitempty"`
 }
 
 // Enabled Test is enabled.
@@ -71,16 +71,16 @@ type Link struct {
 
 // PaginationLinks A links object containing pagination related link(s).
 type PaginationLinks struct {
-	Next     Link `json:"next,omitempty"`
-	Previous Link `json:"previous,omitempty"`
-	Self     Link `json:"self,omitempty"`
+	Next     *Link `json:"next,omitempty"`
+	Previous *Link `json:"previous,omitempty"`
+	Self     *Link `json:"self,omitempty"`
 }
 
 // SimpleTest Each test includes additional fields depending on its `type`.
 // Refer `/tests/{type}` endpoint to know the set of fields returned by a given
 // `type`.
 type SimpleTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// Indicates if alerts are enabled.
 	AlertsEnabled *bool           `json:"alertsEnabled,omitempty"`
 	CreatedBy     TestCreatedBy   `json:"createdBy,omitempty"`
@@ -121,8 +121,8 @@ type TestCreatedDate string
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestResultAgent is generated from the OpenAPI specification.
@@ -139,7 +139,7 @@ type TestResultAgent struct {
 
 // TestResultAppLinks is generated from the OpenAPI specification.
 type TestResultAppLinks struct {
-	AppLink Link `json:"appLink,omitempty"`
+	AppLink *Link `json:"appLink,omitempty"`
 }
 
 // TestResultErrorDetails Error details, if an error were encountered

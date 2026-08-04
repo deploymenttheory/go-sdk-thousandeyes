@@ -87,9 +87,9 @@ type DynamicEndpointTestWebex struct {
 
 // DynamicEndpointTestsDataRoundSearch is generated from the OpenAPI specification.
 type DynamicEndpointTestsDataRoundSearch struct {
-	SearchFilters   DynamicEndpointTestsDataSearchFilter `json:"searchFilters,omitempty"`
-	SearchSort      []EndpointTestsDataSearchSort        `json:"searchSort,omitempty"`
-	ThresholdFilter EndpointTestsDataThresholdFilters    `json:"thresholdFilter,omitempty"`
+	SearchFilters   *DynamicEndpointTestsDataSearchFilter `json:"searchFilters,omitempty"`
+	SearchSort      []EndpointTestsDataSearchSort         `json:"searchSort,omitempty"`
+	ThresholdFilter *EndpointTestsDataThresholdFilters    `json:"thresholdFilter,omitempty"`
 }
 
 // DynamicEndpointTestsDataSearchFilter is generated from the OpenAPI specification.
@@ -107,7 +107,7 @@ type DynamicEndpointTestsDataSearchFilter struct {
 
 // DynamicTest is generated from the OpenAPI specification.
 type DynamicTest struct {
-	Links                 DynamicTestLinks            `json:"_links,omitempty"`
+	Links                 *DynamicTestLinks           `json:"_links,omitempty"`
 	AgentSelectorConfig   EndpointAgentSelectorConfig `json:"agentSelectorConfig,omitempty"`
 	AID                   AccountGroupId              `json:"aid,omitempty"`
 	Application           DynamicTestApplication      `json:"application,omitempty"`
@@ -138,8 +138,8 @@ type DynamicTestApplication string
 // DynamicTestLinks A list of links that can be accessed to get more
 // information.
 type DynamicTestLinks struct {
-	Self        DynamicTestSelfLink `json:"self,omitempty"`
-	TestResults DynamicTestResults  `json:"testResults,omitempty"`
+	Self        *DynamicTestSelfLink `json:"self,omitempty"`
+	TestResults DynamicTestResults   `json:"testResults,omitempty"`
 }
 
 // DynamicTestResults Reference to the test results.
@@ -361,9 +361,9 @@ type NetworkDynamicEndpointTestResult struct {
 	AID         AccountGroupId         `json:"aid,omitempty"`
 	Application DynamicTestApplication `json:"application,omitempty"`
 	// Average RTT for packets sent to destination.
-	AvgLatency      *float64        `json:"avgLatency,omitempty"`
-	BatteryMetrics  BatteryMetrics  `json:"batteryMetrics,omitempty"`
-	CellularProfile CellularProfile `json:"cellularProfile,omitempty"`
+	AvgLatency      *float64         `json:"avgLatency,omitempty"`
+	BatteryMetrics  *BatteryMetrics  `json:"batteryMetrics,omitempty"`
+	CellularProfile *CellularProfile `json:"cellularProfile,omitempty"`
 	// Error details, if an error was encountered.
 	ErrorDetails  *string     `json:"errorDetails,omitempty"`
 	IsIcmpBlocked IcmpBlocked `json:"isIcmpBlocked,omitempty"`
@@ -374,32 +374,32 @@ type NetworkDynamicEndpointTestResult struct {
 	// Maximum RTT for packets sent to destination.
 	MaxLatency *float64 `json:"maxLatency,omitempty"`
 	// Minimum RTT for packets sent to destination.
-	MinLatency            *float64                   `json:"minLatency,omitempty"`
-	NetworkProfile        NetworkProfile             `json:"networkProfile,omitempty"`
-	OriginalTargetProfile TargetProfile              `json:"originalTargetProfile,omitempty"`
-	Platform              Platform                   `json:"platform,omitempty"`
-	Protocol              EndpointTestResultProtocol `json:"protocol,omitempty"`
-	RoundID               RoundId                    `json:"roundId,omitempty"`
-	Score                 EndpointPingDataPointScore `json:"score,omitempty"`
+	MinLatency            *float64                    `json:"minLatency,omitempty"`
+	NetworkProfile        *NetworkProfile             `json:"networkProfile,omitempty"`
+	OriginalTargetProfile *TargetProfile              `json:"originalTargetProfile,omitempty"`
+	Platform              Platform                    `json:"platform,omitempty"`
+	Protocol              EndpointTestResultProtocol  `json:"protocol,omitempty"`
+	RoundID               RoundId                     `json:"roundId,omitempty"`
+	Score                 *EndpointPingDataPointScore `json:"score,omitempty"`
 	// IP address of target server.
-	ServerIP      *string                  `json:"serverIp,omitempty"`
-	SystemMetrics SystemMetrics            `json:"systemMetrics,omitempty"`
-	TcpProbeMode  TestProbeModeResponse    `json:"tcpProbeMode,omitempty"`
-	TestID        TestId                   `json:"testId,omitempty"`
-	UdpProbeMode  UdpProbeModeResponse     `json:"udpProbeMode,omitempty"`
-	UserProfile   UserProfile              `json:"userProfile,omitempty"`
-	VpnProfile    VpnProfile               `json:"vpnProfile,omitempty"`
-	Webex         DynamicEndpointTestWebex `json:"webex,omitempty"`
-	ZtaMetrics    []EndpointZtaMetrics     `json:"ztaMetrics,omitempty"`
+	ServerIP      *string                   `json:"serverIp,omitempty"`
+	SystemMetrics *SystemMetrics            `json:"systemMetrics,omitempty"`
+	TcpProbeMode  TestProbeModeResponse     `json:"tcpProbeMode,omitempty"`
+	TestID        TestId                    `json:"testId,omitempty"`
+	UdpProbeMode  UdpProbeModeResponse      `json:"udpProbeMode,omitempty"`
+	UserProfile   *UserProfile              `json:"userProfile,omitempty"`
+	VpnProfile    *VpnProfile               `json:"vpnProfile,omitempty"`
+	Webex         *DynamicEndpointTestWebex `json:"webex,omitempty"`
+	ZtaMetrics    []EndpointZtaMetrics      `json:"ztaMetrics,omitempty"`
 }
 
 // ResourceNetworkDynamicEndpointTestResults is generated from the OpenAPI specification.
 type ResourceNetworkDynamicEndpointTestResults struct {
-	Links     PaginationNextLink                 `json:"_links,omitempty"`
+	Links     *PaginationNextLink                `json:"_links,omitempty"`
 	EndDate   EndDate                            `json:"endDate,omitempty"`
 	Results   []NetworkDynamicEndpointTestResult `json:"results,omitempty"`
 	StartDate StartDate                          `json:"startDate,omitempty"`
-	Test      DynamicTest                        `json:"test,omitempty"`
+	Test      *DynamicTest                       `json:"test,omitempty"`
 	TotalHits TotalHits                          `json:"totalHits,omitempty"`
 }
 
@@ -427,8 +427,8 @@ type NetworkProfile struct {
 	// Network DNS servers.
 	DnsServers []string `json:"dnsServers,omitempty"`
 	// Only present when there is an error
-	Error           *string                     `json:"error,omitempty"`
-	EthernetProfile EndpointTestEthernetProfile `json:"ethernetProfile,omitempty"`
+	Error           *string                      `json:"error,omitempty"`
+	EthernetProfile *EndpointTestEthernetProfile `json:"ethernetProfile,omitempty"`
 	// Network gateway address.
 	Gateway      *string               `json:"gateway,omitempty"`
 	HardwareType InterfaceHardwareType `json:"hardwareType,omitempty"`
@@ -437,16 +437,16 @@ type NetworkProfile struct {
 	// Network IP address.
 	IpAddress *string `json:"ipAddress,omitempty"`
 	// Network local prefix.
-	LocalPrefix       *string             `json:"localPrefix,omitempty"`
-	PreviousInterface NetworkInterface    `json:"previousInterface,omitempty"`
-	ProxyProfile      NetworkProxyProfile `json:"proxyProfile,omitempty"`
+	LocalPrefix       *string              `json:"localPrefix,omitempty"`
+	PreviousInterface *NetworkInterface    `json:"previousInterface,omitempty"`
+	ProxyProfile      *NetworkProxyProfile `json:"proxyProfile,omitempty"`
 	// Network public IP address.
 	PublicIpAddress *string `json:"publicIpAddress,omitempty"`
 	// Network public IP range.
 	PublicIpRange *string `json:"publicIpRange,omitempty"`
 	// Network subnet mask - only for IPv4.
-	SubnetMask      *string                `json:"subnetMask,omitempty"`
-	WirelessProfile NetworkWirelessProfile `json:"wirelessProfile,omitempty"`
+	SubnetMask      *string                 `json:"subnetMask,omitempty"`
+	WirelessProfile *NetworkWirelessProfile `json:"wirelessProfile,omitempty"`
 }
 
 // NetworkProxy is generated from the OpenAPI specification.
@@ -491,14 +491,14 @@ type NetworkWirelessProfile struct {
 // PaginationNextAndSelfLink A links object containing a related link for
 // forward pagination.
 type PaginationNextAndSelfLink struct {
-	Next Link `json:"next,omitempty"`
-	Self Link `json:"self,omitempty"`
+	Next *Link `json:"next,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // PaginationNextLink A links object containing a related link for forward
 // pagination.
 type PaginationNextLink struct {
-	Next Link `json:"next,omitempty"`
+	Next *Link `json:"next,omitempty"`
 }
 
 // PathVisDetailDynamicEndpointTestResult is generated from the OpenAPI specification.
@@ -506,11 +506,11 @@ type PathVisDetailDynamicEndpointTestResult struct {
 	AgentID               EndpointAgentId        `json:"agentId,omitempty"`
 	AID                   AccountGroupId         `json:"aid,omitempty"`
 	Application           DynamicTestApplication `json:"application,omitempty"`
-	AsnDetails            AsnDetails             `json:"asnDetails,omitempty"`
-	BatteryMetrics        BatteryMetrics         `json:"batteryMetrics,omitempty"`
-	CellularProfile       CellularProfile        `json:"cellularProfile,omitempty"`
-	NetworkProfile        NetworkProfile         `json:"networkProfile,omitempty"`
-	OriginalTargetProfile TargetProfile          `json:"originalTargetProfile,omitempty"`
+	AsnDetails            *AsnDetails            `json:"asnDetails,omitempty"`
+	BatteryMetrics        *BatteryMetrics        `json:"batteryMetrics,omitempty"`
+	CellularProfile       *CellularProfile       `json:"cellularProfile,omitempty"`
+	NetworkProfile        *NetworkProfile        `json:"networkProfile,omitempty"`
+	OriginalTargetProfile *TargetProfile         `json:"originalTargetProfile,omitempty"`
 	// Shows iterations of path trace, with each iteration specified by a pathId.
 	PathTraces []EndpointPathVisRoute     `json:"pathTraces,omitempty"`
 	Platform   Platform                   `json:"platform,omitempty"`
@@ -524,23 +524,23 @@ type PathVisDetailDynamicEndpointTestResult struct {
 	SourceIP *string `json:"sourceIp,omitempty"`
 	// IP prefix of source endpoint agent.
 	SourcePrefix  *string               `json:"sourcePrefix,omitempty"`
-	SystemMetrics SystemMetrics         `json:"systemMetrics,omitempty"`
+	SystemMetrics *SystemMetrics        `json:"systemMetrics,omitempty"`
 	TcpProbeMode  TestProbeModeResponse `json:"tcpProbeMode,omitempty"`
 	TestID        TestId                `json:"testId,omitempty"`
 	UdpProbeMode  UdpProbeModeResponse  `json:"udpProbeMode,omitempty"`
-	UserProfile   UserProfile           `json:"userProfile,omitempty"`
+	UserProfile   *UserProfile          `json:"userProfile,omitempty"`
 	// Shows iterations of the VPN path trace, with each iteration specified by a
 	// pathId.
-	VpnPathTraces []EndpointPathVisRoute   `json:"vpnPathTraces,omitempty"`
-	VpnProfile    VpnProfile               `json:"vpnProfile,omitempty"`
-	Webex         DynamicEndpointTestWebex `json:"webex,omitempty"`
+	VpnPathTraces []EndpointPathVisRoute    `json:"vpnPathTraces,omitempty"`
+	VpnProfile    *VpnProfile               `json:"vpnProfile,omitempty"`
+	Webex         *DynamicEndpointTestWebex `json:"webex,omitempty"`
 }
 
 // PathVisDetailDynamicEndpointTestResults is generated from the OpenAPI specification.
 type PathVisDetailDynamicEndpointTestResults struct {
-	Links   SelfLinks                                `json:"_links,omitempty"`
+	Links   *SelfLinks                               `json:"_links,omitempty"`
 	Results []PathVisDetailDynamicEndpointTestResult `json:"results,omitempty"`
-	Test    DynamicTest                              `json:"test,omitempty"`
+	Test    *DynamicTest                             `json:"test,omitempty"`
 }
 
 // PathVisDynamicEndpointTestResult is generated from the OpenAPI specification.
@@ -548,13 +548,13 @@ type PathVisDynamicEndpointTestResult struct {
 	AgentID         EndpointAgentId        `json:"agentId,omitempty"`
 	AID             AccountGroupId         `json:"aid,omitempty"`
 	Application     DynamicTestApplication `json:"application,omitempty"`
-	AsnDetails      AsnDetails             `json:"asnDetails,omitempty"`
-	BatteryMetrics  BatteryMetrics         `json:"batteryMetrics,omitempty"`
-	CellularProfile CellularProfile        `json:"cellularProfile,omitempty"`
+	AsnDetails      *AsnDetails            `json:"asnDetails,omitempty"`
+	BatteryMetrics  *BatteryMetrics        `json:"batteryMetrics,omitempty"`
+	CellularProfile *CellularProfile       `json:"cellularProfile,omitempty"`
 	// Geographic location of the path visualization.
-	Location              *string        `json:"location,omitempty"`
-	NetworkProfile        NetworkProfile `json:"networkProfile,omitempty"`
-	OriginalTargetProfile TargetProfile  `json:"originalTargetProfile,omitempty"`
+	Location              *string         `json:"location,omitempty"`
+	NetworkProfile        *NetworkProfile `json:"networkProfile,omitempty"`
+	OriginalTargetProfile *TargetProfile  `json:"originalTargetProfile,omitempty"`
 	// Shows an iteration of path trace, with each iteration specified by a pathId.
 	PathTraces []EndpointPathTrace        `json:"pathTraces,omitempty"`
 	Platform   Platform                   `json:"platform,omitempty"`
@@ -567,23 +567,23 @@ type PathVisDynamicEndpointTestResult struct {
 	// IP address of source endpoint agent.
 	SourceIP *string `json:"sourceIp,omitempty"`
 	// IP prefix of source endpoint agent.
-	SourcePrefix  *string                  `json:"sourcePrefix,omitempty"`
-	SystemMetrics SystemMetrics            `json:"systemMetrics,omitempty"`
-	TcpProbeMode  TestProbeModeResponse    `json:"tcpProbeMode,omitempty"`
-	TestID        TestId                   `json:"testId,omitempty"`
-	UdpProbeMode  UdpProbeModeResponse     `json:"udpProbeMode,omitempty"`
-	UserProfile   UserProfile              `json:"userProfile,omitempty"`
-	VpnProfile    VpnProfile               `json:"vpnProfile,omitempty"`
-	Webex         DynamicEndpointTestWebex `json:"webex,omitempty"`
+	SourcePrefix  *string                   `json:"sourcePrefix,omitempty"`
+	SystemMetrics *SystemMetrics            `json:"systemMetrics,omitempty"`
+	TcpProbeMode  TestProbeModeResponse     `json:"tcpProbeMode,omitempty"`
+	TestID        TestId                    `json:"testId,omitempty"`
+	UdpProbeMode  UdpProbeModeResponse      `json:"udpProbeMode,omitempty"`
+	UserProfile   *UserProfile              `json:"userProfile,omitempty"`
+	VpnProfile    *VpnProfile               `json:"vpnProfile,omitempty"`
+	Webex         *DynamicEndpointTestWebex `json:"webex,omitempty"`
 }
 
 // PathVisDynamicEndpointTestResults is generated from the OpenAPI specification.
 type PathVisDynamicEndpointTestResults struct {
-	Links     PaginationNextAndSelfLink          `json:"_links,omitempty"`
+	Links     *PaginationNextAndSelfLink         `json:"_links,omitempty"`
 	EndDate   EndDate                            `json:"endDate,omitempty"`
 	Results   []PathVisDynamicEndpointTestResult `json:"results,omitempty"`
 	StartDate StartDate                          `json:"startDate,omitempty"`
-	Test      DynamicTest                        `json:"test,omitempty"`
+	Test      *DynamicTest                       `json:"test,omitempty"`
 	TotalHits TotalHits                          `json:"totalHits,omitempty"`
 }
 
@@ -608,7 +608,7 @@ type RoundId int
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // StartDate (Optional) When passing `window` or `startDate` parameter, the
@@ -618,13 +618,13 @@ type StartDate string
 
 // SystemMetrics is generated from the OpenAPI specification.
 type SystemMetrics struct {
-	CpuUtilization CpuUtilization `json:"cpuUtilization,omitempty"`
+	CpuUtilization *CpuUtilization `json:"cpuUtilization,omitempty"`
 	// The end time of metrics collection, expressed in milliseconds since the
 	// Epoch.
 	EndTimeMs *int64 `json:"endTimeMs,omitempty"`
 	// Total physical memory of the system.
-	PhysicalMemoryTotalBytes *int64                  `json:"physicalMemoryTotalBytes,omitempty"`
-	PhysicalMemoryUsedBytes  PhysicalMemoryUsedBytes `json:"physicalMemoryUsedBytes,omitempty"`
+	PhysicalMemoryTotalBytes *int64                   `json:"physicalMemoryTotalBytes,omitempty"`
+	PhysicalMemoryUsedBytes  *PhysicalMemoryUsedBytes `json:"physicalMemoryUsedBytes,omitempty"`
 	// The start time of metrics collection, expressed in milliseconds since the
 	// Epoch.
 	StartTimeMs *int64 `json:"startTimeMs,omitempty"`

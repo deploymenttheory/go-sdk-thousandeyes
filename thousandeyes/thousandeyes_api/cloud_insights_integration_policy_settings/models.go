@@ -9,7 +9,7 @@ package cloud_insights_integration_policy_settings
 // controls which resource groups and regions ThousandEyes inventories, and
 // whether CloudTrail is enabled.
 type AwsIntegrationPolicySetting struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// Indicates whether CloudTrail integration is enabled for AWS inventory
 	// monitoring.
 	EnabledCloudtrail bool `json:"enabledCloudtrail"`
@@ -23,7 +23,7 @@ type AwsIntegrationPolicySetting struct {
 // defines the monitored Azure resource groups and the subscription policy that
 // ThousandEyes enforces.
 type AzureIntegrationPolicySetting struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// The set of Azure resource group types included in inventory monitoring.
 	EnabledResourceGroupTypes []AzureResourceGroupType `json:"enabledResourceGroupTypes"`
 	SubscriptionsPolicy       SubscriptionsPolicy      `json:"subscriptionsPolicy"`
@@ -53,7 +53,7 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // SubscriptionsPolicy Policy document that controls which Azure subscriptions

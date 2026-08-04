@@ -7,7 +7,7 @@ package credential_vault_operations
 
 // CredentialVaultOperation is generated from the OpenAPI specification.
 type CredentialVaultOperation struct {
-	Links   SelfLinks               `json:"_links,omitempty"`
+	Links   *SelfLinks              `json:"_links,omitempty"`
 	ID      *string                 `json:"id,omitempty"`
 	Name    string                  `json:"name"`
 	Secrets []CredentialVaultSecret `json:"secrets"`
@@ -17,7 +17,7 @@ type CredentialVaultOperation struct {
 
 // ResourceCredentialVaultOperations is generated from the OpenAPI specification.
 type ResourceCredentialVaultOperations struct {
-	Links SelfLinks                  `json:"_links,omitempty"`
+	Links *SelfLinks                 `json:"_links,omitempty"`
 	Items []CredentialVaultOperation `json:"items,omitempty"`
 }
 
@@ -52,5 +52,5 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

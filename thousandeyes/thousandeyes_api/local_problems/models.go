@@ -67,7 +67,7 @@ type LocalProblemAgentName string
 
 // LocalProblemAgentResults is generated from the OpenAPI specification.
 type LocalProblemAgentResults struct {
-	Links         SelfLinks      `json:"_links,omitempty"`
+	Links         *SelfLinks     `json:"_links,omitempty"`
 	EndDate       EndDate        `json:"endDate,omitempty"`
 	LocalProblems []LocalProblem `json:"localProblems,omitempty"`
 	StartDate     StartDate      `json:"startDate,omitempty"`
@@ -86,7 +86,7 @@ type LocalProblemStartDate string
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // StartDate (Optional) When passing `window` or `startDate` parameter, the

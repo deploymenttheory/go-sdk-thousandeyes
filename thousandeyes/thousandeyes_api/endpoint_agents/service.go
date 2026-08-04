@@ -157,11 +157,15 @@ func (s *EndpointAgents) FilterEndpointAgents(ctx context.Context, request *Agen
 
 // DeleteEndpointAgent delete endpoint agent.
 // URL: DELETE /endpoint/agents/{agentId}
+// Optional query params: expand
 //
 // Deletes the agent with the specified `agent_id`.
-func (s *EndpointAgents) DeleteEndpointAgent(ctx context.Context, opts ...client.RequestOption) (*resty.Response, error) {
+func (s *EndpointAgents) DeleteEndpointAgent(ctx context.Context, agentId string, opts ...client.RequestOption) (*resty.Response, error) {
+	if agentId == "" {
+		return nil, fmt.Errorf("agentId is required")
+	}
 
-	endpoint := "/endpoint/agents/{agentId}"
+	endpoint := fmt.Sprintf("/endpoint/agents/%s", agentId)
 
 	req := s.client.NewRequest(ctx).
 		SetHeader("Accept", constants.Accept).
@@ -182,12 +186,15 @@ func (s *EndpointAgents) DeleteEndpointAgent(ctx context.Context, opts ...client
 
 // GetEndpointAgent retrieve endpoint agent.
 // URL: GET /endpoint/agents/{agentId}
-// Optional query params: includeDeleted
+// Optional query params: expand, includeDeleted
 //
 // Retrieves details of an agent with the specified `agent_id`.
-func (s *EndpointAgents) GetEndpointAgent(ctx context.Context, opts ...client.RequestOption) (*EndpointAgent, *resty.Response, error) {
+func (s *EndpointAgents) GetEndpointAgent(ctx context.Context, agentId string, opts ...client.RequestOption) (*EndpointAgent, *resty.Response, error) {
+	if agentId == "" {
+		return nil, nil, fmt.Errorf("agentId is required")
+	}
 
-	endpoint := "/endpoint/agents/{agentId}"
+	endpoint := fmt.Sprintf("/endpoint/agents/%s", agentId)
 
 	var result EndpointAgent
 
@@ -211,14 +218,18 @@ func (s *EndpointAgents) GetEndpointAgent(ctx context.Context, opts ...client.Re
 
 // UpdateEndpointAgent update endpoint agent.
 // URL: PATCH /endpoint/agents/{agentId}
+// Optional query params: expand
 //
 // Updates the agent with the specified `agent_id`.
-func (s *EndpointAgents) UpdateEndpointAgent(ctx context.Context, request *EndpointAgentUpdate, opts ...client.RequestOption) (*EndpointAgent, *resty.Response, error) {
+func (s *EndpointAgents) UpdateEndpointAgent(ctx context.Context, agentId string, request *EndpointAgentUpdate, opts ...client.RequestOption) (*EndpointAgent, *resty.Response, error) {
+	if agentId == "" {
+		return nil, nil, fmt.Errorf("agentId is required")
+	}
 	if request == nil {
 		return nil, nil, fmt.Errorf("request is required")
 	}
 
-	endpoint := "/endpoint/agents/{agentId}"
+	endpoint := fmt.Sprintf("/endpoint/agents/%s", agentId)
 
 	var result EndpointAgent
 

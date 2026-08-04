@@ -16,17 +16,17 @@ type ApiContextFilterRequest struct {
 // ApiContextFilterResponse Response containing dashboard filter settings and
 // context details.
 type ApiContextFilterResponse struct {
-	Links SelfLinks `json:"_links,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
 	// Account group ID of the filter.
-	AID       string                        `json:"aid"`
-	Context   ApiContextFilters             `json:"context"`
-	CreatedBy ApiDashboardFilterUserDetails `json:"createdBy,omitempty"`
+	AID       string                         `json:"aid"`
+	Context   ApiContextFilters              `json:"context"`
+	CreatedBy *ApiDashboardFilterUserDetails `json:"createdBy,omitempty"`
 	// Timestamp when the filter was created.
 	CreatedDate *string                       `json:"createdDate,omitempty"`
 	Description ApiDashboardFilterDescription `json:"description,omitempty"`
 	// Unique ID of the dashboard filter.
-	ID         string                        `json:"id"`
-	ModifiedBy ApiDashboardFilterUserDetails `json:"modifiedBy,omitempty"`
+	ID         string                         `json:"id"`
+	ModifiedBy *ApiDashboardFilterUserDetails `json:"modifiedBy,omitempty"`
 	// Timestamp when the filter was last modified.
 	ModifiedDate *string                `json:"modifiedDate,omitempty"`
 	Name         ApiDashboardFilterName `json:"name"`
@@ -99,5 +99,5 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

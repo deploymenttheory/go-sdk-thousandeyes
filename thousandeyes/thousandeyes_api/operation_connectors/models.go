@@ -7,8 +7,8 @@ package operation_connectors
 
 // Assignments A list of assigned items.
 type Assignments struct {
-	Links SelfLinks `json:"_links,omitempty"`
-	Items []string  `json:"items,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
+	Items []string   `json:"items,omitempty"`
 }
 
 // Link A hyperlink from the containing resource to a URI.
@@ -35,5 +35,5 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }

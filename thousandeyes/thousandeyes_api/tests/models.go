@@ -32,14 +32,14 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // SimpleTest Each test includes additional fields depending on its `type`.
 // Refer `/tests/{type}` endpoint to know the set of fields returned by a given
 // `type`.
 type SimpleTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// Indicates if alerts are enabled.
 	AlertsEnabled *bool           `json:"alertsEnabled,omitempty"`
 	CreatedBy     TestCreatedBy   `json:"createdBy,omitempty"`
@@ -72,8 +72,8 @@ type TestCreatedDate string
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestResults Reference to the test results.
@@ -115,12 +115,12 @@ type TestVersionHistory struct {
 
 // TestVersionHistoryResponse is generated from the OpenAPI specification.
 type TestVersionHistoryResponse struct {
-	Links              SelfLinks            `json:"_links,omitempty"`
+	Links              *SelfLinks           `json:"_links,omitempty"`
 	TestVersionHistory []TestVersionHistory `json:"testVersionHistory,omitempty"`
 }
 
 // ResourceTests is generated from the OpenAPI specification.
 type ResourceTests struct {
-	Links SelfLinks    `json:"_links,omitempty"`
+	Links *SelfLinks   `json:"_links,omitempty"`
 	Tests []SimpleTest `json:"tests,omitempty"`
 }

@@ -15,11 +15,11 @@ type BgpHop struct {
 
 // BgpTestResult is generated from the OpenAPI specification.
 type BgpTestResult struct {
-	Links TestResultAppLinks `json:"_links,omitempty"`
+	Links *TestResultAppLinks `json:"_links,omitempty"`
 	// Data point date UTC (ISO date-time format).
-	Date    *string           `json:"date,omitempty"`
-	EndTime EndTime           `json:"endTime,omitempty"`
-	Monitor TestResultMonitor `json:"monitor,omitempty"`
+	Date    *string            `json:"date,omitempty"`
+	EndTime EndTime            `json:"endTime,omitempty"`
+	Monitor *TestResultMonitor `json:"monitor,omitempty"`
 	// Number of path changes tracked against this prefix by this monitor.
 	PathChanges *float64 `json:"pathChanges,omitempty"`
 	// Prefix being tracked.
@@ -37,22 +37,22 @@ type BgpTestResult struct {
 
 // BgpTestResults is generated from the OpenAPI specification.
 type BgpTestResults struct {
-	Links     PaginationLinks `json:"_links,omitempty"`
-	EndDate   EndDate         `json:"endDate,omitempty"`
-	Results   []BgpTestResult `json:"results,omitempty"`
-	StartDate StartDate       `json:"startDate,omitempty"`
-	Test      SimpleTest      `json:"test,omitempty"`
+	Links     *PaginationLinks `json:"_links,omitempty"`
+	EndDate   EndDate          `json:"endDate,omitempty"`
+	Results   []BgpTestResult  `json:"results,omitempty"`
+	StartDate StartDate        `json:"startDate,omitempty"`
+	Test      *SimpleTest      `json:"test,omitempty"`
 }
 
 // BgpTestRouteInformationResult is generated from the OpenAPI specification.
 type BgpTestRouteInformationResult struct {
-	Links TestResultAppLinks `json:"_links,omitempty"`
+	Links *TestResultAppLinks `json:"_links,omitempty"`
 	// Data point date UTC (ISO date-time format).
 	Date *string  `json:"date,omitempty"`
 	Hops []BgpHop `json:"hops,omitempty"`
 	// Represents whether the route is active or inactive.
-	IsActive *bool             `json:"isActive,omitempty"`
-	Monitor  TestResultMonitor `json:"monitor,omitempty"`
+	IsActive *bool              `json:"isActive,omitempty"`
+	Monitor  *TestResultMonitor `json:"monitor,omitempty"`
 	// Prefix being tracked.
 	Prefix *string `json:"prefix,omitempty"`
 	// Internally tracked prefix ID.
@@ -63,9 +63,9 @@ type BgpTestRouteInformationResult struct {
 
 // BgpTestRouteInformationResults is generated from the OpenAPI specification.
 type BgpTestRouteInformationResults struct {
-	Links   SelfLinks                       `json:"_links,omitempty"`
+	Links   *SelfLinks                      `json:"_links,omitempty"`
 	Results []BgpTestRouteInformationResult `json:"results,omitempty"`
-	Test    SimpleTest                      `json:"test,omitempty"`
+	Test    *SimpleTest                     `json:"test,omitempty"`
 }
 
 // Enabled Test is enabled.
@@ -103,21 +103,21 @@ type Link struct {
 
 // PaginationLinks A links object containing pagination related link(s).
 type PaginationLinks struct {
-	Next     Link `json:"next,omitempty"`
-	Previous Link `json:"previous,omitempty"`
-	Self     Link `json:"self,omitempty"`
+	Next     *Link `json:"next,omitempty"`
+	Previous *Link `json:"previous,omitempty"`
+	Self     *Link `json:"self,omitempty"`
 }
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // SimpleTest Each test includes additional fields depending on its `type`.
 // Refer `/tests/{type}` endpoint to know the set of fields returned by a given
 // `type`.
 type SimpleTest struct {
-	Links TestLinks `json:"_links,omitempty"`
+	Links *TestLinks `json:"_links,omitempty"`
 	// Indicates if alerts are enabled.
 	AlertsEnabled *bool           `json:"alertsEnabled,omitempty"`
 	CreatedBy     TestCreatedBy   `json:"createdBy,omitempty"`
@@ -158,13 +158,13 @@ type TestCreatedDate string
 
 // TestLinks A list of links that can be accessed to get more information
 type TestLinks struct {
-	Self        TestSelfLink `json:"self,omitempty"`
-	TestResults TestResults  `json:"testResults,omitempty"`
+	Self        *TestSelfLink `json:"self,omitempty"`
+	TestResults TestResults   `json:"testResults,omitempty"`
 }
 
 // TestResultAppLinks is generated from the OpenAPI specification.
 type TestResultAppLinks struct {
-	AppLink Link `json:"appLink,omitempty"`
+	AppLink *Link `json:"appLink,omitempty"`
 }
 
 // TestResultMonitor is generated from the OpenAPI specification.

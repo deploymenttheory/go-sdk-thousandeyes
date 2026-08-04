@@ -11,10 +11,10 @@ type AccountGroupId string
 
 // AuditUserEvents is generated from the OpenAPI specification.
 type AuditUserEvents struct {
-	Links       PaginationLinks `json:"_links,omitempty"`
-	AuditEvents []UserEvent     `json:"auditEvents,omitempty"`
-	EndDate     EndDate         `json:"endDate,omitempty"`
-	StartDate   StartDate       `json:"startDate,omitempty"`
+	Links       *PaginationLinks `json:"_links,omitempty"`
+	AuditEvents []UserEvent      `json:"auditEvents,omitempty"`
+	EndDate     EndDate          `json:"endDate,omitempty"`
+	StartDate   StartDate        `json:"startDate,omitempty"`
 }
 
 // EndDate (Optional) When passing `window` or `endDate` parameter, the client
@@ -46,9 +46,9 @@ type Link struct {
 
 // PaginationLinks A links object containing pagination related link(s).
 type PaginationLinks struct {
-	Next     Link `json:"next,omitempty"`
-	Previous Link `json:"previous,omitempty"`
-	Self     Link `json:"self,omitempty"`
+	Next     *Link `json:"next,omitempty"`
+	Previous *Link `json:"previous,omitempty"`
+	Self     *Link `json:"self,omitempty"`
 }
 
 // Resource is generated from the OpenAPI specification.

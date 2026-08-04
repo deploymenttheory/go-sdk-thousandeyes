@@ -7,7 +7,7 @@ package alerts
 
 // Alert is generated from the OpenAPI specification.
 type Alert struct {
-	Links AlertLinks `json:"_links,omitempty"`
+	Links *AlertLinks `json:"_links,omitempty"`
 	// A unique ID for each individual alert occurrence.
 	AlertID       *string   `json:"alertId,omitempty"`
 	AlertRuleID   RuleId    `json:"alertRuleId,omitempty"`
@@ -24,8 +24,8 @@ type Alert struct {
 	Duration *int64  `json:"duration,omitempty"`
 	EndDate  EndDate `json:"endDate,omitempty"`
 	// A unique ID for each individual alert occurrence.
-	ID   *string   `json:"id,omitempty"`
-	Meta AlertMeta `json:"meta,omitempty"`
+	ID   *string    `json:"id,omitempty"`
+	Meta *AlertMeta `json:"meta,omitempty"`
 	// Hyperlink to alerts list, with row expanded
 	Permalink *string `json:"permalink,omitempty"`
 	// Unique ID of the rule.
@@ -43,8 +43,8 @@ type Alert struct {
 
 // AlertDetail is generated from the OpenAPI specification.
 type AlertDetail struct {
-	Embedded      AlertEmbedded       `json:"_embedded,omitempty"`
-	Links         AlertLinks          `json:"_links,omitempty"`
+	Embedded      *AlertEmbedded      `json:"_embedded,omitempty"`
+	Links         *AlertLinks         `json:"_links,omitempty"`
 	AlertSeverity Severity            `json:"alertSeverity,omitempty"`
 	AlertState    State               `json:"alertState,omitempty"`
 	AlertType     AlertType           `json:"alertType,omitempty"`
@@ -53,11 +53,11 @@ type AlertDetail struct {
 	Duration *int64  `json:"duration,omitempty"`
 	EndDate  EndDate `json:"endDate,omitempty"`
 	// A unique ID for each individual alert occurrence.
-	ID        *string   `json:"id,omitempty"`
-	Meta      AlertMeta `json:"meta,omitempty"`
-	Severity  Severity  `json:"severity,omitempty"`
-	StartDate StartDate `json:"startDate,omitempty"`
-	State     State     `json:"state,omitempty"`
+	ID        *string    `json:"id,omitempty"`
+	Meta      *AlertMeta `json:"meta,omitempty"`
+	Severity  Severity   `json:"severity,omitempty"`
+	StartDate StartDate  `json:"startDate,omitempty"`
+	State     State      `json:"state,omitempty"`
 	// Indicates whether the alert is currently suppressed by a real-time ASW.
 	Suppressed *bool `json:"suppressed,omitempty"`
 	// Number of sources that meet the alert criteria.
@@ -66,15 +66,15 @@ type AlertDetail struct {
 
 // AlertEmbedded Container for embedded resources in alert responses (HATEOAS).
 type AlertEmbedded struct {
-	Asn Asn `json:"asn,omitempty"`
+	Asn *Asn `json:"asn,omitempty"`
 }
 
 // AlertLinks An object containing the alert links.
 type AlertLinks struct {
-	AppLink Link `json:"appLink,omitempty"`
-	Rule    Link `json:"rule,omitempty"`
-	Self    Link `json:"self,omitempty"`
-	Test    Link `json:"test,omitempty"`
+	AppLink *Link `json:"appLink,omitempty"`
+	Rule    *Link `json:"rule,omitempty"`
+	Self    *Link `json:"self,omitempty"`
+	Test    *Link `json:"test,omitempty"`
 }
 
 // AlertMeta is generated from the OpenAPI specification.
@@ -86,21 +86,21 @@ type AlertMeta struct {
 
 // AlertMetricDetail is generated from the OpenAPI specification.
 type AlertMetricDetail struct {
-	End EndAlertMetrics `json:"end,omitempty"`
+	End *EndAlertMetrics `json:"end,omitempty"`
 	// Unique metric detail id.
 	ID *string `json:"id,omitempty"`
 	// Geolocation of the alert.
-	Name  *string           `json:"name,omitempty"`
-	Start StartAlertMetrics `json:"start,omitempty"`
-	State State             `json:"state,omitempty"`
+	Name  *string            `json:"name,omitempty"`
+	Start *StartAlertMetrics `json:"start,omitempty"`
+	State State              `json:"state,omitempty"`
 	// Type of the alert metric.
 	Type *string `json:"type,omitempty"`
 }
 
 // ResourceAlerts is generated from the OpenAPI specification.
 type ResourceAlerts struct {
-	Links  PaginationLinks `json:"_links,omitempty"`
-	Alerts []Alert         `json:"alerts,omitempty"`
+	Links  *PaginationLinks `json:"_links,omitempty"`
+	Alerts []Alert          `json:"alerts,omitempty"`
 }
 
 // Asn Autonomous System Number (ASN) information for network outage alerts.
@@ -150,9 +150,9 @@ type Link struct {
 
 // PaginationLinks A links object containing pagination related link(s).
 type PaginationLinks struct {
-	Next     Link `json:"next,omitempty"`
-	Previous Link `json:"previous,omitempty"`
-	Self     Link `json:"self,omitempty"`
+	Next     *Link `json:"next,omitempty"`
+	Previous *Link `json:"previous,omitempty"`
+	Self     *Link `json:"self,omitempty"`
 }
 
 // RuleId Unique ID of the rule.

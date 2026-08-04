@@ -7,7 +7,7 @@ package autonomous_system_prefixes
 
 // AsPrefixAssociations is generated from the OpenAPI specification.
 type AsPrefixAssociations struct {
-	Links    PaginationLinks      `json:"_links,omitempty"`
+	Links    *PaginationLinks     `json:"_links,omitempty"`
 	Prefixes []PrefixAssociations `json:"prefixes,omitempty"`
 }
 
@@ -35,9 +35,9 @@ type Link struct {
 
 // PaginationLinks A links object containing pagination related link(s).
 type PaginationLinks struct {
-	Next     Link `json:"next,omitempty"`
-	Previous Link `json:"previous,omitempty"`
-	Self     Link `json:"self,omitempty"`
+	Next     *Link `json:"next,omitempty"`
+	Previous *Link `json:"previous,omitempty"`
+	Self     *Link `json:"self,omitempty"`
 }
 
 // PrefixAssociation is generated from the OpenAPI specification.

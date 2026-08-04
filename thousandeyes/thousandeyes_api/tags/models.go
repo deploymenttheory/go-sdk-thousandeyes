@@ -14,7 +14,7 @@ type Assignment struct {
 
 // BulkTagResponse is generated from the OpenAPI specification.
 type BulkTagResponse struct {
-	Links  SelfLinks            `json:"_links,omitempty"`
+	Links  *SelfLinks           `json:"_links,omitempty"`
 	Errors []TagBulkCreateError `json:"errors,omitempty"`
 	Tags   []Tag                `json:"tags,omitempty"`
 }
@@ -43,12 +43,12 @@ type Link struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // Tag is generated from the OpenAPI specification.
 type Tag struct {
-	Links      SelfLinks  `json:"_links,omitempty"`
+	Links      *SelfLinks `json:"_links,omitempty"`
 	AccessType AccessType `json:"accessType,omitempty"`
 	// The account group ID
 	AID         *int64       `json:"aid,omitempty"`
@@ -131,6 +131,6 @@ type TagInfo struct {
 
 // ResourceTags is generated from the OpenAPI specification.
 type ResourceTags struct {
-	Links SelfLinks `json:"_links,omitempty"`
-	Tags  []Tag     `json:"tags,omitempty"`
+	Links *SelfLinks `json:"_links,omitempty"`
+	Tags  []Tag      `json:"tags,omitempty"`
 }

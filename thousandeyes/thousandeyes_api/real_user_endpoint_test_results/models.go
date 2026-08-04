@@ -135,8 +135,8 @@ type NetworkProfile struct {
 	// Network DNS servers.
 	DnsServers []string `json:"dnsServers,omitempty"`
 	// Only present when there is an error
-	Error           *string                     `json:"error,omitempty"`
-	EthernetProfile EndpointTestEthernetProfile `json:"ethernetProfile,omitempty"`
+	Error           *string                      `json:"error,omitempty"`
+	EthernetProfile *EndpointTestEthernetProfile `json:"ethernetProfile,omitempty"`
 	// Network gateway address.
 	Gateway      *string               `json:"gateway,omitempty"`
 	HardwareType InterfaceHardwareType `json:"hardwareType,omitempty"`
@@ -145,16 +145,16 @@ type NetworkProfile struct {
 	// Network IP address.
 	IpAddress *string `json:"ipAddress,omitempty"`
 	// Network local prefix.
-	LocalPrefix       *string             `json:"localPrefix,omitempty"`
-	PreviousInterface NetworkInterface    `json:"previousInterface,omitempty"`
-	ProxyProfile      NetworkProxyProfile `json:"proxyProfile,omitempty"`
+	LocalPrefix       *string              `json:"localPrefix,omitempty"`
+	PreviousInterface *NetworkInterface    `json:"previousInterface,omitempty"`
+	ProxyProfile      *NetworkProxyProfile `json:"proxyProfile,omitempty"`
 	// Network public IP address.
 	PublicIpAddress *string `json:"publicIpAddress,omitempty"`
 	// Network public IP range.
 	PublicIpRange *string `json:"publicIpRange,omitempty"`
 	// Network subnet mask - only for IPv4.
-	SubnetMask      *string                `json:"subnetMask,omitempty"`
-	WirelessProfile NetworkWirelessProfile `json:"wirelessProfile,omitempty"`
+	SubnetMask      *string                 `json:"subnetMask,omitempty"`
+	WirelessProfile *NetworkWirelessProfile `json:"wirelessProfile,omitempty"`
 }
 
 // NetworkProxy is generated from the OpenAPI specification.
@@ -199,7 +199,7 @@ type NetworkWirelessProfile struct {
 // PaginationNextLink A links object containing a related link for forward
 // pagination.
 type PaginationNextLink struct {
-	Next Link `json:"next,omitempty"`
+	Next *Link `json:"next,omitempty"`
 }
 
 // PhysicalMemoryUsedBytes is generated from the OpenAPI specification.
@@ -260,20 +260,20 @@ type RealUserEndpointTestCoordinates struct {
 
 // RealUserEndpointTestDetail is generated from the OpenAPI specification.
 type RealUserEndpointTestDetail struct {
-	AgentID EndpointAgentId `json:"agentId,omitempty"`
-	Browser EndpointBrowser `json:"browser,omitempty"`
+	AgentID EndpointAgentId  `json:"agentId,omitempty"`
+	Browser *EndpointBrowser `json:"browser,omitempty"`
 	// UTC date when endpoint real user test was committed to the controller (ISO
 	// date-time format).
-	Committed   *string                         `json:"committed,omitempty"`
-	Coordinates RealUserEndpointTestCoordinates `json:"coordinates,omitempty"`
+	Committed   *string                          `json:"committed,omitempty"`
+	Coordinates *RealUserEndpointTestCoordinates `json:"coordinates,omitempty"`
 	// UTC date when endpoint real user test took place (ISO date-time format).
 	Date *string `json:"date,omitempty"`
 	// Score rating a user’s experience when loading a particular page, from 0
 	// (the worst) to 1 (the best).
 	ExperienceScore *float64 `json:"experienceScore,omitempty"`
 	// Endpoint real user test ID.
-	ID      *string                     `json:"id,omitempty"`
-	Network RealUserEndpointTestNetwork `json:"network,omitempty"`
+	ID      *string                      `json:"id,omitempty"`
+	Network *RealUserEndpointTestNetwork `json:"network,omitempty"`
 	// Number of web pages visited on target website.
 	NumberOfPages *int `json:"numberOfPages,omitempty"`
 	// Name of the AS organization `sourceAddress` belongs to.
@@ -293,7 +293,7 @@ type RealUserEndpointTestDetail struct {
 
 // RealUserEndpointTestDetailResults is generated from the OpenAPI specification.
 type RealUserEndpointTestDetailResults struct {
-	Links   SelfLinks                    `json:"_links,omitempty"`
+	Links   *SelfLinks                   `json:"_links,omitempty"`
 	Results []RealUserEndpointTestDetail `json:"results,omitempty"`
 }
 
@@ -304,34 +304,34 @@ type RealUserEndpointTestNetwork struct {
 	// with the target.
 	ConnectRtt *float64 `json:"connectRtt,omitempty"`
 	// Array of string representing possible network errors.
-	Errors         []string           `json:"errors,omitempty"`
-	GatewayPing    GatewayNetworkPing `json:"gatewayPing,omitempty"`
-	IsIcmpBlocked  IcmpBlocked        `json:"isIcmpBlocked,omitempty"`
-	NetworkProfile NetworkProfile     `json:"networkProfile,omitempty"`
-	Ping           TargetNetworkPing  `json:"ping,omitempty"`
-	SystemMetrics  SystemMetrics      `json:"systemMetrics,omitempty"`
-	Traceroute     TargetTraceroute   `json:"traceroute,omitempty"`
-	VpnPing        VpnNetworkPing     `json:"vpnPing,omitempty"`
-	VpnTraceroute  VpnTraceroute      `json:"vpnTraceroute,omitempty"`
+	Errors         []string            `json:"errors,omitempty"`
+	GatewayPing    *GatewayNetworkPing `json:"gatewayPing,omitempty"`
+	IsIcmpBlocked  IcmpBlocked         `json:"isIcmpBlocked,omitempty"`
+	NetworkProfile *NetworkProfile     `json:"networkProfile,omitempty"`
+	Ping           *TargetNetworkPing  `json:"ping,omitempty"`
+	SystemMetrics  *SystemMetrics      `json:"systemMetrics,omitempty"`
+	Traceroute     *TargetTraceroute   `json:"traceroute,omitempty"`
+	VpnPing        *VpnNetworkPing     `json:"vpnPing,omitempty"`
+	VpnTraceroute  *VpnTraceroute      `json:"vpnTraceroute,omitempty"`
 }
 
 // RealUserEndpointTestNetworkResult is generated from the OpenAPI specification.
 type RealUserEndpointTestNetworkResult struct {
 	AgentID EndpointAgentId `json:"agentId,omitempty"`
 	// UTC date when endpoint real user test took place (ISO date-time format).
-	Date        *string        `json:"date,omitempty"`
-	Destination NetworkMetrics `json:"destination,omitempty"`
+	Date        *string         `json:"date,omitempty"`
+	Destination *NetworkMetrics `json:"destination,omitempty"`
 	// Endpoint real user test ID.
-	ID            *string        `json:"id,omitempty"`
-	Proxy         NetworkMetrics `json:"proxy,omitempty"`
-	RoundID       RoundId        `json:"roundId,omitempty"`
-	SystemMetrics SystemMetrics  `json:"systemMetrics,omitempty"`
-	Vpn           NetworkMetrics `json:"vpn,omitempty"`
+	ID            *string         `json:"id,omitempty"`
+	Proxy         *NetworkMetrics `json:"proxy,omitempty"`
+	RoundID       RoundId         `json:"roundId,omitempty"`
+	SystemMetrics *SystemMetrics  `json:"systemMetrics,omitempty"`
+	Vpn           *NetworkMetrics `json:"vpn,omitempty"`
 }
 
 // RealUserEndpointTestNetworkResults is generated from the OpenAPI specification.
 type RealUserEndpointTestNetworkResults struct {
-	Links     PaginationNextLink                  `json:"_links,omitempty"`
+	Links     *PaginationNextLink                 `json:"_links,omitempty"`
 	EndDate   EndDate                             `json:"endDate,omitempty"`
 	Results   []RealUserEndpointTestNetworkResult `json:"results,omitempty"`
 	StartDate StartDate                           `json:"startDate,omitempty"`
@@ -340,9 +340,9 @@ type RealUserEndpointTestNetworkResults struct {
 // RealUserEndpointTestPage is generated from the OpenAPI specification.
 type RealUserEndpointTestPage struct {
 	// UTC date when page load started (ISO date-time format).
-	LoadDate    *string                         `json:"loadDate,omitempty"`
-	PageID      EndpointPageId                  `json:"pageId,omitempty"`
-	PageTimings RealUserEndpointTestPageTimings `json:"pageTimings,omitempty"`
+	LoadDate    *string                          `json:"loadDate,omitempty"`
+	PageID      EndpointPageId                   `json:"pageId,omitempty"`
+	PageTimings *RealUserEndpointTestPageTimings `json:"pageTimings,omitempty"`
 	// Web page title.
 	PageTitle *string `json:"pageTitle,omitempty"`
 	// Web page url
@@ -353,7 +353,7 @@ type RealUserEndpointTestPage struct {
 
 // RealUserEndpointTestPageDetailResult is generated from the OpenAPI specification.
 type RealUserEndpointTestPageDetailResult struct {
-	Links SelfLinks                   `json:"_links,omitempty"`
+	Links *SelfLinks                  `json:"_links,omitempty"`
 	Har   RealUserEndpointTestPageHar `json:"har,omitempty"`
 }
 
@@ -368,9 +368,9 @@ type RealUserEndpointTestPageResult struct {
 	// Endpoint real user test ID.
 	ID *string `json:"id,omitempty"`
 	// UTC date when page load started (ISO date-time format).
-	LoadDate    *string                         `json:"loadDate,omitempty"`
-	PageID      EndpointPageId                  `json:"pageId,omitempty"`
-	PageTimings RealUserEndpointTestPageTimings `json:"pageTimings,omitempty"`
+	LoadDate    *string                          `json:"loadDate,omitempty"`
+	PageID      EndpointPageId                   `json:"pageId,omitempty"`
+	PageTimings *RealUserEndpointTestPageTimings `json:"pageTimings,omitempty"`
 	// Web page title.
 	PageTitle *string `json:"pageTitle,omitempty"`
 	// Web page url
@@ -378,14 +378,14 @@ type RealUserEndpointTestPageResult struct {
 	// HTTP response code.
 	ResponseCode *int `json:"responseCode,omitempty"`
 	// HTTP server response in milliseconds.
-	ResponseTime  *int          `json:"responseTime,omitempty"`
-	RoundID       RoundId       `json:"roundId,omitempty"`
-	SystemMetrics SystemMetrics `json:"systemMetrics,omitempty"`
+	ResponseTime  *int           `json:"responseTime,omitempty"`
+	RoundID       RoundId        `json:"roundId,omitempty"`
+	SystemMetrics *SystemMetrics `json:"systemMetrics,omitempty"`
 }
 
 // RealUserEndpointTestPageResults is generated from the OpenAPI specification.
 type RealUserEndpointTestPageResults struct {
-	Links     PaginationNextLink               `json:"_links,omitempty"`
+	Links     *PaginationNextLink              `json:"_links,omitempty"`
 	EndDate   EndDate                          `json:"endDate,omitempty"`
 	Results   []RealUserEndpointTestPageResult `json:"results,omitempty"`
 	StartDate StartDate                        `json:"startDate,omitempty"`
@@ -431,7 +431,7 @@ type RealUserEndpointTestResultRequestFilter struct {
 
 // ResourceRealUserEndpointTestResults is generated from the OpenAPI specification.
 type ResourceRealUserEndpointTestResults struct {
-	Links     PaginationNextLink     `json:"_links,omitempty"`
+	Links     *PaginationNextLink    `json:"_links,omitempty"`
 	EndDate   EndDate                `json:"endDate,omitempty"`
 	Results   []RealUserEndpointTest `json:"results,omitempty"`
 	StartDate StartDate              `json:"startDate,omitempty"`
@@ -439,7 +439,7 @@ type ResourceRealUserEndpointTestResults struct {
 
 // RealUserEndpointTestResultsRequest is generated from the OpenAPI specification.
 type RealUserEndpointTestResultsRequest struct {
-	SearchFilters RealUserEndpointTestResultRequestFilter `json:"searchFilters,omitempty"`
+	SearchFilters *RealUserEndpointTestResultRequestFilter `json:"searchFilters,omitempty"`
 }
 
 // RoundId Epoch time (seconds) indicating the start time of the round.
@@ -447,7 +447,7 @@ type RoundId int
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // StartDate (Optional) When passing `window` or `startDate` parameter, the
@@ -457,13 +457,13 @@ type StartDate string
 
 // SystemMetrics is generated from the OpenAPI specification.
 type SystemMetrics struct {
-	CpuUtilization CpuUtilization `json:"cpuUtilization,omitempty"`
+	CpuUtilization *CpuUtilization `json:"cpuUtilization,omitempty"`
 	// The end time of metrics collection, expressed in milliseconds since the
 	// Epoch.
 	EndTimeMs *int64 `json:"endTimeMs,omitempty"`
 	// Total physical memory of the system.
-	PhysicalMemoryTotalBytes *int64                  `json:"physicalMemoryTotalBytes,omitempty"`
-	PhysicalMemoryUsedBytes  PhysicalMemoryUsedBytes `json:"physicalMemoryUsedBytes,omitempty"`
+	PhysicalMemoryTotalBytes *int64                   `json:"physicalMemoryTotalBytes,omitempty"`
+	PhysicalMemoryUsedBytes  *PhysicalMemoryUsedBytes `json:"physicalMemoryUsedBytes,omitempty"`
 	// The start time of metrics collection, expressed in milliseconds since the
 	// Epoch.
 	StartTimeMs *int64 `json:"startTimeMs,omitempty"`

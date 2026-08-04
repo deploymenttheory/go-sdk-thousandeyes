@@ -164,3 +164,110 @@ func TestUnit_Codegen_TypeOf_NullableUnion(t *testing.T) {
 	assert.Equal(t, "object", typeOf(map[string]any{"properties": map[string]any{}}))
 	assert.Equal(t, "", typeOf(map[string]any{}))
 }
+
+// TestUnit_Codegen_PathItemParametersReachEveryOperation pins the fix for the
+// literal-"{id}" bug: /endpoint/labels/{id} declares its id parameter on the path
+// item, which OpenAPI shares across every method, and the generator read only the
+// operation's own list -- so three methods sent "{id}" to the live API, where a
+// mutation would have created objects nothing could address again.
+func TestUnit_Codegen_PathItemParametersReachEveryOperation(t *testing.T) {
+	spec := &Spec{
+		Paths: map[string]map[string]any{
+			"/labels/{id}": {
+				"parameters": []any{
+					map[string]any{"name": "id", "in": "path", "required": true},
+				},
+				"get": map[string]any{
+					"operationId": "getLabel",
+					"tags":        []any{"Labels"},
+				},
+				"delete": map[string]any{
+					"operationId": "deleteLabel",
+					"tags":        []any{"Labels"},
+				},
+			},
+		},
+	}
+
+	g := &Generator{spec: spec}
+	for _, raw := range spec.Operations() {
+		path, _ := g.parameters(raw)
+		if assert.Len(t, path, 1, "%s must see the path-item parameter", raw.OperationID) {
+			assert.Equal(t, "id", path[0].Name)
+		}
+		assert.Equal(t, `fmt.Sprintf("/labels/%s", id)`, endpointExpression(raw.Path, path))
+	}
+}
+
+// TestUnit_Codegen_OperationParametersOverridePathItemOnes: OpenAPI's stated
+// semantics -- an operation-level redeclaration of the same name wins.
+func TestUnit_Codegen_OperationParametersOverridePathItemOnes(t *testing.T) {
+	spec := &Spec{
+		Paths: map[string]map[string]any{
+			"/labels/{id}": {
+				"parameters": []any{
+					map[string]any{"name": "id", "in": "path", "required": true, "description": "shared."},
+				},
+				"get": map[string]any{
+					"operationId": "getLabel",
+					"tags":        []any{"Labels"},
+					"parameters": []any{
+						map[string]any{"name": "id", "in": "path", "required": true, "description": "specific."},
+					},
+				},
+			},
+		},
+	}
+
+	g := &Generator{spec: spec}
+	ops := spec.Operations()
+	path, _ := g.parameters(ops[0])
+	if assert.Len(t, path, 1, "a redeclared name must not duplicate") {
+		assert.Equal(t, "specific.", path[0].Description)
+	}
+}
+
+// TestUnit_Codegen_OptionalStructFieldsTakePointers pins the omittability fix.
+//
+// encoding/json cannot omit a value-typed struct, so an optional struct field
+// travelled as an empty object in every request that did not set it -- and the
+// dashboards API refuses "layout":{} outright. A nil pointer is the only spelling
+// of "not sent" a struct has. Enums and required structs keep their value form.
+func TestUnit_Codegen_OptionalStructFieldsTakePointers(t *testing.T) {
+	spec := &Spec{
+		Components: map[string]map[string]any{
+			"schemas": {
+				"Layout": map[string]any{
+					"type":       "object",
+					"properties": map[string]any{"kind": map[string]any{"type": "string"}},
+				},
+				"Mode": map[string]any{
+					"type": "string",
+					"enum": []any{"basic", "wide"},
+				},
+			},
+		},
+	}
+	spec.Schemas = map[string]any{}
+	for k, v := range spec.Components["schemas"] {
+		spec.Schemas[k] = v
+	}
+
+	r := NewTypeResolver(spec)
+	def := r.definitionFor(map[string]any{
+		"type":     "object",
+		"required": []any{"pinned"},
+		"properties": map[string]any{
+			"layout": map[string]any{"$ref": "#/components/schemas/Layout"},
+			"pinned": map[string]any{"$ref": "#/components/schemas/Layout"},
+			"mode":   map[string]any{"$ref": "#/components/schemas/Mode"},
+		},
+	})
+
+	assert.Contains(t, def, "Layout *Layout `json:\"layout,omitempty\"`",
+		"an optional struct must be a pointer, or it cannot be omitted")
+	assert.Contains(t, def, "Pinned Layout `json:\"pinned\"`",
+		"a required struct always travels, so the pointer buys nothing")
+	assert.Contains(t, def, "Mode Mode `json:\"mode,omitempty\"`",
+		"an enum's zero is a representable value, not an unomittable {}")
+}

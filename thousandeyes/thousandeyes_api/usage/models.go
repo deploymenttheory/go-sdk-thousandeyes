@@ -100,7 +100,7 @@ type EnterpriseAgents struct {
 
 // EnterpriseAgentsUsage is generated from the OpenAPI specification.
 type EnterpriseAgentsUsage struct {
-	Links      PaginationLinks                               `json:"_links,omitempty"`
+	Links      *PaginationLinks                              `json:"_links,omitempty"`
 	Breakdowns []EnterpriseAgentUnitsByTestOwnerAccountGroup `json:"breakdowns,omitempty"`
 }
 
@@ -128,14 +128,14 @@ type Link struct {
 
 // PaginationLinks A links object containing pagination related link(s).
 type PaginationLinks struct {
-	Next     Link `json:"next,omitempty"`
-	Previous Link `json:"previous,omitempty"`
-	Self     Link `json:"self,omitempty"`
+	Next     *Link `json:"next,omitempty"`
+	Previous *Link `json:"previous,omitempty"`
+	Self     *Link `json:"self,omitempty"`
 }
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // TestUsage is generated from the OpenAPI specification.
@@ -159,8 +159,8 @@ type TestUsage struct {
 
 // TestsUsage is generated from the OpenAPI specification.
 type TestsUsage struct {
-	Links      PaginationLinks `json:"_links,omitempty"`
-	Breakdowns []UnitsByTests  `json:"breakdowns,omitempty"`
+	Links      *PaginationLinks `json:"_links,omitempty"`
+	Breakdowns []UnitsByTests   `json:"breakdowns,omitempty"`
 }
 
 // UnitAllocationSummary is generated from the OpenAPI specification.
@@ -200,14 +200,14 @@ type UnitsByTests struct {
 
 // ResourceUsage is generated from the OpenAPI specification.
 type ResourceUsage struct {
-	Links SelfLinks    `json:"_links,omitempty"`
-	Usage UsageDetails `json:"usage,omitempty"`
+	Links *SelfLinks    `json:"_links,omitempty"`
+	Usage *UsageDetails `json:"usage,omitempty"`
 }
 
 // UsageDetails is generated from the OpenAPI specification.
 type UsageDetails struct {
 	// Summary of allocations
-	Allocations UnitAllocationSummary `json:"allocations,omitempty"`
+	Allocations *UnitAllocationSummary `json:"allocations,omitempty"`
 	// Number of cloud units projected in the upcoming usage period, based on
 	// configuration of enabled tests.
 	CloudUnitsNextBillingPeriod *int64 `json:"cloudUnitsNextBillingPeriod,omitempty"`
@@ -248,8 +248,8 @@ type UsageDetails struct {
 	// units consumed to date and configuration of enabled tests.
 	EnterpriseUnitsProjected *int64 `json:"enterpriseUnitsProjected,omitempty"`
 	// Number of enterprise units consumed in the usage period.
-	EnterpriseUnitsUsed *int64     `json:"enterpriseUnitsUsed,omitempty"`
-	Quota               UsageQuota `json:"quota,omitempty"`
+	EnterpriseUnitsUsed *int64      `json:"enterpriseUnitsUsed,omitempty"`
+	Quota               *UsageQuota `json:"quota,omitempty"`
 	// A breakdown of unit consumption for each test during the current monthly
 	// period.
 	Tests []TestUsage `json:"tests,omitempty"`

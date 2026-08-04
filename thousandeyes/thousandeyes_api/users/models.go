@@ -18,20 +18,20 @@ type AccountGroupId string
 
 // AccountGroupRole is generated from the OpenAPI specification.
 type AccountGroupRole struct {
-	AccountGroup AccountGroup `json:"accountGroup,omitempty"`
-	Roles        []Role       `json:"roles,omitempty"`
+	AccountGroup *AccountGroup `json:"accountGroup,omitempty"`
+	Roles        []Role        `json:"roles,omitempty"`
 }
 
 // CreatedUser is generated from the OpenAPI specification.
 type CreatedUser struct {
-	Links                SelfLinks          `json:"_links,omitempty"`
+	Links                *SelfLinks         `json:"_links,omitempty"`
 	AccountGroupRoles    []AccountGroupRole `json:"accountGroupRoles,omitempty"`
 	AllAccountGroupRoles []Role             `json:"allAccountGroupRoles,omitempty"`
 	// UTC date the user registered their account (ISO date-time format).
 	DateRegistered *string `json:"dateRegistered,omitempty"`
 	// User's email address.
-	Email             *string      `json:"email,omitempty"`
-	LoginAccountGroup AccountGroup `json:"loginAccountGroup,omitempty"`
+	Email             *string       `json:"email,omitempty"`
+	LoginAccountGroup *AccountGroup `json:"loginAccountGroup,omitempty"`
 	// User's display name.
 	Name *string `json:"name,omitempty"`
 	// Unique ID of the user.
@@ -45,8 +45,8 @@ type ExtendedUser struct {
 	// User's email address.
 	Email *string `json:"email,omitempty"`
 	// UTC last login of the user (ISO date-time format).
-	LastLogin         *string      `json:"lastLogin,omitempty"`
-	LoginAccountGroup AccountGroup `json:"loginAccountGroup,omitempty"`
+	LastLogin         *string       `json:"lastLogin,omitempty"`
+	LoginAccountGroup *AccountGroup `json:"loginAccountGroup,omitempty"`
 	// User's display name.
 	Name *string `json:"name,omitempty"`
 	// Unique ID of the user.
@@ -90,7 +90,7 @@ type Role struct {
 
 // SelfLinks A links object containing the self link.
 type SelfLinks struct {
-	Self Link `json:"self,omitempty"`
+	Self *Link `json:"self,omitempty"`
 }
 
 // UserAccountGroupRole is generated from the OpenAPI specification.
@@ -103,7 +103,7 @@ type UserAccountGroupRole struct {
 
 // UserDetail is generated from the OpenAPI specification.
 type UserDetail struct {
-	Links                SelfLinks          `json:"_links,omitempty"`
+	Links                *SelfLinks         `json:"_links,omitempty"`
 	AccountGroupRoles    []AccountGroupRole `json:"accountGroupRoles,omitempty"`
 	AllAccountGroupRoles []Role             `json:"allAccountGroupRoles,omitempty"`
 	// UTC date the user registered their account (ISO date-time format).
@@ -111,8 +111,8 @@ type UserDetail struct {
 	// User's email address.
 	Email *string `json:"email,omitempty"`
 	// UTC last login of the user (ISO date-time format).
-	LastLogin         *string      `json:"lastLogin,omitempty"`
-	LoginAccountGroup AccountGroup `json:"loginAccountGroup,omitempty"`
+	LastLogin         *string       `json:"lastLogin,omitempty"`
+	LoginAccountGroup *AccountGroup `json:"loginAccountGroup,omitempty"`
 	// User's display name.
 	Name *string `json:"name,omitempty"`
 	// Unique ID of the user.
@@ -134,6 +134,6 @@ type UserRequest struct {
 
 // ResourceUsers is generated from the OpenAPI specification.
 type ResourceUsers struct {
-	Links SelfLinks      `json:"_links,omitempty"`
+	Links *SelfLinks     `json:"_links,omitempty"`
 	Users []ExtendedUser `json:"users,omitempty"`
 }
